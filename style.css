@@ -1,0 +1,290 @@
+/* Import Lexend Deca font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap');
+
+/* Apply Lexend Deca as the primary font and define color variables */
+:root {
+    --font-primary: 'Lexend Deca', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --color-main: #0A2342;
+    --color-accent: #ED254E;
+    --color-background: #EAEBED;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+body {
+    background-color: var(--color-background);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* border: 2px solid var(--color-main); */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--color-main);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin: 5px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    z-index: 2;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    right: 2rem;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+    position: relative;
+    transform-origin: center;
+    padding: 2px 6px;
+}
+
+nav ul li a:hover {
+    transform: scale(1.35);
+    /* color: var(--color-accent); */
+}
+
+main {
+    flex: 1;
+    display: flex;
+    padding: 3rem 2rem;
+    flex-wrap: wrap;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.profile-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-width: 300px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 8px solid var(--color-main);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    aspect-ratio: 1;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-container {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 300px;
+}
+
+.bio-box {
+    background-color: var(--color-main);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bio-box h1 {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.bio-box h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.bio-text {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.bio-text a {
+    color: white;
+    text-decoration: underline;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.bio-text a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.bio-text a:hover::after {
+    width: 100%;
+}
+
+.bio-text p {
+    margin-bottom: 1.5rem;
+}
+
+.bio-text p:last-child {
+    margin-bottom: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+footer {
+    background-color: var(--color-main);
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    /* border-top: 3px solid var(--color-accent); */
+    margin: 5px;
+    border-radius: 15px;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--color-main);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.3s ease;
+        z-index: 1;
+        padding-right: 2rem;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    main {
+        flex-direction: column;
+    }
+    
+    .profile-container, .bio-container {
+        width: 100%;
+    }
+
+    .profile-image {
+        max-width: 300px;
+        max-height: 300px;
+        margin: 0 auto;
+    }
+}

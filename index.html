@@ -3,158 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Engineering Student</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #EAEBED;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            border: 2px solid #0A2342;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background-color: #EAEBED;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: flex-end;
-            border-bottom: 3px solid #F26430;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #0A2342;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #F26430;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            padding: 3rem 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .profile-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            min-width: 300px;
-        }
-
-        .profile-image {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 3px solid #0A2342;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ddd;
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .bio-container {
-            flex: 1;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 300px;
-        }
-
-        .bio-box {
-            background-color: #0A2342;
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .bio-box h1 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .bio-text {
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #F26430;
-        }
-
-        footer {
-            background-color: #EAEBED;
-            text-align: center;
-            padding: 1rem;
-            margin-top: auto;
-            border-top: 3px solid #F26430;
-        }
-
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-            
-            .profile-container, .bio-container {
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Vikram Anantha - Computer Science Student</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/markivx.png">
+    
 </head>
+<script>
+    // Set variables for use throughout the HTML file
+    const myName = "Vikram Anantha";
+    const universityName = "University of Michigan";
+    const major = "Computer Science";
+    const emailAddress = "markiv@umich.com";
+    const githubUsername = "vikramanantha";
+    const linkedinProfile = "vikramanantha";
+    const graduationYear = "2027";
+    const year = "sophomore";
+    
+    // Additional information that might be useful
+    const skills = ["Python & C++", "Gaussian Splat", "Data Structures & Algorithms", "Problem Solving", "Innovation"];
+    const interests = ["Autonomous Vehicles", "Applied Computer Vision", "Smart Cities"];
+    const currentpositions = ["Software Engineering Intern at <a href='https://www.stellantis.com/en'>Stellantis</a>", 
+                              "Software Engineering Student Intern at <a href='https://www.capoom.com/'>Capoom</a>", 
+                              "Research Assistant at <a href='https://www.roahmlab.com/'>ROAHM Lab</a> at University of Michigan Robotics"];        
+    
+    // You can access these variables later using JavaScript
+    document.addEventListener("DOMContentLoaded", function() {
+        // Example of how you could use these variables (uncomment if needed)
+        // document.title = myName + " - Engineering Student";
+    });
+</script>
+
 <body>
     <div class="container">
         <header>
+            <div class="logo">
+                <img src="images/markivx.png" alt="Logo">
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <nav>
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
@@ -168,25 +58,27 @@
         <main>
             <div class="profile-container">
                 <div class="profile-image">
-                    <img src="/api/placeholder/400/400" alt="Profile Photo">
+                    <img src="images/profile.jpg" alt="Profile Photo">
                 </div>
             </div>
 
             <div class="bio-container">
                 <div class="bio-box">
-                    <h1>Your Name</h1>
+                    <h1 id="name"></h1>
+                    <h2 id="subname"></h2>
                     <div class="bio-text">
-                        <p>I'm an engineering student with a passion for innovation and problem-solving. With experience in [your specific engineering field], I combine technical expertise with creative thinking to develop effective solutions.</p>
-                        <p>Currently pursuing my degree in [your engineering discipline] at [your university], I'm actively seeking opportunities to apply my skills in real-world settings and contribute to meaningful projects.</p>
+                        <p id="bio1"></p>
+                        <p id="bio2"></p>
+                        <p id="bio3"></p>
                     </div>
                     <div class="social-links">
-                        <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+                        <a id="github-link" target="_blank" title="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+                        <a id="linkedin-link" target="_blank" title="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="mailto:your.email@example.com" title="Email Me">
+                        <a id="email-link" title="Email Me">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
@@ -195,8 +87,70 @@
         </main>
 
         <footer>
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>Vikram Anantha • 2025</p>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Hamburger menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav ul');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+            });
+
+            document.getElementById("name").textContent = myName;
+            document.getElementById("subname").textContent = `${major}, ${universityName}, Class of ${graduationYear}`;
+            document.getElementById("bio1").textContent = `
+                    I am currently a ${year} at the ${universityName} pursuing a degree in ${major}.
+                    I'm very interested in ${interests.map((interest, index) => {
+                        if (index === interests.length - 1) {
+                            return `and ${interest}`;
+                        } else if (index === interests.length - 2) {
+                            return `${interest} `;
+                        } else {
+                            return `${interest}, `;
+                        }
+                    }).join('')}.
+            `;
+            document.getElementById("bio2").textContent = `I'm actively seeking opportunities to apply my skills in real-world settings and contribute to meaningful projects.
+            I have skills in ${skills.map((skill, index) => {
+                        if (index === skills.length - 1) {
+                            return `and ${skill}`;
+                        } else if (index === skills.length - 2) {
+                            return `${skill} `;
+                        } else {
+                            return `${skill}, `;
+                        }
+                    }).join('')}.
+            `;
+            document.getElementById("bio3").innerHTML = `I am currently ${currentpositions.map((position, index) => {
+                const firstWord = position.trim().split(' ')[0].toLowerCase();
+                const prefix = /^[aeiou]/i.test(firstWord) ? 'an' : 'a';
+                
+                if (index === currentpositions.length - 1) {
+                    return `and ${prefix} ${position}`;
+                } else if (index === currentpositions.length - 2) {
+                    return `${prefix} ${position} `;
+                } else {
+                    return `${prefix} ${position}, `;
+                }
+            }).join('')}.`;
+            document.getElementById("github-link").href = `https://github.com/${githubUsername}`;
+            document.getElementById("linkedin-link").href = `https://linkedin.com/in/${linkedinProfile}`;
+            document.getElementById("email-link").href = `mailto:${emailAddress}`;
+        });
+    </script>
 </body>
 </html>
