@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Engineering Student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #EAEBED;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 2px solid #0A2342;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #EAEBED;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 3px solid #F26430;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #0A2342;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #F26430;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            padding: 3rem 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .profile-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            min-width: 300px;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 3px solid #0A2342;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bio-container {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 300px;
+        }
+
+        .bio-box {
+            background-color: #0A2342;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .bio-box h1 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .bio-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #F26430;
+        }
+
+        footer {
+            background-color: #EAEBED;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            border-top: 3px solid #F26430;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            
+            .profile-container, .bio-container {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="engineering.html">Engineering</a></li>
+                    <li><a href="photos.html">Photos</a></li>
+                    <li><a href="resume.pdf" target="_blank">Resume</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="/api/placeholder/400/400" alt="Profile Photo">
+                </div>
+            </div>
+
+            <div class="bio-container">
+                <div class="bio-box">
+                    <h1>Your Name</h1>
+                    <div class="bio-text">
+                        <p>I'm an engineering student with a passion for innovation and problem-solving. With experience in [your specific engineering field], I combine technical expertise with creative thinking to develop effective solutions.</p>
+                        <p>Currently pursuing my degree in [your engineering discipline] at [your university], I'm actively seeking opportunities to apply my skills in real-world settings and contribute to meaningful projects.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:your.email@example.com" title="Email Me">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
