@@ -102,9 +102,23 @@ nav ul li a {
     padding: 2px 6px;
 }
 
+nav ul li a.active {
+    position: relative;
+}
+
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
 nav ul li a:hover {
     transform: scale(1.35);
-    /* color: var(--color-accent); */
 }
 
 main {
@@ -181,25 +195,28 @@ main {
     line-height: 1.5;
 }
 
-.bio-text a {
-    color: white;
+a:not(nav a):not(.social-links a):not(.engineering-container h3 a) {
+    color:white;
+}
+
+a:not(nav a):not(.social-links a) {
     text-decoration: underline;
     position: relative;
     transition: color 0.2s ease;
 }
 
-.bio-text a::after {
+a:not(nav a):not(.social-links a)::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
+    height: 3px;
     bottom: 0;
     left: 0;
     background-color: var(--color-accent);
     transition: width 0.3s ease;
 }
 
-.bio-text a:hover::after {
+a:not(nav a):not(.social-links a):hover::after {
     width: 100%;
 }
 
@@ -227,15 +244,112 @@ main {
     color: var(--color-accent);
 }
 
+.content-box {
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-background);
+    border: 2px solid var(--color-main);
+    color: black;
+}
+
+.engineering-container h2 {
+    font-size: 2.5rem;
+    /* line-height: 1.2; */
+}
+
+.engineering-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+    color: var(--color-main);
+}
+
+.engineering-container h3 a {
+    color: var(--color-main);
+}
+
+.engineering-container h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.engineering-container p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.engineering-container ul {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+
+
 footer {
     background-color: var(--color-main);
     text-align: center;
     padding: 1rem;
     margin-top: auto;
-    /* border-top: 3px solid var(--color-accent); */
     margin: 5px;
     border-radius: 15px;
     color: white;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.footer-content a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* .footer-content a:hover {
+    color: var(--color-accent);
+} */
+
+/* Engineering Page Styles */
+.engineering-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.education-section,
+.expertise-section {
+    flex: 1;
+    min-width: 300px;
+    /* background-color: var(--color-main);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.experience-section {
+    width: 100%;
+    margin-top: 20px;
+    /* background-color: var(--color-main);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.experience-item {
+    margin-top: 20px;
+}
+
+.experience-item:first-child {
+    margin-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -287,4 +401,58 @@ footer {
         max-height: 300px;
         margin: 0 auto;
     }
+
+    .engineering-container {
+        flex-direction: column;
+    }
+
+    .education-section,
+    .expertise-section {
+        width: 100%;
+    }
+}
+
+/* Education Experience Styles */
+.education-item, .experience-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.eee-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    border-radius: 20%;
+    transition: transform 0.1s ease;
+}
+
+.title-card h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--color-main);
+}
+
+.title-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.eee-icon:hover {
+    transform: scale(1.1);
+}
+
+.education-text, .experience-text {
+    flex: 1;
 }
