@@ -21,14 +21,14 @@ function loadHeader() {
                         window.location.pathname.includes('resume/')),
         },
         engineering: {
-            path: 'engineering/index.html',
+            path: 'engineering/',
             isCurrent: window.location.pathname.includes('engineering/'),
-            navPath: 'engineering/index.html'
+            navPath: 'engineering/'
         },
         photos: {
-            path: 'photos/index.html',
+            path: 'photos/',
             isCurrent: window.location.pathname.includes('photos/'),
-            navPath: 'photos/index.html'
+            navPath: 'photos/'
         },
         resume: {
             path: 'resume/resume.pdf',

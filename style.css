@@ -205,7 +205,7 @@ main {
     line-height: 1.5;
 }
 
-a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-link) {
+a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-link):not(.experience-item a) {
     color:white;
 }
 
@@ -354,11 +354,13 @@ footer {
 
 .experience-item {
     margin-top: 20px;
-    cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     padding: 1rem;
     border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 .experience-item:first-child {
@@ -374,11 +376,13 @@ footer {
     bottom: 0;
     border: 2px solid transparent;
     border-radius: 10px;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: none;
 }
 
 .experience-item:hover::before {
-    border-color: var(--color-accent);
+    /* border-color: var(--color-accent); REMOVED/COMMENTED */
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); /* Apply hover shadow */
 }
 
 .experience-item::after {
@@ -388,14 +392,20 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid var(--color-accent);
+    /* border: 2px solid var(--color-accent); REMOVED/COMMENTED */
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); /* Apply hover shadow */
     border-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .experience-item:hover::after {
     opacity: 1;
+}
+
+.experience-item a {
+    color: black;
 }
 
 .experience-header {
@@ -405,6 +415,7 @@ footer {
     position: relative;
     padding-right: 2rem;
     z-index: 1;
+    cursor: pointer;
 }
 
 .experience-header h3 {
@@ -424,6 +435,7 @@ footer {
     display: flex;
     align-items: center;
     flex-direction: row;
+    gap: 0.5rem;
 }
 
 .social-link {
@@ -439,7 +451,8 @@ footer {
 }
 
 .social-link i {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
 }
 
 .expand-button {
@@ -454,17 +467,16 @@ footer {
     align-items: center;
 }
 
-/* Adjust expand button position when icons are present */
-.experience-header:has(.icon-link) .expand-button {
-    right: 2.5rem;
+.expand-button i {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    transition: color 0.2s ease;
 }
 
-.experience-header:has(.icon-link:nth-child(2)) .expand-button {
-    right: 5rem;
-}
-
-.experience-header:has(.icon-link:nth-child(3)) .expand-button {
-    right: 7.5rem;
+/* Change expand arrow color when header is hovered */
+.education-header:hover .expand-button i,
+.experience-header:hover .expand-button i {
+    color: var(--color-accent);
 }
 
 .experience-description {
@@ -574,11 +586,13 @@ footer {
 /* Education Experience Styles */
 .education-item {
     margin-top: 20px;
-    cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     padding: 1rem;
     border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 .education-item:first-child {
@@ -594,11 +608,13 @@ footer {
     bottom: 0;
     border: 2px solid transparent;
     border-radius: 10px;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: none;
 }
 
 .education-item:hover::before {
-    border-color: var(--color-accent);
+    /* border-color: var(--color-accent); REMOVED */
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); /* Add shadow like experience item */
 }
 
 .education-item::after {
@@ -608,14 +624,23 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid var(--color-accent);
+    /* border: 2px solid var(--color-accent); REMOVED */
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); /* Add shadow like experience item */
     border-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .education-item:hover::after {
     opacity: 1;
+}
+
+/* Apply shadow when the education item is expanded */
+.education-item:has(.education-details.expanded) {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Optional: add a transition for the shadow appearing/disappearing */
+    transition: box-shadow 0.3s ease, all 0.3s ease; 
 }
 
 .education-header {
@@ -625,6 +650,7 @@ footer {
     position: relative;
     padding-right: 2rem;
     z-index: 1;
+    cursor: pointer;
 }
 
 .education-header h3 {
@@ -642,6 +668,8 @@ footer {
     transition: max-height 0.3s ease-out;
     margin-top: 0;
     z-index: 1;
+    cursor: text;
+    user-select: text;
 }
 
 .education-details.expanded {
@@ -736,27 +764,55 @@ footer {
     justify-content: center;
 }
 
-/* Styling for individual experience images */
-.experience-image {
-    flex: 1 1 calc(33.333% - 1rem);
-    max-width: calc(33.333% - 1rem);
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+/* Styling for the container wrapping each experience image */
+.experience-image-container {
+    flex: 1 1 calc(33.333% - 1rem); 
+    max-width: calc(33.333% - 1rem); 
+    height: 300px; /* Set fixed height for containers (adjust as needed) */
+    display: flex; /* Use flex to center image inside */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide potential overflow if needed */
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
 }
 
-/* Responsive adjustment for fewer images per row on smaller screens */
+/* Styling for individual experience images (within the container) */
+.experience-image {
+    /* Remove flex sizing from image itself */
+    /* flex: 1 1 calc(33.333% - 1rem); */ 
+    /* max-width: calc(33.333% - 1rem); */ 
+    max-width: 100%; /* Image can be up to container width */
+    max-height: 100%; /* Image can be up to container height */
+    height: auto; /* Let browser determine height based on width/aspect ratio */
+    width: auto; /* Let browser determine width based on height/aspect ratio */
+    object-fit: contain; /* Scale down to fit container bounds */
+    /* Remove border/radius from image, apply to container */
+    /* border-radius: 8px; */ 
+    /* border: 1px solid #ddd; */ 
+}
+
+/* Responsive adjustments apply to the CONTAINER now */
 @media (max-width: 768px) {
-    .experience-image {
-        flex-basis: calc(50% - 0.5rem);
+    .experience-image-container {
+        flex-basis: calc(50% - 0.5rem); 
         max-width: calc(50% - 0.5rem);
     }
+    /* Keep other rules */
 }
 
 @media (max-width: 480px) {
-    .experience-image {
-        flex-basis: 100%;
+    .experience-image-container {
+        flex-basis: 100%; 
         max-width: 100%;
     }
+}
+
+/* Apply shadow when the experience item is expanded */
+.experience-item:has(.experience-description.expanded) {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Optional: add a transition for the shadow appearing/disappearing */
+    transition: box-shadow 0.3s ease, /* Existing transitions if any */
+                /* Add other transitions for item here if needed */
+                all 0.3s ease; /* Fallback or keep existing */
 }
