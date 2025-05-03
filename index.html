@@ -109,14 +109,27 @@
                 const firstWord = position.trim().split(' ')[0].toLowerCase();
                 const prefix = /^[aeiou]/i.test(firstWord) ? 'an' : 'a';
                 
+                // Add target="_blank" to the links within the position string
+                const positionWithLinkAttrs = position.replace(/<a href=/g, '<a target="_blank" rel="noopener noreferrer" href=');
+
                 if (index === currentpositions.length - 1) {
-                    return `and ${prefix} ${position}`;
+                    return `and ${prefix} ${positionWithLinkAttrs}`;
                 } else if (index === currentpositions.length - 2) {
-                    return `${prefix} ${position} `;
+                    return `${prefix} ${positionWithLinkAttrs} `;
                 } else {
-                    return `${prefix} ${position}, `;
+                    return `${prefix} ${positionWithLinkAttrs}, `;
                 }
             }).join('')}.`;
+
+            // Add attributes to GitHub and LinkedIn links
+            const githubLink = document.getElementById("github-link");
+            githubLink.target = "_blank";
+            githubLink.rel = "noopener noreferrer";
+            
+            const linkedinLink = document.getElementById("linkedin-link");
+            linkedinLink.target = "_blank";
+            linkedinLink.rel = "noopener noreferrer";
+
             document.getElementById("github-link").href = `https://github.com/${githubUsername}`;
             document.getElementById("linkedin-link").href = `https://linkedin.com/in/${linkedinProfile}`;
             document.getElementById("email-link").href = `mailto:${emailAddress}`;

@@ -90,31 +90,6 @@ function loadHeader() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('nav ul li a');
     
-    // navLinks.forEach(link => {
-    //     const linkPath = link.getAttribute('href');
-    //     console.log(linkPath);
-    //     // console.log(currentPath);
-    //     // Remove any existing active class first
-    //     link.classList.remove('active');
-
-        
-        
-    //     // // Check if current path ends with the link path
-    //     // if (currentPath.endsWith(linkPath)) {
-    //     //     link.classList.add('active');
-    //     // }
-    //     // // Special case for subdirectory index pages
-    //     // else if ((pages.engineering.isCurrent && linkPath.includes('engineering/')) ||
-    //     //          (pages.photos.isCurrent && linkPath.includes('photos/')) ||
-    //     //          (pages.resume.isCurrent && linkPath.includes('resume/'))) {
-    //     //     link.classList.add('active');
-    //     // }
-    //     // // Special case for home page
-    //     // else if (pages.home.isCurrent) {
-    //     //     link.classList.add('active');
-    //     // }
-    // });
-
     // Loop through all nav links
     navLinks.forEach(link => {
         // Remove any existing active class first
@@ -136,18 +111,31 @@ function loadHeader() {
 
     // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
-    const nav = document.querySelector('nav ul');
-
+    const navMenu = document.querySelector('nav ul');
+    
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
-        nav.classList.toggle('active');
+        navMenu.classList.toggle('active');
     });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+    
+    document.addEventListener('click', (event) => {
+        const isClickInsideNav = navMenu.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
             hamburger.classList.remove('active');
-            nav.classList.remove('active');
+            navMenu.classList.remove('active');
         }
     });
+    
+    // Header scroll effect
+    const header = document.querySelector('header');
+    if (header) { // Check if header exists
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Adjust threshold as needed
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+    }
 } 

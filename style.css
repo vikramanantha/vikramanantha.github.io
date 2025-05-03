@@ -38,9 +38,18 @@ header {
     justify-content: space-between;
     align-items: center;
     color: white;
-    margin: 5px;
+    position: fixed;
+    top: 5px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: auto;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 15px;
-    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
 }
 
 .logo {
@@ -128,6 +137,7 @@ main {
     flex-wrap: wrap;
     margin: 5px;
     border-radius: 15px;
+    padding-top: 90px;
 }
 
 .profile-container {
@@ -195,17 +205,17 @@ main {
     line-height: 1.5;
 }
 
-a:not(nav a):not(.social-links a):not(.engineering-container h3 a) {
+a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-link) {
     color:white;
 }
 
-a:not(nav a):not(.social-links a) {
+a:not(nav a):not(.social-links a):not(.social-link) {
     text-decoration: underline;
     position: relative;
     transition: color 0.2s ease;
 }
 
-a:not(nav a):not(.social-links a)::after {
+a:not(nav a):not(.social-links a):not(.social-link)::after {
     content: '';
     position: absolute;
     width: 0;
@@ -216,7 +226,7 @@ a:not(nav a):not(.social-links a)::after {
     transition: width 0.3s ease;
 }
 
-a:not(nav a):not(.social-links a):hover::after {
+a:not(nav a):not(.social-links a):not(.social-link):hover::after {
     width: 100%;
 }
 
@@ -283,8 +293,6 @@ a:not(nav a):not(.social-links a):hover::after {
     margin-left: 20px;
 }
 
-
-
 footer {
     background-color: var(--color-main);
     text-align: center;
@@ -346,10 +354,147 @@ footer {
 
 .experience-item {
     margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .experience-item:first-child {
     margin-top: 0;
+}
+
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.experience-item:hover::before {
+    border-color: var(--color-accent);
+}
+
+.experience-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--color-accent);
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.experience-item:hover::after {
+    opacity: 1;
+}
+
+.experience-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    padding-right: 2rem;
+    z-index: 1;
+}
+
+.experience-header h3 {
+    margin: 0;
+}
+
+.experience-header p {
+    margin: 0;
+    color: var(--color-main);
+}
+
+.right-container {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.social-link {
+    color: var(--color-main);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+.social-link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.social-link i {
+    font-size: 1.2rem;
+}
+
+.expand-button {
+    background: none;
+    border: none;
+    color: var(--color-main);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+/* Adjust expand button position when icons are present */
+.experience-header:has(.icon-link) .expand-button {
+    right: 2.5rem;
+}
+
+.experience-header:has(.icon-link:nth-child(2)) .expand-button {
+    right: 5rem;
+}
+
+.experience-header:has(.icon-link:nth-child(3)) .expand-button {
+    right: 7.5rem;
+}
+
+.experience-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    margin-top: 0;
+    z-index: 1;
+}
+
+.experience-description.expanded {
+    max-height: 100vh;
+    margin-top: 1rem;
+}
+
+.experience-description ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.experience-description li {
+    margin-bottom: 0.5rem;
+}
+
+.experience-description li:last-child {
+    margin-bottom: 0;
+}
+
+.experience-item:hover {
+    /* Remove the transform effect */
 }
 
 @media (max-width: 768px) {
@@ -410,6 +555,124 @@ footer {
     .expertise-section {
         width: 100%;
     }
+    
+    .experience-header,
+    .education-header {
+        padding-right: 0;
+    }
+    
+    .experience-item .right-container, 
+    .education-item .right-container {
+        position: static;
+        transform: none;
+        margin-top: 0.5rem;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+
+/* Education Experience Styles */
+.education-item {
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.education-item:first-child {
+    margin-top: 0;
+}
+
+.education-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.education-item:hover::before {
+    border-color: var(--color-accent);
+}
+
+.education-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--color-accent);
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.education-item:hover::after {
+    opacity: 1;
+}
+
+.education-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    padding-right: 2rem;
+    z-index: 1;
+}
+
+.education-header h3 {
+    margin: 0;
+}
+
+.education-header p {
+    margin: 0;
+    color: var(--color-main);
+}
+
+.education-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    margin-top: 0;
+    z-index: 1;
+}
+
+.education-details.expanded {
+    max-height: 500px;
+    margin-top: 1rem;
+}
+
+.coursework {
+    margin-top: 1rem;
+}
+
+.coursework p {
+    margin-bottom: 0.5rem;
+    color: var(--color-main);
+}
+
+.coursework ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.coursework li {
+    margin-bottom: 0.5rem;
+}
+
+.coursework li:last-child {
+    margin-bottom: 0;
+}
+
+.education-item:hover {
+    /* Remove the transform effect */
 }
 
 /* Education Experience Styles */
@@ -455,4 +718,45 @@ footer {
 
 .education-text, .experience-text {
     flex: 1;
+}
+
+/* New class for scrolled state */
+.header-scrolled {
+    background-color: rgba(10, 35, 66, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* Styling for experience images container */
+.experience-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+/* Styling for individual experience images */
+.experience-image {
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Responsive adjustment for fewer images per row on smaller screens */
+@media (max-width: 768px) {
+    .experience-image {
+        flex-basis: calc(50% - 0.5rem);
+        max-width: calc(50% - 0.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-image {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 }
