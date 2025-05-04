@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikram Anantha - Photos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../images/markivx.png">
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <h1>Photo Portfolio</h1>
+            </div>
+            <div id="photo-portfolio-container" class="photo-portfolio-container">
+                <!-- Photo sections will be dynamically inserted here by script -->
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        // Function to create a photo item element using data from JSON
+        function createPhotoItem(photo) {
+            const item = document.createElement('div');
+            item.className = 'photo-item';
+
+            const img = document.createElement('img');
+            img.src = photo.path; // Use path from JSON
+            img.alt = photo.what || 'Photo'; // Use WHAT as alt text, with fallback
+
+            const description = document.createElement('div');
+            description.className = 'description';
+            description.textContent = photo.what || 'View Details'; // Use WHAT for hover description
+
+            // --- Button Container ---
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'photo-item-buttons';
+
+            // --- Fullscreen Button ---
+            const fullscreenBtn = document.createElement('button');
+            fullscreenBtn.className = 'photo-action-btn fullscreen-btn';
+            fullscreenBtn.title = 'View Details'; // Update title
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+            fullscreenBtn.onclick = (event) => {
+                event.stopPropagation();
+                // Call the global openLightbox function, which will be defined in window.onload
+                window.openLightbox(photo.path, photo.what, photo.when, photo.where);
+            };
+            buttonContainer.appendChild(fullscreenBtn);
+
+            // --- Download Button (using <a> tag) ---
+            const downloadBtn = document.createElement('a');
+            downloadBtn.className = 'photo-action-btn download-btn';
+            downloadBtn.title = 'Download Image';
+            downloadBtn.href = photo.path;
+            
+            // Suggest filename based on WHAT field
+            const safeWhat = (photo.what || 'image').replace(/[^a-z0-9\s]/gi, '_').replace(/\s+/g, '_');
+            const extension = photo.path.split('.').pop();
+            downloadBtn.download = `${safeWhat}.${extension}`; 
+            
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i>';
+            buttonContainer.appendChild(downloadBtn);
+
+            // --- Append elements ---
+            item.appendChild(img);
+            item.appendChild(description);
+            item.appendChild(buttonContainer); // Add button container
+
+            // Handle image loading errors
+            img.onerror = () => {
+                console.error(`Failed to load image: ${photo.path}`);
+                item.innerHTML = `<p style="color: red; font-size: 0.8em; text-align: center;">Error loading:<br>${photo.path.split('/').pop()}</p>`;
+                item.style.alignItems = 'center';
+                item.style.justifyContent = 'center';
+                item.style.border = '1px dashed red'; // Indicate error visually
+            };
+
+            return item;
+        }
+
+        // Function to create a section and load photos into its carousel
+        function createPhotoSection(sectionTitle, photos, container) {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'photo-section content-box'; // Use existing styles
+
+            const title = document.createElement('h2');
+            title.textContent = sectionTitle;
+            sectionDiv.appendChild(title);
+
+            const carouselDiv = document.createElement('div');
+            carouselDiv.className = 'photo-carousel';
+            // Optional: give it a unique ID if needed later, e.g.:
+            // carouselDiv.id = sectionTitle.replace(/\s+/g, '-').toLowerCase() + '-carousel';
+            sectionDiv.appendChild(carouselDiv);
+
+            // Populate the carousel
+            if (photos && photos.length > 0) {
+                photos.forEach(photo => {
+                    if (photo.path && photo.what) { 
+                         carouselDiv.appendChild(createPhotoItem(photo));
+                    } else {
+                        console.warn('Skipping photo entry with missing path or what field in section:', sectionTitle, photo);
+                    }
+                });
+            } else {
+                 carouselDiv.innerHTML = '<p>No photos found in this category yet.</p>'; // Placeholder text
+                 carouselDiv.style.justifyContent = 'center';
+                 carouselDiv.style.alignItems = 'center';
+                 carouselDiv.style.minHeight = '100px';
+            }
+
+            container.appendChild(sectionDiv);
+        }
+
+        // Main function to load and display photo data
+        async function loadAndDisplayPhotos() {
+            const portfolioContainer = document.getElementById('photo-portfolio-container');
+            if (!portfolioContainer) {
+                console.error('Photo portfolio container not found!');
+                return;
+            }
+
+            try {
+                const response = await fetch('photo_data.json'); // Fetch the JSON file
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const photoData = await response.json(); // Parse JSON data
+
+                // Clear any existing content (e.g., placeholders)
+                portfolioContainer.innerHTML = '';
+
+                // Iterate through the sections defined in the JSON
+                for (const sectionTitle in photoData) {
+                    if (photoData.hasOwnProperty(sectionTitle)) {
+                         createPhotoSection(sectionTitle, photoData[sectionTitle], portfolioContainer);
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error loading or parsing photo data:', error);
+                portfolioContainer.innerHTML = '<p style="color: red; text-align: center;">Could not load photo portfolio data. Please check photo_data.json.</p>';
+            }
+        }
+
+        // Load header/footer and then the photo data when the page loads
+        window.onload = function() {
+            loadHeader();
+            loadFooter();
+            
+            // Setup lightbox functionality - MOVED HERE
+            const lightboxOverlay = document.getElementById('lightbox-overlay');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+
+            // Define the openLightbox function as a global function so it can be called from the button's onclick
+            window.openLightbox = function(imageSrc, what, when, where) {
+                console.log('Opening lightbox for:', imageSrc); // Debug log
+                if (!lightboxOverlay || !lightboxImage || !lightboxCaption) {
+                    console.error('Lightbox elements not found!', {
+                        overlay: lightboxOverlay,
+                        image: lightboxImage,
+                        caption: lightboxCaption
+                    });
+                    return;
+                }
+                
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = what || 'Enlarged photo';
+                
+                let captionText = what || '';
+                if (where) captionText += ` - ${where}`;
+                if (when) captionText += ` (${when})`;
+                lightboxCaption.textContent = captionText.trim();
+                
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('body-blur'); // Add class to body
+            };
+
+            // Function to close the lightbox
+            function closeLightbox() {
+                if (!lightboxOverlay) return;
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                document.body.classList.remove('body-blur'); // Remove class from body
+            }
+
+            // Event Listeners for Closing Lightbox
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            } else {
+                console.error('Lightbox close button not found!');
+            }
+            
+            if (lightboxOverlay) {
+                lightboxOverlay.addEventListener('click', (event) => {
+                    if (event.target === lightboxOverlay) { 
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Close with Escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Initialize photo display
+            loadAndDisplayPhotos();
+        };
+    </script>
+
+    <!-- Modal/Lightbox Structure -->
+    <div id="lightbox-overlay" class="lightbox-overlay">
+        <span id="lightbox-close" class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="#" alt="Lightbox Image">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+</body>
+</html>

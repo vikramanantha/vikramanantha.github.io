@@ -1,0 +1,78 @@
+{
+  "Vik's Picks": [
+    {
+        "path": "../images/photos/ViksPicks/School Fall vs Winter.png",
+        "what": "High School Courtyard, Fall vs Winter",
+        "where": "Lexington, MA",
+        "when": "Oct 2023 / Jan 2024"
+    },
+    {
+      "path": "../images/photos/ViksPicks/SnowyCentral_Feb122025_VikramAnantha-08.jpg",
+      "what": "Snowy Statue",
+      "where": "Ann Arbor, MI",
+      "when": "Feb 2025"
+    },
+    {
+        "path": "../images/photos/ViksPicks/FballUIUC_Oct192024_VikramAnantha-24.jpg",
+        "what": "Michigan vs Illinois",
+        "where": "Champaign, IL",
+        "when": "Oct 2024"
+    },
+    {
+        "path": "../images/photos/ViksPicks/solareclipse2024.jpg",
+        "what": "Solar Eclipse",
+        "where": "Burlington, VT",
+        "when": "Apr 2024"
+    },
+    {
+        "path": "../images/photos/ViksPicks/Stock_Oct2024_VikramAnantha-01.jpg",
+        "what": "Evening on North Campus",
+        "where": "Ann Arbor, MI",
+        "when": "Oct 2024"
+    },
+    {
+        "path": "../images/photos/ViksPicks/bostonzakim.jpg",
+        "what": "Zakim Bridge Long Exposure",
+        "where": "Boston, MA",
+        "when": "Apr 2023"
+    },
+    {
+        "path": "../images/photos/ViksPicks/BayBridge.jpg",
+        "what": "Bay Bridge Aerial",
+        "where": "San Francisco, CA",
+        "when": "Sept 2022"
+    },
+    
+    {
+        "path": "../images/photos/ViksPicks/carnival.jpg",
+        "what": "Town Faire Aerial",
+        "where": "Lexington, MA",
+        "when": "July 2023"
+    },
+    {
+        "path": "../images/photos/ViksPicks/darkroomlongexpo.jpg",
+        "what": "Dark Room Long Exposure",
+        "where": "Lexington, MA",
+        "when": "Feb 2024"
+    },
+    {
+        "path": "../images/photos/ViksPicks/harvard.jpg",
+        "what": "Harvard University Aerial",
+        "where": "Cambridge, MA",
+        "when": "July 2023"
+    },
+    {
+        "path": "../images/photos/ViksPicks/nubble.jpg",
+        "what": "Nubble Lighthouse Aerial",
+        "where": "York, ME",
+        "when": "Aug 2022"
+    },
+    
+    {
+        "path": "../images/photos/ViksPicks/timeslice.png",
+        "what": "Sunset Timeslice",
+        "where": "Boston, MA",
+        "when": "Mar 2021"
+    }
+  ]
+}

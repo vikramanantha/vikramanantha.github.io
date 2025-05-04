@@ -42,8 +42,8 @@ function loadHeader() {
     for (const [key, page] of Object.entries(pages)) {
         if (key === 'home') {
             page.navPath = page.isCurrent ? page.path : '../index.html';
-        } else if (key === 'photos') { // SPECIAL CASE: Instagram link
-            page.navPath = 'https://www.instagram.com/photos.by.vik';
+        // } else if (key === 'photos') { // SPECIAL CASE: Instagram link
+        //     page.navPath = 'https://www.instagram.com/photos.by.vik';
         }
         else {
             page.navPath = page.isCurrent ? 

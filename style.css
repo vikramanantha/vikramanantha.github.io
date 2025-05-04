@@ -29,6 +29,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: filter 0.3s ease-out;
 }
 
 header {
@@ -205,17 +206,17 @@ main {
     line-height: 1.5;
 }
 
-a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-link):not(.experience-item a) {
+a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-link):not(.experience-item a):not(.photo-action-btn) {
     color:white;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link) {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn) {
     text-decoration: underline;
     position: relative;
     transition: color 0.2s ease;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link)::after {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn)::after {
     content: '';
     position: absolute;
     width: 0;
@@ -226,7 +227,7 @@ a:not(nav a):not(.social-links a):not(.social-link)::after {
     transition: width 0.3s ease;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link):hover::after {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):hover::after {
     width: 100%;
 }
 
@@ -263,7 +264,8 @@ a:not(nav a):not(.social-links a):not(.social-link):hover::after {
     color: black;
 }
 
-.engineering-container h2 {
+.engineering-container h2,
+.photo-section h2 {
     font-size: 2.5rem;
     /* line-height: 1.2; */
 }
@@ -815,4 +817,254 @@ footer {
     transition: box-shadow 0.3s ease, /* Existing transitions if any */
                 /* Add other transitions for item here if needed */
                 all 0.3s ease; /* Fallback or keep existing */
+}
+
+/* Photo Portfolio Carousel Styles */
+.photo-carousel {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
+    gap: 15px; /* Space between images */
+    padding: 10px 0;
+    margin-bottom: 20px; /* Space below carousel */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--secondary-color) var(--bg-color); /* Firefox */
+}
+
+/* Webkit scrollbar styling */
+.photo-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+.photo-carousel::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 4px;
+}
+.photo-carousel::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    border: 2px solid var(--bg-color);
+}
+
+.photo-item {
+    flex: 0 0 auto; /* Prevent stretching, allow shrinking */
+    width: auto;
+    height: auto;
+    max-height: 410px; /* Max height for the item slightly larger than image max */
+    scroll-snap-align: start; /* Optional: Snap alignment */
+    position: relative;
+    overflow: hidden; /* Hide overflow for description */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #eee; /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-item img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 400px; /* Set max height for image */
+    max-width: 100%; /* Ensure image doesn't overflow item horizontally */
+    transition: transform 0.3s ease;
+}
+
+.photo-item .description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(10, 35, 66, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.photo-item:hover .description {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Button Container Styles */
+.photo-item-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.photo-item:hover .photo-item-buttons {
+    opacity: 1;
+}
+
+/* Individual Button Base Styles */
+.photo-action-btn {
+    background-color: rgba(10, 35, 66, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    text-decoration: none !important;
+}
+
+/* Style changes specifically for when the BUTTON itself is hovered (color/scale) */
+.photo-action-btn:hover,
+a.photo-action-btn:hover { 
+    background-color: rgba(10, 35, 66, 0.8);
+    color: var(--color-accent);
+    transform: scale(1.1);
+    text-decoration: none !important;
+}
+
+.photo-action-btn i {
+    line-height: 1;
+}
+
+/* Lightbox/Modal Styles */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 35, 66, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-content {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: calc(90vh - 80px);
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+#lightbox-caption {
+    margin-top: 15px;
+    color: #333;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+}
+
+/* Photo Portfolio Section Adjustments */
+.photo-section {
+    width: 100%; /* Span full width */
+    padding-bottom: 3rem; /* Add more space below content */
+}
+
+/* Photo Item Buttons */
+.photo-item-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    z-index: 10; /* Above description */
+}
+
+.photo-item:hover .photo-item-buttons {
+    opacity: 1; /* Visible on hover */
+}
+
+.photo-action-btn {
+    background-color: rgba(10, 35, 66, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    text-decoration: none !important;
+}
+
+.photo-action-btn:hover,
+a.photo-action-btn:hover { 
+    background-color: rgba(10, 35, 66, 0.8);
+    color: var(--color-accent);
+    transform: scale(1.1);
+    text-decoration: none !important;
+}
+
+.photo-action-btn i {
+    line-height: 1;
+}
+
+/* Blur background container when lightbox is active */
+.body-blur > .container {
+    filter: blur(5px);
+    transition: filter 0.3s ease-out;
+    /* Prevent interaction with blurred background */
+    /* pointer-events: none; // Might be needed if blur causes issues */
+    /* transform: scale(1); // May help rendering on some browsers */
 }
