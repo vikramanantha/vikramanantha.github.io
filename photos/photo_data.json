@@ -56,12 +56,6 @@
         "when": "Feb 2024"
     },
     {
-        "path": "../images/photos/ViksPicks/harvard.jpg",
-        "what": "Harvard University Aerial",
-        "where": "Cambridge, MA",
-        "when": "July 2023"
-    },
-    {
         "path": "../images/photos/ViksPicks/nubble.jpg",
         "what": "Nubble Lighthouse Aerial",
         "where": "York, ME",
@@ -73,6 +67,56 @@
         "what": "Sunset Timeslice",
         "where": "Boston, MA",
         "when": "Mar 2021"
+    }
+  ],
+  "Best of Aerials": [
+    {
+        "path": "../images/photos/Aerials/ggbridge.jpg",
+        "what": "Golden Gate Bridge",
+        "where": "San Francisco, CA",
+        "when": "Sept 2022"
+    },
+    {
+        "path": "../images/photos/Aerials/bubuilding.jpg",
+        "what": "A New Boston Skyline",
+        "where": "Boston, MA",
+        "when": "July 2024"
+    },
+    {
+        "path": "../images/photos/Aerials/chatham.jpg",
+        "what": "Cape Cod Sand Bar",
+        "where": "Chatham, MA",
+        "when": "Mar 2021"
+    },
+    {
+        "path": "../images/photos/Aerials/hawaii.jpg",
+        "what": "Hawaiian Canyon",
+        "where": "Waimea, HI",
+        "when": "Aug 2021"
+    },
+    {
+        "path": "../images/photos/Aerials/lex.jpg",
+        "what": "Patroitic Early Morning",
+        "where": "Lexington, MA",
+        "when": "Apr 2024 [Patriot's Day]"
+    },
+    {
+        "path": "../images/photos/Aerials/lhs.jpg",
+        "what": "High School Courtyard Morning",
+        "where": "Lexington, MA",
+        "when": "Oct 2023"
+    },
+    {
+        "path": "../images/photos/Aerials/mit.jpg",
+        "what": "University Outlook",
+        "where": "Cambridge, MA",
+        "when": "Aug 2023"
+    },
+    {
+        "path": "../images/photos/ViksPicks/harvard.jpg",
+        "what": "Harvard standing tall",
+        "where": "Cambridge, MA",
+        "when": "July 2023"
     }
   ]
 }
