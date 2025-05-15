@@ -118,5 +118,61 @@
         "where": "Cambridge, MA",
         "when": "July 2023"
     }
+  ],
+  "Best of People": [
+    {
+        "path": "../images/photos/People/20241213-DSC_9160.jpg",
+        "what": "Hockey Fan",
+        "where": "Ann Arbor MI",
+        "when": "Dec 2024"
+    },
+    {
+        "path": "../images/photos/People/20250315-DSC_0330.jpg",
+        "what": "Dance Performance",
+        "where": "Ann Arbor MI",
+        "when": "Mar 2025"
+    },
+    {
+        "path": "../images/photos/People/20250329-DSC_8224-Enhanced-NR.jpg",
+        "what": "Lightsaber Duel",
+        "where": "Ann Arbor MI",
+        "when": "Mar 2025"
+    },   
+    {
+        "path": "../images/photos/People/20241205-DSC_7837.jpg",
+        "what": "Law Quad Portrait",
+        "where": "Ann Arbor MI",
+        "when": "Dec 2024"
+    },
+    {
+        "path": "../images/photos/People/20250315-DSC_9184.jpg",
+        "what": "Hip Hop Performance",
+        "where": "Ann Arbor MI",
+        "when": "Mar 2025"
+    },
+    {
+        "path": "../images/photos/People/20250212-DSC_3949.jpg",
+        "what": "Public Speaker",
+        "where": "Ann Arbor MI",
+        "when": "Feb 2025"
+    },
+    {
+        "path": "../images/photos/People/20250315-DSC_9643.jpg",
+        "what": "Dance Performance",
+        "where": "Ann Arbor MI",
+        "when": "Mar 2025"
+    }, 
+    {
+        "path": "../images/photos/People/20250419-CAN_0786.jpg",
+        "what": "Parade Man",
+        "where": "Lexington MA",
+        "when": "Apr 2025"
+    },  
+    {
+        "path": "../images/photos/People/20250419-CAN_8954-Enhanced-NR.jpg",
+        "what": "Audience Participation",
+        "where": "Lexington MA",
+        "when": "Apr 2025"
+    }
   ]
 }
