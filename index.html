@@ -81,7 +81,7 @@
             
             // Rest of your existing JavaScript...
             document.getElementById("name").textContent = myName;
-            document.getElementById("subname").textContent = `${major}, ${universityName}, Class of ${graduationYear}`;
+            document.getElementById("subname").innerHTML = `${universityName} <br>${major}, Graduating ${graduationYear}`;
             document.getElementById("bio1").textContent = `
                     I am currently a ${year} at the ${universityName} pursuing a degree in ${major}.
                     I'm very interested in ${interests.map((interest, index) => {

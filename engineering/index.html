@@ -31,10 +31,11 @@
                     <div class="expertise-content">
                         <p>Technical Skills:</p>
                         <ul>
-                            <li>Python, C++, Java, JavaScript, HTML, CSS, SQL</li>
+                            <li>Python, C++, Java, JavaScript, HTML, CSS, SQL, CAPL</li>
                             <li>Gaussian Splat</li>
                             <li>PyTorch, TensorFlow, OpenCV, ROS</li>
                             <li>Git, Docker, Amazon Web Services</li>
+                            <li>Vector CANalyzer / CANoe, MATLAB</li>
                         </ul>
                         <p>Areas of Interest:</p>
                         <ul>
@@ -70,12 +71,12 @@
             // Education data array
             const education = [
                 {
-                    logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Michigan_Wolverines_Block_M.png",
+                    logo: "https://play-lh.googleusercontent.com/VDUtvYtd2tr9sQXulbPv9kJbJHBMJmZG0V05EvGBHmrFWkjK7bWQ9pn5mj8SyFq4nWY=w480-h960-rw",
                     alt: "University of Michigan Logo",
                     name: "University of Michigan",
                     degree: "Computer Science",
                     duration: "August 2024 - Present",
-                    gpa: "3.96",
+                    notes: ["3.96 GPA", "1931E Scholar"],
                     coursework: [
                         "Data Structures & Algorithms",
                         "Computer Organization",
@@ -88,8 +89,8 @@
                     logo: "https://assets.scorebooklive.com/uploads/production/school/19216/image/Lexington__MA__Minutemen_Logo.png",
                     alt: "LHS Logo",
                     name: "Lexington High School",
-                    duration: "August 2020 - May 2024",
-                    gpa: "4.0",
+                    duration: "September 2020 - May 2024",
+                    notes: ["4.0 GPA", "36/36 ACT Score"],
                     coursework: [
                         "AP Computer Science A",
                         "AP Computer Science Principles",
@@ -147,8 +148,22 @@
                 const details = document.createElement('div');
                 details.className = 'education-details';
                 
-                const gpa = document.createElement('p');
-                gpa.textContent = `GPA: ${edu.gpa}`;
+                // Add notes if they exist
+                let notesElement = null;
+                if (edu.notes && edu.notes.length > 0) {
+                    notesElement = document.createElement('div');
+                    notesElement.className = 'notes';
+
+                    const notesTitle = document.createElement('p');
+                    notesTitle.textContent = "";
+
+                    // Create a single paragraph with notes separated by commas
+                    const notesText = document.createElement('p');
+                    notesText.textContent = edu.notes.join(', ');
+
+                    notesElement.appendChild(notesTitle);
+                    notesElement.appendChild(notesText);
+                }
                 
                 const coursework = document.createElement('div');
                 coursework.className = 'coursework';
@@ -166,7 +181,9 @@
                 coursework.appendChild(courseworkTitle);
                 coursework.appendChild(courseworkList);
                 
-                details.appendChild(gpa);
+                if (notesElement) {
+                    details.appendChild(notesElement);
+                }
                 details.appendChild(coursework);
                 
                 text.appendChild(header);
@@ -204,9 +221,16 @@
                     alt: "Stellantis Logo",
                     name: "Stellantis",
                     link: "https://www.stellantis.com/en",
-                    role: "Software Engineering Intern",
+                    role: "ADAS Functional Integration Engineering Intern",
                     duration: "May 2025 - Present",
-                    description: "<p>Advanced Driver-Assistance Systems (ADAS) Engineer</p>"
+                    description: `
+                    <p>
+                        Developed a <b>CAPL script to measure the fault detection fidelity of the high speed ADAS camera component</b>, by hijacking CAN signals using Vector CANalyzer to simulate setting DTCs (error codes for vehicle components).
+                    </p>
+                    <p>
+                        Simultaneously, <b>ran controlled experiment to measure automatic longitudinal control</b> by controlling CAN signals of acceleration/deceleration using Vector CANoe.
+                    </p>
+                    `
                 },
                 {
                     logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/irk4bkrls8rlqrqwd7ci",
@@ -229,7 +253,7 @@
                     ]
                 },
                 {
-                    logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Michigan_Wolverines_Block_M.png",
+                    logo: "https://play-lh.googleusercontent.com/VDUtvYtd2tr9sQXulbPv9kJbJHBMJmZG0V05EvGBHmrFWkjK7bWQ9pn5mj8SyFq4nWY=w480-h960-rw",
                     alt: "University of Michigan Logo",
                     name: "Robotic & Optimization for Analysis of Human Motion Lab",
                     link: "https://www.roahmlab.com/",
@@ -238,12 +262,17 @@
                     paper: "https://drive.google.com/file/d/1aC-cdw4XmY19WyBp9W5B8dSc1mJTcwET/view?usp=sharing",
                     description: `
                     <p>
-                        <b>Worked on a novel pipeline for safe mobile manipulation by implementing scene representation through 3D Gaussian Splatting, which efficiently generates detailed, manipulable 3D models from RGB-D images. </b>
+                        Currently <b>using Vision Language Action models (VLAs) to develop generalist robots</b> that can perform a wide range of tasks, such as grasping, pushing, and pulling objects.
                     </p>
                     <p>
-                        I integrated object detection capabilities combining <a href="https://github.com/IDEA-Research/GroundingDINO">GroundingDINO</a> for zero-shot target identification and <a href="https://github.com/facebookresearch/segment-anything">Meta's Segment Anything Model</a> for precise object segmentation, allowing the system to identify specific clusters of Gaussians associated with target objects. 
-                        I established grasp detection functionality using <a href="https://github.com/graspnet/anygrasp_sdk">AnyGrasp</a> to generate optimal gripper positions for the Fetch robot to safely manipulate objects in novel environments. 
-                        I leveraged <a href="https://github.com/UZ-SLAMLab/ORB_SLAM3">ORBSLAM3</a> to process continuous camera feeds, track features across frames, and generate accurate camera positions that were essential for creating the initial point cloud used to produce Normalized Gaussians for scene representation.
+                        Last semester, I <b>worked on a novel pipeline for safe mobile manipulation by implementing scene representation through 3D Gaussian Splatting, which efficiently generates detailed, manipulable 3D models from RGB-D images. </b>
+                        <ul>
+                        <li>I integrated object detection capabilities combining <a href="https://github.com/IDEA-Research/GroundingDINO">GroundingDINO</a> for zero-shot target identification and <a href="https://github.com/facebookresearch/segment-anything">Meta's Segment Anything Model</a> for precise object segmentation, allowing the system to identify specific clusters of Gaussians associated with target objects. </li>
+                        <li>I established grasp detection functionality using <a href="https://github.com/graspnet/anygrasp_sdk">AnyGrasp</a> to generate optimal gripper positions for the Fetch robot to safely manipulate objects in novel environments. </li>
+                        <li>I leveraged <a href="https://github.com/UZ-SLAMLab/ORB_SLAM3">ORBSLAM3</a> to process continuous camera feeds, track features across frames, and generate accurate camera positions that were essential for creating the initial point cloud used to produce Normalized Gaussians for scene representation. </li>
+                        </ul>
+                    </p>
+                    <p>
                         Together, my contributions formed the foundation for a computationally efficient and safe autonomous system capable of understanding scenes, identifying objects, and calculating appropriate grasping positions without prior environment knowledge.
                     </p>
                     `,
@@ -253,7 +282,7 @@
                     ]
                 },
                 {
-                    logo: "https://i.vimeocdn.com/player/375755?sig=a8d6fa180b32ddccd8e86ae4dbaf8477b07f7b37fe5cad0758dd93a4ace2551d&v=1",
+                    logo: "https://play-lh.googleusercontent.com/luQutu1IGIGIOKyV1Co8XacLD7SHarmc7HEs8os5SNv1kZfAcjZhQO0OqEIHHlHEvV4=w480-h960-rw",
                     alt: "Constant Therapy Health Logo",
                     name: "Constant Therapy Health",
                     link: "https://constanttherapyhealth.com/constant-therapy/",
@@ -336,7 +365,7 @@
                     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4oHdQYnnDK85X9ZKw28iNtIlX6SBXkUczow&s",
                     alt: "HELM Learning Logo",
                     name: "HELM Learning",
-                    link: "https://web.archive.org/web/20240414172814/https://helmlearning.com/",
+                    link: "https://helm-learning.github.io/",
                     role: "Co-founder, Teacher, Developer",
                     duration: "Apr 2020 - May 2024",
                     github: "https://github.com/vikramanantha/helmlearning",
