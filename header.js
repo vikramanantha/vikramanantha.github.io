@@ -65,7 +65,7 @@ function loadHeader() {
     const headerHTML = `
         <header>
             <div class="logo">
-                <img src="${pages.home.isCurrent ? '' : '../'}images/markivx.png" alt="Logo">
+                <img src="${pages.home.isCurrent ? '' : '../'}images/VA-2025.png" alt="Logo">
             </div>
             <div class="hamburger">
                 <span></span>
