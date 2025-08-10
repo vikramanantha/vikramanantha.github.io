@@ -65,6 +65,13 @@ header {
     object-fit: contain;
 }
 
+.header-icon {
+    height: 30px !important;
+    width: 30px !important;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -129,6 +136,94 @@ nav ul li a.active::after {
 
 nav ul li a:hover {
     transform: scale(1.35);
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-toggle i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-main);
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 5px;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    border-radius: 6px;
+    margin: 2px;
+    position: relative;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a.active {
+    color: white;
+    transform: none;
+}
+
+.dropdown-menu li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 5px;
+    left: 15px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.dropdown-menu li a:hover::after,
+.dropdown-menu li a.active::after {
+    width: calc(100% - 30px);
+}
+
+.project-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 main {
@@ -536,6 +631,27 @@ footer {
         right: 0;
     }
 
+    /* Dropdown styles for mobile */
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background-color: transparent;
+        box-shadow: none;
+        margin-top: 0;
+        margin-left: 20px;
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .dropdown-toggle i {
+        display: inline;
+    }
+
     .hamburger.active span:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
     }
@@ -730,6 +846,22 @@ footer {
     margin-bottom: 1rem;
     text-align: center;
     color: var(--color-main);
+    margin: 0;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
+
+.title-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .title-card {
@@ -1245,6 +1377,89 @@ a.photo-action-btn:hover {
 .lexobserver-link i {
     margin-left: 5px;
 }
+
+/* Polaroider Page Styles */
+.polaroider-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.polaroider-container .controls, 
+.polaroider-container .display {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.polaroider-container .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+}
+
+.polaroider-container .controls h2 {
+    margin-top: 0;
+    color: var(--color-main);
+}
+
+.polaroider-container input[type="file"] {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.polaroider-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+    font-family: var(--font-primary);
+}
+
+.polaroider-container button,
+.polaroider-container a {
+    background-color: var(--color-main);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.polaroider-container button:hover,
+.polaroider-container a:hover {
+    background-color: var(--color-accent);
+}
+
+.polaroider-container .display {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.polaroider-container .image-preview, 
+.polaroider-container .polaroid-preview {
+    width: 400px;
+}
+
+.polaroider-container #original-image, 
+.polaroider-container #polaroid-canvas {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

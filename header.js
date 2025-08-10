@@ -18,7 +18,8 @@ function loadHeader() {
             path: 'index.html',
             isCurrent: !(window.location.pathname.includes('engineering/') || 
                         window.location.pathname.includes('photos/') || 
-                        window.location.pathname.includes('resume/')),
+                        window.location.pathname.includes('resume/') ||
+                        window.location.pathname.includes('polaroider/')),
         },
         engineering: {
             path: 'engineering/',
@@ -34,6 +35,11 @@ function loadHeader() {
             path: 'resume/resume.pdf',
             isCurrent: window.location.pathname.includes('resume/'),
             navPath: 'resume/resume.pdf'
+        },
+        polaroider: {
+            path: 'polaroider/',
+            isCurrent: window.location.pathname.includes('polaroider/'),
+            navPath: 'polaroider/'
         }
     }
     
@@ -77,6 +83,15 @@ function loadHeader() {
                     <li><a href="${pages.home.navPath}">Home</a></li>
                     <li><a href="${pages.engineering.navPath}">Engineering</a></li>
                     <li><a href="${pages.photos.navPath}">Photos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Small Projects <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="${pages.polaroider.navPath}">
+                                <img src="${pages.home.isCurrent ? '' : '../'}polaroider/icon.png" alt="Polaroider Icon" class="project-icon">
+                                Polaroider
+                            </a></li>
+                        </ul>
+                    </li>
                     <li><a href="${pages.resume.navPath}" target="_blank">Resume</a></li>
                 </ul>
             </nav>
@@ -108,6 +123,34 @@ function loadHeader() {
             }
         }
     });
+
+    // Special handling for Small Projects dropdown
+    if (pages.polaroider.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const polaroiderLink = document.querySelector('.dropdown-menu a[href*="polaroider"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (polaroiderLink) polaroiderLink.classList.add('active');
+    }
+
+    // Dropdown functionality
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    if (dropdown && dropdownToggle && dropdownMenu) {
+        dropdown.addEventListener('mouseenter', () => {
+            dropdownMenu.classList.add('show');
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+            dropdownMenu.classList.remove('show');
+        });
+
+        dropdownToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdownMenu.classList.toggle('show');
+        });
+    }
 
     // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');

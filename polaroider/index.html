@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polaroider - Vikram Anantha</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../images/icon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <div class="title-with-icon">
+                    <img src="icon.png" alt="Polaroider Icon" class="title-icon">
+                    <h1>Polaroider</h1>
+                </div>
+                <p>I like mementos on my walls. Read the <a style="color: var(--color-main);" href="https://github.com/vikramanantha/polaroider">README</a></p>
+            </div>
+            <div class="polaroider-container">
+                <div class="controls">
+                    <h2>Controls</h2>
+                    <label for="image-picker">1. Select a photo</label>
+                    <input type="file" id="image-picker" accept="image/*">
+                    
+                    <h2>2. Enter Details</h2>
+                    <input type="text" id="what-input" placeholder="What? (e.g., Ice Skating)">
+                    <input type="text" id="when-input" placeholder="When? (e.g., Jan 9 2025)">
+                    <input type="text" id="where-input" placeholder="Where? (e.g., Yost Arena)">
+                    
+                    <button id="generate-btn">Generate Polaroid</button>
+                    <a id="download-link" style="display: none;">Download Polaroid</a>
+                </div>
+                <div class="display">
+                    <div class="image-preview">
+                        <h2>Original Photo</h2>
+                        <img id="original-image" src="" alt="Selected image will be shown here."/>
+                    </div>
+                    <div class="polaroid-preview">
+                        <h2>Generated Polaroid</h2>
+                        <canvas id="polaroid-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 
