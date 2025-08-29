@@ -42,31 +42,63 @@
                 </div>
                 <p>I like mementos on my walls. Read the <a style="color: var(--color-main);" href="https://github.com/vikramanantha/polaroider">README</a></p>
             </div>
-            <div class="polaroider-container">
-                <div class="controls">
-                    <h2>Controls</h2>
-                    <label for="image-picker">1. Select a photo</label>
-                    <input type="file" id="image-picker" accept="image/*">
-                    
-                    <h2>2. Enter Details</h2>
-                    <input type="text" id="what-input" placeholder="What? (e.g., Ice Skating)">
-                    <input type="text" id="when-input" placeholder="When? (e.g., Jan 9 2025)">
-                    <input type="text" id="where-input" placeholder="Where? (e.g., Yost Arena)">
-                    
-                    <button id="generate-btn">Generate Polaroid</button>
-                    <a id="download-link" style="display: none;">Download Polaroid</a>
-                </div>
-                <div class="display">
-                    <div class="image-preview">
-                        <h2>Original Photo</h2>
-                        <img id="original-image" src="" alt="Selected image will be shown here."/>
-                    </div>
-                    <div class="polaroid-preview">
-                        <h2>Generated Polaroid</h2>
-                        <canvas id="polaroid-canvas"></canvas>
-                    </div>
-                </div>
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-btn-single" aria-controls="tab-single">Single Polaroid</button>
+                <button class="tab-btn" id="tab-btn-batch" aria-controls="tab-batch">Batch 2x2 Export</button>
             </div>
+
+            <section id="tab-single" class="tab-content active">
+                <div class="polaroider-container">
+                    <div class="controls">
+                        <h2>Polaroid Generator</h2>
+                        <!-- <label for="image-picker">1. Select a photo</label> -->
+                        <h2>1. Select a photo</h2>
+                        <input type="file" id="image-picker" accept="image/*">
+                        
+                        <h2>2. Enter Details</h2> 
+                        <input type="text" id="what-input" placeholder="What? (e.g., Ice Skating)">
+                        <input type="text" id="when-input" placeholder="When? (e.g., Jan 9 2025)">
+                        <input type="text" id="where-input" placeholder="Where? (e.g., Yost Arena)">
+                        
+                        <button id="generate-btn">Generate Polaroid</button>
+                        <a id="download-link" style="display: none;">Download Polaroid</a>
+                    </div>
+                    <div class="display">
+                        <div class="image-preview">
+                            <h2>Original Photo</h2>
+                            <img id="original-image" src="" alt="Selected image will be shown here."/>
+                        </div>
+                        <div class="polaroid-preview">
+                            <h2>Generated Polaroid</h2>
+                            <canvas id="polaroid-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-batch" class="tab-content">
+                <div class="polaroider-container">
+                    <div class="rationale-card">
+                        <h2>Rationale</h2>
+                        <p id="rationale-text">
+                            Walgreens graciously allows you to print "2x3 wallet prints" for 99¢, where they will print 4 copies of the same image.
+                            This is essentially printing a 4x6 sheet with 4 pictures, 3 of which I won't use.
+                            <br><br>
+                            However, you can print a 4x6 image for 39¢. If I instead have the file I print be 4 different 2x3 images, then each image is only 10¢.
+                            <br><br>
+                            Screw you walgreens.
+                        </p>
+                    </div>
+                    <div class="controls">
+                        <h2>Batch 2x2 Export</h2>
+                        <label for="batch-image-picker">1. Select multiple 2x3 polaroid images</label>
+                        <input type="file" id="batch-image-picker" accept="image/*" multiple>
+                        <div class="batch-summary" id="batch-summary">Total images: 0 • Pages: 0 • Padding: 0</div>
+                        <div class="batch-list" id="batch-list"></div>
+                        <button id="export-batch-btn">Export 2x2 Pages</button>
+                    </div>
+                </div>
+            </section>
         </main>
         <div id="footer-placeholder"></div>
     </div>

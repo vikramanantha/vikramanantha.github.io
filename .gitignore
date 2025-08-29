@@ -1,0 +1,15 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Ignore entire project directory
+jobapp_demon/
+
+# NPM manifests
+package-lock.json
+package.json
+
+# macOS metadata
+.DS_Store
+.DS_STORE
+

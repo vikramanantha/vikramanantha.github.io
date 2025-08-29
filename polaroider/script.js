@@ -140,4 +140,199 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadLink.download = (what.toLowerCase().replace(/[^a-z0-9]/g, '') || 'polaroid') + '_polaroid.png';
         downloadLink.style.display = 'block';
     }
-}); 
+    // Tabs & Batch 2x2 Export Logic
+    const tabBtnSingle = document.getElementById('tab-btn-single');
+    const tabBtnBatch = document.getElementById('tab-btn-batch');
+    const tabSingle = document.getElementById('tab-single');
+    const tabBatch = document.getElementById('tab-batch');
+
+    function activateTab(target) {
+        if (!tabBtnSingle || !tabBtnBatch || !tabSingle || !tabBatch) return;
+        if (target === 'single') {
+            tabBtnSingle.classList.add('active');
+            tabBtnBatch.classList.remove('active');
+            tabSingle.classList.add('active');
+            tabBatch.classList.remove('active');
+        } else {
+            tabBtnBatch.classList.add('active');
+            tabBtnSingle.classList.remove('active');
+            tabBatch.classList.add('active');
+            tabSingle.classList.remove('active');
+        }
+    }
+
+    if (tabBtnSingle && tabBtnBatch) {
+        tabBtnSingle.addEventListener('click', () => activateTab('single'));
+        tabBtnBatch.addEventListener('click', () => activateTab('batch'));
+    }
+
+    // Batch UI elements
+    const batchPicker = document.getElementById('batch-image-picker');
+    const batchListEl = document.getElementById('batch-list');
+    const batchSummaryEl = document.getElementById('batch-summary');
+    const exportBatchBtn = document.getElementById('export-batch-btn');
+    const batchPreviewCanvas = null;
+    const batchPreviewCtx = null;
+
+    let batchItems = [];
+    let nextItemId = 1;
+
+    function clearBatchList() {
+        if (!batchListEl) return;
+        while (batchListEl.firstChild) batchListEl.removeChild(batchListEl.firstChild);
+    }
+
+    function updateBatchSummary() {
+        if (!batchSummaryEl) return;
+        const total = batchItems.reduce((sum, it) => sum + (Number(it.quantity) || 0), 0);
+        const pad = (4 - (total % 4 || 0)) % 4;
+        const pages = (total + pad) / 4;
+        batchSummaryEl.textContent = `Total images: ${total} • Pages: ${pages} • Padding: ${pad}`;
+    }
+
+    function renderBatchList() {
+        if (!batchListEl) return;
+        clearBatchList();
+        batchItems.forEach((item) => {
+            const row = document.createElement('div');
+            row.className = 'batch-item';
+
+            const thumb = document.createElement('img');
+            thumb.src = item.url;
+            thumb.alt = item.file.name;
+
+            const label = document.createElement('div');
+            label.textContent = item.file.name;
+            label.style.flex = '1';
+            label.style.textAlign = 'left';
+
+            const qty = document.createElement('input');
+            qty.type = 'number';
+            qty.min = '0';
+            qty.value = String(item.quantity);
+            qty.className = 'qty-input';
+            qty.addEventListener('change', () => {
+                const v = Math.max(0, Math.floor(Number(qty.value) || 0));
+                item.quantity = v;
+                qty.value = String(v);
+                updateBatchSummary();
+            });
+
+            row.appendChild(thumb);
+            row.appendChild(label);
+            row.appendChild(qty);
+            batchListEl.appendChild(row);
+        });
+        updateBatchSummary();
+    }
+
+    function loadImageFromURL(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
+
+    if (batchPicker) {
+        batchPicker.addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files || []);
+            batchItems = [];
+            for (const file of files) {
+                const url = URL.createObjectURL(file);
+                const img = await loadImageFromURL(url).catch(() => null);
+                if (!img) continue;
+                batchItems.push({ id: nextItemId++, file, url, img, quantity: 1 });
+            }
+            renderBatchList();
+        });
+    }
+
+    function drawContain(ctx, img, x, y, w, h) {
+        const imgRatio = img.width / img.height;
+        const cellRatio = w / h;
+        let drawW = w;
+        let drawH = h;
+        if (imgRatio > cellRatio) {
+            drawW = w;
+            drawH = w / imgRatio;
+        } else {
+            drawH = h;
+            drawW = h * imgRatio;
+        }
+        const dx = x + (w - drawW) / 2;
+        const dy = y + (h - drawH) / 2;
+        ctx.drawImage(img, dx, dy, drawW, drawH);
+    }
+
+    function draw2x2Page(imagesForPage, targetW = 4000, targetH = 6000) {
+        const off = document.createElement('canvas');
+        off.width = targetW;
+        off.height = targetH;
+        const c = off.getContext('2d');
+        c.fillStyle = 'white';
+        c.fillRect(0, 0, targetW, targetH);
+
+        const outer = Math.floor(targetW * 0.04);
+        const gap = Math.floor(targetW * 0.02);
+        const cellW = Math.floor((targetW - outer * 2 - gap) / 2);
+        const cellH = Math.floor((targetH - outer * 2 - gap) / 2);
+
+        const positions = [
+            { x: outer, y: outer },
+            { x: outer + cellW + gap, y: outer },
+            { x: outer, y: outer + cellH + gap },
+            { x: outer + cellW + gap, y: outer + cellH + gap }
+        ];
+
+        for (let i = 0; i < 4; i++) {
+            const slot = imagesForPage[i] || null;
+            const { x, y } = positions[i];
+            c.fillStyle = '#ffffff';
+            c.fillRect(x, y, cellW, cellH);
+            if (slot) {
+                drawContain(c, slot, x, y, cellW, cellH);
+            }
+        }
+
+        return off;
+    }
+
+    async function exportBatch() {
+        const expanded = [];
+        batchItems.forEach((item) => {
+            const qty = Math.max(0, Math.floor(Number(item.quantity) || 0));
+            for (let i = 0; i < qty; i++) expanded.push(item.img);
+        });
+        if (expanded.length === 0) {
+            alert('Please add at least one image with quantity > 0.');
+            return;
+        }
+        const pad = (4 - (expanded.length % 4 || 0)) % 4;
+        for (let i = 0; i < pad; i++) expanded.push(null);
+        const pages = expanded.length / 4;
+
+        for (let p = 0; p < pages; p++) {
+            const pageImgs = expanded.slice(p * 4, p * 4 + 4);
+            const pageCanvas = draw2x2Page(pageImgs);
+            await new Promise((resolve) => setTimeout(resolve, 50));
+            const link = document.createElement('a');
+            link.href = pageCanvas.toDataURL('image/png');
+            const idx = String(p + 1).padStart(2, '0');
+            const now = new Date();
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const mon = months[now.getMonth()];
+            const day = String(now.getDate());
+            const year = now.getFullYear();
+            link.download = `${mon}${day}${year}_polaroidexport_${idx}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
+    if (exportBatchBtn) {
+        exportBatchBtn.addEventListener('click', exportBatch);
+    }
+});

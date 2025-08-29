@@ -1399,7 +1399,7 @@ a.photo-action-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 300px;
+    width: 500px;
 }
 
 .polaroider-container .controls h2 {
@@ -1459,6 +1459,89 @@ a.photo-action-btn:hover {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
+/* Polaroider Tabs */
+.tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin: 10px auto 0;
+    max-width: 1000px;
+}
+
+.tab-btn {
+    background: #fff;
+    color: var(--color-main);
+    border: 2px solid var(--color-main);
+    border-bottom: none;
+    padding: 8px 14px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: var(--color-main);
+    color: #fff;
+}
+
+.tab-content { display: none; width: 100%; }
+.tab-content.active { display: block; width: 100%; }
+
+/* Ensure tabs sit above card sections and span full row */
+.tabs + section.tab-content {
+    width: 100%;
+}
+
+/* Batch list UI */
+.batch-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow: auto;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.batch-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.batch-item img {
+    width: 48px;
+    height: 72px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.qty-input {
+    width: 70px;
+}
+
+.batch-summary {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Rationale card above batch controls */
+.rationale-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 80%;
+}
+
+.rationale-card h2 {
+    margin-top: 0;
+    color: var(--color-main);
+}
+
+.rationale-card p { margin: 0; }
 
 
 /* Responsive adjustments */
