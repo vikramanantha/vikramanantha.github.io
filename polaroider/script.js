@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillRect(0, 0, polaroid_w, polaroid_h);
         ctx.drawImage(img, border_side, border_top, img_w, img_h);
 
-        const font_size = border_bottom * 0.20;
+        const font_size = border_bottom * 0.18;
         ctx.font = `bold ${font_size}px 'Lexend Deca', sans-serif`;
         ctx.fillStyle = 'black';
 
