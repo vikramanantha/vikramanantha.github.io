@@ -1422,6 +1422,33 @@ a.photo-action-btn:hover {
     font-family: var(--font-primary);
 }
 
+.polaroider-container .slider-group {
+    margin-top: 5px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.polaroider-container .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.polaroider-container .slider-row label {
+    flex: 0 0 140px;
+    color: var(--color-main);
+}
+
+.polaroider-container .slider-row input[type="range"] {
+    flex: 1;
+}
+
+.polaroider-container .slider-value {
+    width: 70px;
+    text-align: right;
+    color: #666;
+}
+
 .polaroider-container button,
 .polaroider-container a {
     background-color: var(--color-main);

@@ -13,3 +13,7 @@ package.json
 .DS_Store
 .DS_STORE
 
+important_files/*
+!important_files/resume.pdf
+
+polaroider/polaroids

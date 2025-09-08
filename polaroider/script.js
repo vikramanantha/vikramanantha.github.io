@@ -9,7 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('polaroid-canvas');
     const ctx = canvas.getContext('2d');
 
+    // Text layout controls
+    const fontSizeSlider = document.getElementById('font-size-slider');
+    const lineSpacingSlider = document.getElementById('line-spacing-slider');
+    const topOffsetSlider = document.getElementById('top-offset-slider');
+    const whatWidthSlider = document.getElementById('what-width-slider');
+    const fontSizeValue = document.getElementById('font-size-value');
+    const lineSpacingValue = document.getElementById('line-spacing-value');
+    const topOffsetValue = document.getElementById('top-offset-value');
+    const whatWidthValue = document.getElementById('what-width-value');
+
     let selectedImage = null;
+    let currentCropped = null;
 
     imagePicker.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -52,19 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please select an image first.');
             return;
         }
-        selectedImage.onload = () => {
-            const cropped = cropToAspect(selectedImage, [3, 4]);
-            cropped.onload = () => {
-                createPolaroid(cropped, whatInput.value, whenInput.value, whereInput.value);
-            }
-        };
-        if (selectedImage.complete) {
-            const cropped = cropToAspect(selectedImage, [3, 4]);
-            cropped.onload = () => {
-                createPolaroid(cropped, whatInput.value, whenInput.value, whereInput.value);
-            }
+        const cropped = cropToAspect(selectedImage, [3, 4]);
+        cropped.onload = () => {
+            currentCropped = cropped;
+            createPolaroid(currentCropped, whatInput.value, whenInput.value, whereInput.value);
         }
     });
+
+    function getControls() {
+        const fontSizePx = Math.max(10, Number(fontSizeSlider?.value || 257));
+        const lineSpacingMultiplier = Math.max(0.5, Number(lineSpacingSlider?.value || 1.25));
+        const topOffsetPx = Math.max(0, Number(topOffsetSlider?.value || 60));
+        const whatWidthPercent = Math.min(95, Math.max(5, Number(whatWidthSlider?.value || 60)));
+        return { fontSizePx, lineSpacingMultiplier, topOffsetPx, whatWidthPercent };
+    }
 
     function createPolaroid(img, what, when, where) {
         const polaroid_h_target = 6000;
@@ -85,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillRect(0, 0, polaroid_w, polaroid_h);
         ctx.drawImage(img, border_side, border_top, img_w, img_h);
 
-        const font_size = border_bottom * 0.18;
+        const { fontSizePx, lineSpacingMultiplier, topOffsetPx, whatWidthPercent } = getControls();
+        const font_size = fontSizePx;
         ctx.font = `bold ${font_size}px 'Lexend Deca', sans-serif`;
         ctx.fillStyle = 'black';
 
@@ -111,26 +124,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function drawAlignedText(context, text, x, y, maxWidth, align) {
+            const textTrimmed = (text || '').trimEnd();
             let drawX = x;
             if (align === 'right') {
-                const textWidth = context.measureText(text).width;
+                const textWidth = context.measureText(textTrimmed).width;
                 drawX = x + maxWidth - textWidth;
             } else if (align === 'center') {
-                const textWidth = context.measureText(text).width;
+                const textWidth = context.measureText(textTrimmed).width;
                 drawX = x + (maxWidth - textWidth) / 2;
             }
-            context.fillText(text, drawX, y);
+            context.fillText(textTrimmed, drawX, y);
         }
 
         const x_what = border_side;
-        const y_what = img_h + border_top + 0.05 * border_bottom + font_size;
-        const max_width_what = polaroid_w * 0.6 - border_side;
-        const what_height = wrapText(ctx, what, x_what, y_what, max_width_what, font_size + 2);
+        const y_what = img_h + border_top + topOffsetPx + font_size;
+        const leftBoxWidth = polaroid_w * (whatWidthPercent / 100) - border_side;
+        const max_width_what = Math.max(50, leftBoxWidth);
+        const what_height = wrapText(ctx, what, x_what, y_what, max_width_what, Math.max(1, font_size * lineSpacingMultiplier));
 
-        const x_where = polaroid_w * 0.6;
+        const x_where = border_side + max_width_what;
         const y_where = y_what;
-        const max_width_where = polaroid_w * 0.4 - border_side;
-        wrapText(ctx, where, x_where, y_where, max_width_where, font_size + 2, 'right');
+        const rightBoxWidth = polaroid_w - border_side - x_where;
+        const max_width_where = Math.max(50, rightBoxWidth);
+        wrapText(ctx, where, x_where, y_where, max_width_where, Math.max(1, font_size * lineSpacingMultiplier), 'right');
         
         const x_when = border_side;
         const y_when = y_what + what_height + 8;
@@ -140,6 +156,37 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadLink.download = (what.toLowerCase().replace(/[^a-z0-9]/g, '') || 'polaroid') + '_polaroid.png';
         downloadLink.style.display = 'block';
     }
+
+    // Live update helpers
+    function updateValueLabels() {
+        if (fontSizeValue && fontSizeSlider) fontSizeValue.textContent = `${fontSizeSlider.value} px`;
+        if (lineSpacingValue && lineSpacingSlider) lineSpacingValue.textContent = `${lineSpacingSlider.value}×`;
+        if (topOffsetValue && topOffsetSlider) topOffsetValue.textContent = `${topOffsetSlider.value} px`;
+        if (whatWidthValue && whatWidthSlider) whatWidthValue.textContent = `${whatWidthSlider.value}%`;
+    }
+
+    function maybeRerender() {
+        if (!currentCropped) return;
+        createPolaroid(currentCropped, whatInput.value, whenInput.value, whereInput.value);
+    }
+
+    // Attach listeners for live updates
+    [fontSizeSlider, lineSpacingSlider, topOffsetSlider, whatWidthSlider]
+        .filter(Boolean)
+        .forEach((el) => {
+            el.addEventListener('input', () => {
+                updateValueLabels();
+                maybeRerender();
+            });
+        });
+
+    [whatInput, whenInput, whereInput]
+        .filter(Boolean)
+        .forEach((el) => {
+            el.addEventListener('input', maybeRerender);
+        });
+
+    updateValueLabels();
     // Tabs & Batch 2x2 Export Logic
     const tabBtnSingle = document.getElementById('tab-btn-single');
     const tabBtnBatch = document.getElementById('tab-btn-batch');
