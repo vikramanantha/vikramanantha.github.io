@@ -38,13 +38,12 @@
     const githubUsername = "vikramanantha";
     const linkedinProfile = "vikramanantha";
     const graduationYear = "2027";
-    const year = "sophomore";
+    const year = "junior";
     
     // Additional information that might be useful
-    const skills = ["Python & C++", "Gaussian Splat", "Data Structures & Algorithms", "Problem Solving", "Innovation"];
-    const interests = ["Autonomous Vehicles", "Applied Computer Vision", "Smart Cities"];
-    const currentpositions = ["Software Engineering Intern at <a href='https://www.stellantis.com/en'>Stellantis</a>", 
-                              "Software Engineering Student Intern at <a href='https://www.capoom.com/'>Capoom</a>", 
+    const skills = ["Python & C++", "Gaussian Splats", "Data Structures & Algorithms", "Problem Solving", "Innovation"];
+    const interests = ["Autonomous Vehicles", "Applied Computer Vision", "Robotics", "Smart Cities"];
+    const currentpositions = ["Software Engineering Student Intern at <a href='https://www.capoom.com/'>Capoom</a>", 
                               "Research Assistant at <a href='https://www.roahmlab.com/'>ROAHM Lab</a> at University of Michigan Robotics"];        
     
     // You can access these variables later using JavaScript
@@ -60,7 +59,7 @@
         <main>
             <div class="profile-container">
                 <div class="profile-image">
-                    <img src="images/profile.jpg" alt="Profile Photo">
+                    <img src="images/profile_2025.png" alt="Profile Photo">
                 </div>
             </div>
 
@@ -107,8 +106,6 @@
                     I'm very interested in ${interests.map((interest, index) => {
                         if (index === interests.length - 1) {
                             return `and ${interest}`;
-                        } else if (index === interests.length - 2) {
-                            return `${interest} `;
                         } else {
                             return `${interest}, `;
                         }
@@ -118,8 +115,6 @@
             I have skills in ${skills.map((skill, index) => {
                         if (index === skills.length - 1) {
                             return `and ${skill}`;
-                        } else if (index === skills.length - 2) {
-                            return `${skill} `;
                         } else {
                             return `${skill}, `;
                         }
