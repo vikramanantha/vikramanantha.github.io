@@ -4,6 +4,8 @@ node_modules/
 
 # Ignore entire project directory
 jobapp_demon/
+the_group_chat/
+markiv_core/
 
 # NPM manifests
 package-lock.json
@@ -14,6 +16,7 @@ package.json
 .DS_STORE
 
 important_files/*
-!important_files/resume.pdf
+!important_files/resume_v2.pdf
 
 polaroider/polaroids
+

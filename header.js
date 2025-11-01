@@ -34,7 +34,7 @@ function loadHeader() {
         resume: {
             path: 'resume/resume.pdf',
             isCurrent: window.location.pathname.includes('resume/'),
-            navPath: 'important_files/resume.pdf'
+            navPath: 'important_files/resume_v2.pdf'
         },
         polaroider: {
             path: 'polaroider/',
