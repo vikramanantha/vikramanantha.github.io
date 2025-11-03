@@ -19,7 +19,8 @@ function loadHeader() {
             isCurrent: !(window.location.pathname.includes('engineering/') || 
                         window.location.pathname.includes('photos/') || 
                         window.location.pathname.includes('resume/') ||
-                        window.location.pathname.includes('polaroider/')),
+                        window.location.pathname.includes('polaroider/') ||
+                        window.location.pathname.includes('photorank/')),
         },
         engineering: {
             path: 'engineering/',
@@ -40,6 +41,11 @@ function loadHeader() {
             path: 'polaroider/',
             isCurrent: window.location.pathname.includes('polaroider/'),
             navPath: 'polaroider/'
+        },
+        photorank: {
+            path: 'photorank/',
+            isCurrent: window.location.pathname.includes('photorank/'),
+            navPath: 'photorank/'
         }
     }
     
@@ -90,6 +96,10 @@ function loadHeader() {
                                 <img src="${pages.home.isCurrent ? '' : '../'}polaroider/icon.png" alt="Polaroider Icon" class="project-icon">
                                 Polaroider
                             </a></li>
+                            <li><a href="${pages.photorank.navPath}">
+                                <img src="${pages.home.isCurrent ? '' : '../'}photorank/icon.png" alt="Photo Rank Icon" class="project-icon">
+                                Photo Rank
+                            </a></li>
                         </ul>
                     </li>
                     <li><a href="${pages.resume.navPath}" target="_blank">Resume</a></li>
@@ -130,6 +140,13 @@ function loadHeader() {
         const polaroiderLink = document.querySelector('.dropdown-menu a[href*="polaroider"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (polaroiderLink) polaroiderLink.classList.add('active');
+    }
+    
+    if (pages.photorank.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const photorankLink = document.querySelector('.dropdown-menu a[href*="photorank"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (photorankLink) photorankLink.classList.add('active');
     }
 
     // Dropdown functionality

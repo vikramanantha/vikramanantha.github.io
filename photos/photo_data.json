@@ -1,178 +1,244 @@
 {
+  "meta-data": {
+    "display": 10
+  },
   "Vik's Picks": [
     {
-        "path": "../images/photos/ViksPicks/School Fall vs Winter.png",
-        "what": "High School Courtyard, Fall vs Winter",
-        "where": "Lexington, MA",
-        "when": "Oct 2023 / Jan 2024"
+      "path": "../images/photos/ViksPicks/bostonzakim.jpg",
+      "what": "Zakim Bridge Long Exposure",
+      "where": "Boston, MA",
+      "when": "Apr 2023",
+      "elo": 1572
+    },
+    {
+      "path": "../images/photos/ViksPicks/School Fall vs Winter.png",
+      "what": "High School Courtyard, Fall vs Winter",
+      "where": "Lexington, MA",
+      "when": "Oct 2023 / Jan 2024",
+      "elo": 1567
+    },
+    {
+      "path": "../images/photos/ViksPicks/FballUIUC_Oct192024_VikramAnantha-24.jpg",
+      "what": "Michigan vs Illinois",
+      "where": "Champaign, IL",
+      "when": "Oct 2024",
+      "elo": 1522
+    },
+    {
+      "path": "../images/photos/ViksPicks/darkroomlongexpo.jpg",
+      "what": "Dark Room Long Exposure",
+      "where": "Lexington, MA",
+      "when": "Feb 2024",
+      "elo": 1502
+    },
+    {
+      "path": "../images/photos/ViksPicks/solareclipse2024.jpg",
+      "what": "Solar Eclipse",
+      "where": "Burlington, VT",
+      "when": "Apr 2024",
+      "elo": 1502
+    },
+    {
+      "path": "../images/photos/ViksPicks/timeslice.png",
+      "what": "Sunset Timeslice",
+      "where": "Boston, MA",
+      "when": "Mar 2021",
+      "elo": 1495
+    },
+    {
+      "path": "../images/photos/ViksPicks/BayBridge.jpg",
+      "what": "Bay Bridge Aerial",
+      "where": "San Francisco, CA",
+      "when": "Sept 2022",
+      "elo": 1486
+    },
+    {
+      "path": "../images/photos/ViksPicks/nubble.jpg",
+      "what": "Nubble Lighthouse Aerial",
+      "where": "York, ME",
+      "when": "Aug 2022",
+      "elo": 1486
+    },
+    {
+      "path": "../images/photos/ViksPicks/Stock_Oct2024_VikramAnantha-01.jpg",
+      "what": "Evening on North Campus",
+      "where": "Ann Arbor, MI",
+      "when": "Oct 2024",
+      "elo": 1483
     },
     {
       "path": "../images/photos/ViksPicks/SnowyCentral_Feb122025_VikramAnantha-08.jpg",
       "what": "Snowy Statue",
       "where": "Ann Arbor, MI",
-      "when": "Feb 2025"
+      "when": "Feb 2025",
+      "elo": 1456
     },
     {
-        "path": "../images/photos/ViksPicks/FballUIUC_Oct192024_VikramAnantha-24.jpg",
-        "what": "Michigan vs Illinois",
-        "where": "Champaign, IL",
-        "when": "Oct 2024"
-    },
-    {
-        "path": "../images/photos/ViksPicks/solareclipse2024.jpg",
-        "what": "Solar Eclipse",
-        "where": "Burlington, VT",
-        "when": "Apr 2024"
-    },
-    {
-        "path": "../images/photos/ViksPicks/Stock_Oct2024_VikramAnantha-01.jpg",
-        "what": "Evening on North Campus",
-        "where": "Ann Arbor, MI",
-        "when": "Oct 2024"
-    },
-    {
-        "path": "../images/photos/ViksPicks/bostonzakim.jpg",
-        "what": "Zakim Bridge Long Exposure",
-        "where": "Boston, MA",
-        "when": "Apr 2023"
-    },
-    {
-        "path": "../images/photos/ViksPicks/BayBridge.jpg",
-        "what": "Bay Bridge Aerial",
-        "where": "San Francisco, CA",
-        "when": "Sept 2022"
-    },
-    
-    {
-        "path": "../images/photos/ViksPicks/carnival.jpg",
-        "what": "Town Faire Aerial",
-        "where": "Lexington, MA",
-        "when": "July 2023"
-    },
-    {
-        "path": "../images/photos/ViksPicks/darkroomlongexpo.jpg",
-        "what": "Dark Room Long Exposure",
-        "where": "Lexington, MA",
-        "when": "Feb 2024"
-    },
-    {
-        "path": "../images/photos/ViksPicks/nubble.jpg",
-        "what": "Nubble Lighthouse Aerial",
-        "where": "York, ME",
-        "when": "Aug 2022"
-    },
-    
-    {
-        "path": "../images/photos/ViksPicks/timeslice.png",
-        "what": "Sunset Timeslice",
-        "where": "Boston, MA",
-        "when": "Mar 2021"
+      "path": "../images/photos/ViksPicks/carnival.jpg",
+      "what": "Town Faire Aerial",
+      "where": "Lexington, MA",
+      "when": "July 2023",
+      "elo": 1429
     }
   ],
   "Best of Aerials": [
     {
-        "path": "../images/photos/Aerials/ggbridge.jpg",
-        "what": "Golden Gate Bridge",
-        "where": "San Francisco, CA",
-        "when": "Sept 2022"
+      "path": "../images/photos/Aerials/ggbridge.jpg",
+      "what": "Golden Gate Bridge",
+      "where": "San Francisco, CA",
+      "when": "Sept 2022",
+      "elo": 1562
     },
     {
-        "path": "../images/photos/Aerials/bubuilding.jpg",
-        "what": "A New Boston Skyline",
-        "where": "Boston, MA",
-        "when": "July 2024"
+      "path": "../images/photos/Aerials/lhs.jpg",
+      "what": "High School Courtyard Morning",
+      "where": "Lexington, MA",
+      "when": "Oct 2023",
+      "elo": 1554
     },
     {
-        "path": "../images/photos/Aerials/chatham.jpg",
-        "what": "Cape Cod Sand Bar",
-        "where": "Chatham, MA",
-        "when": "Mar 2021"
+      "path": "../images/photos/ViksPicks/harvard.jpg",
+      "what": "Harvard standing tall",
+      "where": "Cambridge, MA",
+      "when": "July 2023",
+      "elo": 1546
     },
     {
-        "path": "../images/photos/Aerials/hawaii.jpg",
-        "what": "Hawaiian Canyon",
-        "where": "Waimea, HI",
-        "when": "Aug 2021"
+      "path": "../images/photos/Aerials/chatham.jpg",
+      "what": "Cape Cod Sand Bar",
+      "where": "Chatham, MA",
+      "when": "Mar 2021",
+      "elo": 1500
     },
     {
-        "path": "../images/photos/Aerials/lex.jpg",
-        "what": "Patroitic Early Morning",
-        "where": "Lexington, MA",
-        "when": "Apr 2024 [Patriot's Day]"
+      "path": "../images/photos/Aerials/hawaii.jpg",
+      "what": "Hawaiian Canyon",
+      "where": "Waimea, HI",
+      "when": "Aug 2021",
+      "elo": 1500
     },
     {
-        "path": "../images/photos/Aerials/lhs.jpg",
-        "what": "High School Courtyard Morning",
-        "where": "Lexington, MA",
-        "when": "Oct 2023"
+      "path": "../images/photos/Aerials/bubuilding.jpg",
+      "what": "A New Boston Skyline",
+      "where": "Boston, MA",
+      "when": "July 2024",
+      "elo": 1487
     },
     {
-        "path": "../images/photos/Aerials/mit.jpg",
-        "what": "University Outlook",
-        "where": "Cambridge, MA",
-        "when": "Aug 2023"
+      "path": "../images/photos/Aerials/mit.jpg",
+      "what": "University Outlook",
+      "where": "Cambridge, MA",
+      "when": "Aug 2023",
+      "elo": 1443
     },
     {
-        "path": "../images/photos/ViksPicks/harvard.jpg",
-        "what": "Harvard standing tall",
-        "where": "Cambridge, MA",
-        "when": "July 2023"
+      "path": "../images/photos/Aerials/lex.jpg",
+      "what": "Patroitic Early Morning",
+      "where": "Lexington, MA",
+      "when": "Apr 2024 [Patriot's Day]",
+      "elo": 1408
     }
   ],
   "Best of People": [
     {
-        "path": "../images/photos/People/20241213-DSC_9160.jpg",
-        "what": "Hockey Fan",
-        "where": "Ann Arbor MI",
-        "when": "Dec 2024"
+      "path": "../images/photos/People/20250315-DSC_0330.jpg",
+      "what": "Dance Performance",
+      "where": "Ann Arbor MI",
+      "when": "Mar 2025",
+      "elo": 1550
     },
     {
-        "path": "../images/photos/People/20250315-DSC_0330.jpg",
-        "what": "Dance Performance",
-        "where": "Ann Arbor MI",
-        "when": "Mar 2025"
+      "path": "../images/photos/People/20250329-DSC_8224-Enhanced-NR.jpg",
+      "what": "Lightsaber Duel",
+      "where": "Ann Arbor MI",
+      "when": "Mar 2025",
+      "elo": 1545
     },
     {
-        "path": "../images/photos/People/20250329-DSC_8224-Enhanced-NR.jpg",
-        "what": "Lightsaber Duel",
-        "where": "Ann Arbor MI",
-        "when": "Mar 2025"
-    },   
-    {
-        "path": "../images/photos/People/20241205-DSC_7837.jpg",
-        "what": "Law Quad Portrait",
-        "where": "Ann Arbor MI",
-        "when": "Dec 2024"
+      "path": "../images/photos/People/20241205-DSC_7837.jpg",
+      "what": "Law Quad Portrait",
+      "where": "Ann Arbor MI",
+      "when": "Dec 2024",
+      "elo": 1529
     },
     {
-        "path": "../images/photos/People/20250315-DSC_9184.jpg",
-        "what": "Hip Hop Performance",
-        "where": "Ann Arbor MI",
-        "when": "Mar 2025"
+      "path": "../images/photos/People/20250315-DSC_9643.jpg",
+      "what": "Dance Performance",
+      "where": "Ann Arbor MI",
+      "when": "Mar 2025",
+      "elo": 1516
     },
     {
-        "path": "../images/photos/People/20250212-DSC_3949.jpg",
-        "what": "Public Speaker",
-        "where": "Ann Arbor MI",
-        "when": "Feb 2025"
+      "path": "../images/photos/People/20241213-DSC_9160.jpg",
+      "what": "Hockey Fan",
+      "where": "Ann Arbor MI",
+      "when": "Dec 2024",
+      "elo": 1514
     },
     {
-        "path": "../images/photos/People/20250315-DSC_9643.jpg",
-        "what": "Dance Performance",
-        "where": "Ann Arbor MI",
-        "when": "Mar 2025"
-    }, 
+      "path": "../images/photos/People/20250315-DSC_9184.jpg",
+      "what": "Hip Hop Performance",
+      "where": "Ann Arbor MI",
+      "when": "Mar 2025",
+      "elo": 1494
+    },
     {
-        "path": "../images/photos/People/20250419-CAN_0786.jpg",
-        "what": "Parade Man",
-        "where": "Lexington MA",
-        "when": "Apr 2025"
-    },  
+      "path": "../images/photos/People/20250419-CAN_0786.jpg",
+      "what": "Parade Man",
+      "where": "Lexington MA",
+      "when": "Apr 2025",
+      "elo": 1485
+    },
     {
-        "path": "../images/photos/People/20250419-CAN_8954-Enhanced-NR.jpg",
-        "what": "Audience Participation",
-        "where": "Lexington MA",
-        "when": "Apr 2025"
+      "path": "../images/photos/People/20250419-CAN_8954-Enhanced-NR.jpg",
+      "what": "Audience Participation",
+      "where": "Lexington MA",
+      "when": "Apr 2025",
+      "elo": 1444
+    },
+    {
+      "path": "../images/photos/People/20250212-DSC_3949.jpg",
+      "what": "Public Speaker",
+      "where": "Ann Arbor MI",
+      "when": "Feb 2025",
+      "elo": 1424
+    }
+  ],
+  "Best of Sports": [
+    {
+      "path": "../images/photos/Sports/HkyRMU_VP_Oct172025_VikramAnantha-10.jpg",
+      "what": "Hockey Game",
+      "where": "Ann Arbor MI",
+      "when": "Oct 2025",
+      "elo": 1578
+    },
+    {
+      "path": "../images/photos/Sports/HkyRMU_VP_Oct172025_VikramAnantha-06.jpg",
+      "what": "Hockey Game",
+      "where": "Ann Arbor MI",
+      "when": "Oct 2025",
+      "elo": 1565
+    },
+    {
+      "path": "../images/photos/Sports/WVball_Nebr_VP_Oct192025_VikramAnantha-09.jpg",
+      "what": "Volleyball Game",
+      "where": "Ann Arbor MI",
+      "when": "Oct 2025",
+      "elo": 1504
+    },
+    {
+      "path": "../images/photos/Sports/WVball_Nebr_VP_Oct192025_VikramAnantha-03.jpg",
+      "what": "Volleyball Game",
+      "where": "Ann Arbor MI",
+      "when": "Oct 2025",
+      "elo": 1455
+    },
+    {
+      "path": "../images/photos/Sports/HkyRMU_VP_Oct172025_VikramAnantha-02.jpg",
+      "what": "Hockey Game",
+      "where": "Ann Arbor MI",
+      "when": "Oct 2025",
+      "elo": 1398
     }
   ]
 }

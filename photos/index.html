@@ -202,13 +202,27 @@
                 }
                 const photoData = await response.json(); // Parse JSON data
 
+                // Extract meta-data and display limit
+                const displayLimit = photoData['meta-data']?.display || Infinity;
+
                 // Clear any existing content (e.g., placeholders)
                 portfolioContainer.innerHTML = '';
 
                 // Iterate through the sections defined in the JSON
                 for (const sectionTitle in photoData) {
+                    // Skip meta-data section
+                    if (sectionTitle === 'meta-data') {
+                        continue;
+                    }
+                    
                     if (photoData.hasOwnProperty(sectionTitle)) {
-                         createPhotoSection(sectionTitle, photoData[sectionTitle], portfolioContainer);
+                        // Limit the number of photos displayed based on meta-data.display
+                        const photos = photoData[sectionTitle];
+                        const limitedPhotos = Array.isArray(photos) 
+                            ? photos.slice(0, displayLimit)
+                            : photos;
+                        
+                        createPhotoSection(sectionTitle, limitedPhotos, portfolioContainer);
                     }
                 }
 

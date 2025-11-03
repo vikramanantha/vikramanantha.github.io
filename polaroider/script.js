@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function getControls() {
-        const fontSizePx = Math.max(10, Number(fontSizeSlider?.value || 257));
+        const fontSizePx = Math.max(10, Number(fontSizeSlider?.value || 240));
         const lineSpacingMultiplier = Math.max(0.5, Number(lineSpacingSlider?.value || 1.25));
-        const topOffsetPx = Math.max(0, Number(topOffsetSlider?.value || 60));
+        const topOffsetPx = Math.max(0, Number(topOffsetSlider?.value || 40));
         const whatWidthPercent = Math.min(95, Math.max(5, Number(whatWidthSlider?.value || 60)));
         return { fontSizePx, lineSpacingMultiplier, topOffsetPx, whatWidthPercent };
     }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Ranker - Vikram Anantha</title>
+    <meta name="description" content="Photo Ranker - Rank your photos using the ELO rating system through pairwise comparisons.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vikramanantha.github.io/photorank/">
+    <meta property="og:title" content="Photo Ranker - ELO Rating System">
+    <meta property="og:description" content="Rank your photos using the ELO rating system. Compare photos pairwise to find your favorites.">
+    <meta property="og:image" content="https://vikramanantha.github.io/photorank/icon.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://vikramanantha.github.io/photorank/">
+    <meta property="twitter:title" content="Photo Ranker - ELO Rating System">
+    <meta property="twitter:description" content="Rank your photos using the ELO rating system. Compare photos pairwise to find your favorites.">
+    <meta property="twitter:image" content="https://vikramanantha.github.io/photorank/icon.png">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../images/icon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <div class="title-with-icon">
+                    <img src="icon.png" alt="Photo Rank Icon" class="title-icon">
+                    <h1>Photo Rank</h1>
+                </div>
+                <p>Dev tool for Vikram to rank photos for the portfolio</p>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-category="Vik's Picks">Vik's Picks</button>
+                <button class="tab-btn" data-category="Best of Aerials">Best of Aerials</button>
+                <button class="tab-btn" data-category="Best of People">Best of People</button>
+                <button class="tab-btn" data-category="Best of Sports">Best of Sports</button>
+            </div>
+
+            <div class="photorank-container content-box">
+                <!-- Loading message -->
+                <div class="photorank-loading" id="loading-message">
+                    <p>Loading photos...</p>
+                </div>
+
+                <!-- Comparison Section -->
+                <div class="photorank-comparison-section" id="comparison-section" style="display: none;">
+                    <div class="photorank-progress-container">
+                        <h2>Compare Photos</h2>
+                        <div class="photorank-progress-info">
+                            <span id="comparison-count">0</span> / <span id="min-comparisons">0</span> comparisons
+                        </div>
+                        <div class="photorank-progress-bar">
+                            <div class="photorank-progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="photorank-comparison-grid">
+                        <div class="photorank-photo-container">
+                            <div class="photorank-photo-wrapper">
+                                <img id="photo-left" src="" alt="Photo 1">
+                            </div>
+                            <button class="photorank-choice-btn left-btn" id="left-btn">
+                                <i class="fas fa-arrow-left"></i> This One
+                            </button>
+                        </div>
+
+                        <div class="photorank-middle-controls">
+                            <button class="photorank-choice-btn tie-btn" id="tie-btn">
+                                <i class="fas fa-equals"></i> Tie
+                            </button>
+                            <button class="photorank-skip-btn" id="skip-btn">
+                                <i class="fas fa-forward"></i> Skip
+                            </button>
+                        </div>
+
+                        <div class="photorank-photo-container">
+                            <div class="photorank-photo-wrapper">
+                                <img id="photo-right" src="" alt="Photo 2">
+                            </div>
+                            <button class="photorank-choice-btn right-btn" id="right-btn">
+                                This One <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="photorank-finish-container">
+                        <button class="photorank-finish-btn" id="finish-btn" disabled>
+                            <i class="fas fa-trophy"></i> View Rankings
+                        </button>
+                        <button class="photorank-reset-btn" id="reset-btn">
+                            <i class="fas fa-redo"></i> Start Over
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="photorank-results-section" id="results-section" style="display: none;">
+                    <h2>🏆 Final Rankings</h2>
+                    <div class="photorank-results-stats" id="results-stats"></div>
+                    <div class="photorank-rankings-list" id="rankings-list"></div>
+                    <div class="photorank-results-actions">
+                        <button class="photorank-download-photo-data-btn" id="download-photo-data-btn">
+                            <i class="fas fa-file-export"></i> Export photo_data.json
+                        </button>
+                        <button class="photorank-reset-btn" id="reset-from-results-btn">
+                            <i class="fas fa-redo"></i> Start Over
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+

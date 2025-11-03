@@ -172,6 +172,10 @@ nav ul li a:hover {
     transition: all 0.3s ease;
     z-index: 1000;
     margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
 }
 
 .dropdown-menu.show {
@@ -182,6 +186,8 @@ nav ul li a:hover {
 
 .dropdown-menu li {
     margin: 0;
+    width: 100%;
+    display: block;
 }
 
 .dropdown-menu li a {
@@ -642,10 +648,11 @@ footer {
         margin-top: 0;
         margin-left: 20px;
         display: none;
+        flex-direction: column;
     }
 
     .dropdown-menu.show {
-        display: block;
+        display: flex;
     }
 
     .dropdown-toggle i {
@@ -1598,5 +1605,485 @@ a.photo-action-btn:hover {
     
     .lexobserver-image-item {
         height: 120px;
+    }
+}
+
+/* Photo Ranker Styles */
+.photorank-loading {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: var(--color-main);
+}
+
+.photorank-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.photorank-upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.photorank-upload-section h2 {
+    color: var(--color-main);
+    margin: 0;
+}
+
+.photorank-description {
+    color: #666;
+    margin: 0;
+}
+
+.photorank-upload-section input[type="file"] {
+    padding: 12px 20px;
+    border: 2px dashed var(--color-main);
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.photorank-upload-section input[type="file"]:hover {
+    border-color: var(--color-accent);
+    background-color: #f9f9f9;
+}
+
+.photorank-photo-count {
+    font-weight: 600;
+    color: var(--color-main);
+    font-size: 1.1rem;
+}
+
+.photorank-comparison-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.photorank-progress-container {
+    text-align: center;
+}
+
+.photorank-progress-container h2 {
+    color: var(--color-main);
+    margin-bottom: 0.5rem;
+}
+
+.photorank-progress-info {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.photorank-progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.photorank-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-main), var(--color-accent));
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.photorank-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.photorank-photo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.photorank-photo-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 3px solid var(--color-main);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+}
+
+.photorank-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.photorank-choice-btn {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.photorank-choice-btn.left-btn,
+.photorank-choice-btn.right-btn {
+    background-color: var(--color-main);
+    color: white;
+}
+
+.photorank-choice-btn.left-btn:hover,
+.photorank-choice-btn.right-btn:hover {
+    background-color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+.photorank-choice-btn.tie-btn {
+    background-color: #FF9800;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.photorank-choice-btn.tie-btn:hover {
+    background-color: #F57C00;
+    transform: scale(1.05);
+}
+
+.photorank-middle-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.photorank-skip-btn {
+    padding: 10px 20px;
+    background-color: #757575;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.photorank-skip-btn:hover {
+    background-color: #616161;
+    transform: scale(1.05);
+}
+
+.photorank-finish-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.photorank-finish-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: #9C27B0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.photorank-finish-btn:hover:not(:disabled) {
+    background-color: #7B1FA2;
+    transform: scale(1.05);
+}
+
+.photorank-finish-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.photorank-reset-btn {
+    padding: 12px 24px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.photorank-reset-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.photorank-results-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.photorank-results-section h2 {
+    color: var(--color-main);
+    text-align: center;
+    margin: 0;
+}
+
+.photorank-results-stats {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.photorank-results-stats p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.photorank-rankings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.photorank-rank-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.photorank-rank-item:hover {
+    border-color: var(--color-main);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photorank-rank-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-main);
+    min-width: 80px;
+    text-align: center;
+}
+
+.photorank-rank-number.top-three {
+    font-size: 2rem;
+    color: var(--color-accent);
+}
+
+.photorank-rank-photo {
+    width: 120px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.photorank-rank-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photorank-rank-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.photorank-rank-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    word-break: break-word;
+}
+
+.photorank-rank-rating {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.photorank-results-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.photorank-download-btn {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.photorank-download-btn:hover {
+    background-color: #388E3C;
+    transform: scale(1.05);
+}
+
+.photorank-download-photo-data-btn {
+    padding: 12px 24px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.photorank-download-photo-data-btn:hover {
+    background-color: #1976D2;
+    transform: scale(1.05);
+}
+
+.photorank-info {
+    margin-top: 2rem;
+}
+
+.photorank-info h2 {
+    color: var(--color-main);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.photorank-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.photorank-info-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.photorank-info-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.photorank-info-item h3 {
+    color: var(--color-main);
+    margin-bottom: 0.5rem;
+}
+
+.photorank-info-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.photorank-elo-explanation {
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    border-left: 4px solid var(--color-accent);
+}
+
+.photorank-elo-explanation h3 {
+    color: var(--color-main);
+    margin-bottom: 1rem;
+}
+
+.photorank-elo-explanation p {
+    color: #333;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Responsive adjustments for photo ranker */
+@media (max-width: 968px) {
+    .photorank-comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .photorank-middle-controls {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .photorank-choice-btn.tie-btn {
+        margin-bottom: 0;
+    }
+
+    .photorank-rank-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .photorank-rank-photo {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photorank-photo-wrapper {
+        aspect-ratio: 1 / 1;
+    }
+
+    .photorank-rank-photo {
+        height: 150px;
+    }
+
+    .photorank-finish-container {
+        flex-direction: column;
+    }
+
+    .photorank-results-actions {
+        flex-direction: column;
+    }
+
+    .photorank-choice-btn,
+    .photorank-finish-btn,
+    .photorank-download-btn,
+    .photorank-download-photo-data-btn,
+    .photorank-reset-btn {
+        width: 100%;
     }
 }
