@@ -1,0 +1,124 @@
+{
+  "internshipsAndProjects": [
+    {
+      "name": "Stellantis",
+      "logo": "https://pbs.twimg.com/profile_images/1350691793394946048/sc3Hpcsr_200x200.png",
+      "alt": "Stellantis Logo",
+      "role": "ADAS Functional Integration Engineering Intern",
+      "duration": "Summer 2025",
+      "links": [
+      ],
+      "description": "<p>Developed a <b>CAPL script to measure the fault detection fidelity of the high speed ADAS camera component</b>, by hijacking CAN signals using Vector CANalyzer to simulate setting DTCs (error codes for vehicle components).</p><p>Simultaneously, <b>ran controlled experiment to measure automatic longitudinal control</b> by controlling CAN signals of acceleration/deceleration using Vector CANoe.</p>",
+      "images": []
+    },
+    {
+      "name": "Capoom",
+      "logo": "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/irk4bkrls8rlqrqwd7ci",
+      "alt": "Capoom Logo",
+      "role": "Software Engineering Intern, via Perot Jain Tech Lab at Mcity Program",
+      "duration": "Jan 2025 - Present",
+      "links": [
+      ],
+      "description": "<p><b>Developing method for automatic 3D Gaussian Splat model creation of UofM's Mcity</b> as an inexpensive, lightweight testbed for autonomous vehicle companies to train and test their vehicles</p><p>Established the data collection pipeline using Lucid Cameras with Arena SDK and implemented 3D modeling using Gaussian Splatting techniques through <a href='https://www.capturingreality.com/'>Reality Capture</a> and <a href='https://www.jawset.com/'>Post Shot</a> software to create detailed small-scale models. I explored two hierarchical Gaussian splatting methods - <a href='https://github.com/Linketic/CityGaussian'>CityGaussianV2</a> and <a href='https://github.com/graphdeco-inria/hierarchical-3d-gaussians'>Hierarchical 3D Gaussians</a> - to effectively scale up these models while maintaining detail quality and minimizing computational resources.</p>",
+      "images": ["images/engineering/realitycapture.png"]
+    },
+    {
+      "name": "Constant Therapy Health",
+      "logo": "https://s.yimg.com/ny/api/res/1.2/J2MIDeKSsO.aPsbOmRlZYA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTQyMDtoPTQyMA--/https://media.zenfs.com/en/globenewswire.com/45ea93bc3d3fb6bf6bbd185a04b2f5d7",
+      "alt": "Constant Therapy Health Logo",
+      "role": "Software Engineer Intern",
+      "duration": "June 2021 - Aug 2024",
+      "links": [
+      ],
+      "description": "<p>Constant Therapy, a digital health therapeutic technology company that develops tablet-based software to help stroke patients relearn everyday skills through digital-therapy tasks. <b>Worked on the Task progression Visualizer, which is a ReactJS web page that analyzes how patients progress through tasks, and from that, tasks can be reworked to optimally help patients.</b> My project was to make the Visualizer work on the company's newest version of data, which required me to make significant changes to the backend JavaScript and Python code.</p><p><b>Improved their speech recognition / grammar detection with LLMs system for stroke patients.</b> I fine-tuned Meta's Wav2Vec Automatic Speech Recognition model to recognize phonemes rather than full words, which had a false negative rate 4x lower than Google's speech recognition model. I also worked on a Large Language Model to detect the accuracy of grammar in a patient's response. My work is now currently in the Constant Therapy app, being used by patients globally.</p>",
+      "images": []
+    },
+    {
+      "logo": "https://helm-logos.s3.amazonaws.com/helm-icon.png",
+      "alt": "HELM Learning Logo",
+      "name": "HELM Learning",
+      "role": "Co-founder, Teacher, Developer",
+      "duration": "Apr 2020 - May 2024",
+      "links": [
+        { "type": "link", "url": "https://helm-learning.github.io/" },
+        { "type": "github", "url": "https://github.com/vikramanantha/helmlearning" },
+        { "type": "paper", "url": "https://arxiv.org/abs/2209.03489" }
+      ],
+      "description": "<p>I created <b>HELM Learning, a platform for middle and high school students to teach classes to K-12 students worldwide for free.</b> This platform connected 4,000+ students to 90+ student-teachers. I built the back-end system using a Python Flask app, which I hosted on an AWS EC2 instance that connected to a MySQL Database.</p><p>To accommodate for HELM's growing number of classes, I created a <b>Machine Learning Recommendation Algorithm to suggest students new classes they should sign up for based on their previously shown interests in certain subjects.</b> This was implemented into the current sign up page after a student signs up for a class.</p><p>This algorithm used an MLP classifier to create a model for each class, which would output the probability of a student taking that class. Once all models have given an output, the top 3 probabilities are taken, and those classes are recommended to the student. A random 4th class was added as a control to know if the algorithm worked or not</p><p>Presented at the Massachusetts State Science and Engineering Fair, receiving 4th place.</p>",
+      "images": ["images/engineering/helm_recalg_flowchart.png", "images/engineering/helm_recalg_impl.png"]
+    }
+  ],
+  "researchProjects": [
+    {
+      "media": "images/engineering/3dgs_example.jpg",
+      "mediaType": "image",
+      "title": "Safe Mobile Manipulation using 3D Gaussian Splatting",
+      "institution": "ROAHM Lab, University of Michigan",
+      "date": "March 2025",
+      "links": [
+        { "type": "link", "url": "https://www.roahmlab.com/" },
+        { "type": "paper", "url": "https://drive.google.com/file/d/1aC-cdw4XmY19WyBp9W5B8dSc1mJTcwET/view?usp=sharing" }
+      ],
+      "description": "<p>Currently <b>using Vision Language Action models (VLAs) to develop generalist robots</b> that can perform a wide range of tasks, such as grasping, pushing, and pulling objects.</p><p>Last semester, I <b>worked on a novel pipeline for safe mobile manipulation by implementing scene representation through 3D Gaussian Splatting, which efficiently generates detailed, manipulable 3D models from RGB-D images.</b><ul><li>I integrated object detection capabilities combining <a href=\"https://github.com/IDEA-Research/GroundingDINO\">GroundingDINO</a> for zero-shot target identification and <a href=\"https://github.com/facebookresearch/segment-anything\">Meta's Segment Anything Model</a> for precise object segmentation, allowing the system to identify specific clusters of Gaussians associated with target objects.</li><li>I established grasp detection functionality using <a href=\"https://github.com/graspnet/anygrasp_sdk\">AnyGrasp</a> to generate optimal gripper positions for the Fetch robot to safely manipulate objects in novel environments.</li><li>I leveraged <a href=\"https://github.com/UZ-SLAMLab/ORB_SLAM3\">ORBSLAM3</a> to process continuous camera feeds, track features across frames, and generate accurate camera positions that were essential for creating the initial point cloud used to produce Normalized Gaussians for scene representation.</li></ul></p><p>Together, my contributions formed the foundation for a computationally efficient and safe autonomous system capable of understanding scenes, identifying objects, and calculating appropriate grasping positions without prior environment knowledge.</p>"
+    },
+    {
+      "media": "images/engineering/mit_lights_onoff.jpg",
+      "mediaType": "image",
+      "title": "Visual Confirmation System for Autonomous Vehicles",
+      "institution": "Auto ID Lab, MIT",
+      "date": "Sept 2023",
+      "links": [
+        { "type": "link", "url": "https://autoid.mit.edu/" },
+        { "type": "github", "url": "https://github.com/vikramanantha/mit-2fa-summer2023" }
+      ],
+      "description": "<p>The aim of this project was to <b>create a secure visual confirmation system for autonomous vehicles (AVs) communicating with road-side units (RSUs), like a traffic light.</b> For an RSU to verify the identity of an AV, the AV flashes its headlights in a specific sequence. My project was to detect the recognition of this sequence using Python. I worked solely, as a paid intern under the supervision of Post-doc Dajiang Suo and Professor Sanjay Sarma of MIT.</p><ul><li>This system first detects a vehicle using a YOLOv8 Computer Vision model, and cropping the frame to just the vehicle.</li><li>It then detects whether the vehicle's headlights were on or off per frame, by turning each RGB cropped image into a binary image, showing where the bright regions are.</li><li>I evaluated several approaches that have been previously studied (including a few that use machine learning), but developed a new approach that uses binary images, so as to maximize the detection accuracy and minimize processing latency.</li><li>The system finally determines whether the sequence of headlight flashes follows the sequence originally sent to the AV, accounting for possible errors.</li></ul><p>Biggest challenge: process identity while the vehicle is moving through a street intersection in less than 1 second & to work in a lot of situations: variable lighting, different types of vehicles, different shapes of headlights, etc.</p>"
+    },
+    {
+      "media": "images/engineering/field_test_image.jpeg",
+      "mediaType": "image",
+      "title": "Pedestrian-Vehicle Collision Warning System",
+      "institution": "Center for Smart Street Scapes, Columbia University",
+      "date": "Feb 2024",
+      "links": [
+        { "type": "link", "url": "https://cs3-erc.org/" },
+        { "type": "github", "url": "https://github.com/vikramanantha/columbia-pedapp-summer2023" },
+        { "type": "paper", "url": "https://doi.org/10.1109/IV55156.2024.10588544" }
+      ],
+      "description": "<p>The aim of this project was to <b>create a phone application and a backend server that warns pedestrians at street intersections about potential collisions with vehicles.</b> I solely created this, with the guidance of PhD student Yongjie Fu and Professor Sharon Di, both of Columbia University.</p><p>I used Python and React Native to develop this system. The app uses React Native as a framework for the front-end user interface, and communicates via MQTT messages to a Python backend server.</p><p>The app ran the following steps:</p><ul><li>Location coordinates are sent to, and processed by the backend server.</li><li>Backend server constructs a trajectory that predicts where the pedestrian is likely to be in the next 5 seconds.</li><li>Backend Server receives data about where vehicles currently are, and where their predicted trajectories will be over the next 5 seconds.</li><li>Based on this data, the server predicts if there is likely to be a collision between pedestrians and each vehicle.</li><li>As appropriate, the server sends back warnings to the pedestrian's phones.</li></ul><p>The app was optimized for multiple devices of any make and model to connect to it, and maximized accuracy and minimized latency in harsh situations (i.e., weak connection).</p><p>Paper published at the IEEE IV 2024 Intelligent Vehicles Symposium <a href=\"https://doi.org/10.1109/IV55156.2024.10588544\">here</a>.</p>"
+    }
+  ],
+  "educationItems": [
+    {
+      "logo": "https://assets.scorebooklive.com/uploads/production/school/19216/image/Lexington__MA__Minutemen_Logo.png",
+      "alt": "LHS Logo",
+      "name": "Lexington High School",
+      "duration": "2020 - 2024",
+      "notes": ["4.0 GPA", "36/36 ACT Score"],
+      "coursework": [
+        "AP Computer Science A",
+        "AP Computer Science Principles",
+        "AP Physics C",
+        "AP Calculus BC",
+        "AP Statistics"
+      ]
+    },
+    {
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ed/University_of_Michigan_Logo.png",
+      "alt": "University of Michigan Logo",
+      "name": "University of Michigan",
+      "degree": "Computer Science, Electrical Engineering",
+      "duration": "2024 - May 2027 (exp)",
+      "notes": ["3.96 GPA", "1931E Scholar"],
+      "coursework": [
+        "Machine Learning",
+        "Computer Vision",
+        "Data Structures & Algorithms",
+        "Computer Organization",
+        "Robot Human Interaction",
+        "Circuits",
+        "Discrete Mathematics"
+      ]
+    }
+  ]
+}
+
