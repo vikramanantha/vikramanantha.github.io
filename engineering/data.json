@@ -1,6 +1,17 @@
 {
   "internshipsAndProjects": [
     {
+      "name": "Meta",
+      "logo": "https://blog.logomyway.com/wp-content/uploads/2021/11/meta-logo.png",
+      "alt": "Meta Logo",
+      "role": "Incoming Software Engineering Intern",
+      "duration": "Summer 2026",
+      "links": [
+      ],
+      "description": "<p>Incoming Intern for Summer 2026</p>",
+      "images": []
+    },
+    {
       "name": "Stellantis",
       "logo": "https://pbs.twimg.com/profile_images/1350691793394946048/sc3Hpcsr_200x200.png",
       "alt": "Stellantis Logo",
