@@ -7,9 +7,11 @@ jobapp_demon/
 the_group_chat/
 markiv_core/
 
-# NPM manifests
+# NPM manifests (excluding photos directory)
 package-lock.json
 package.json
+!photos/package.json
+!photos/tsconfig.json
 
 # macOS metadata
 .DS_Store
