@@ -1,17 +1,6 @@
 {
   "internshipsAndProjects": [
     {
-      "name": "Meta",
-      "logo": "https://blog.logomyway.com/wp-content/uploads/2021/11/meta-logo.png",
-      "alt": "Meta Logo",
-      "role": "Incoming Software Engineering Intern",
-      "duration": "Summer 2026",
-      "links": [
-      ],
-      "description": "<p>Incoming Intern for Summer 2026</p>",
-      "images": []
-    },
-    {
       "name": "Stellantis",
       "logo": "https://pbs.twimg.com/profile_images/1350691793394946048/sc3Hpcsr_200x200.png",
       "alt": "Stellantis Logo",
@@ -38,7 +27,7 @@
       "logo": "https://s.yimg.com/ny/api/res/1.2/J2MIDeKSsO.aPsbOmRlZYA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTQyMDtoPTQyMA--/https://media.zenfs.com/en/globenewswire.com/45ea93bc3d3fb6bf6bbd185a04b2f5d7",
       "alt": "Constant Therapy Health Logo",
       "role": "Software Engineer Intern",
-      "duration": "June 2021 - Aug 2024",
+      "duration": "Summer 2021, Summer 2024",
       "links": [
       ],
       "description": "<p>Constant Therapy, a digital health therapeutic technology company that develops tablet-based software to help stroke patients relearn everyday skills through digital-therapy tasks. <b>Worked on the Task progression Visualizer, which is a ReactJS web page that analyzes how patients progress through tasks, and from that, tasks can be reworked to optimally help patients.</b> My project was to make the Visualizer work on the company's newest version of data, which required me to make significant changes to the backend JavaScript and Python code.</p><p><b>Improved their speech recognition / grammar detection with LLMs system for stroke patients.</b> I fine-tuned Meta's Wav2Vec Automatic Speech Recognition model to recognize phonemes rather than full words, which had a false negative rate 4x lower than Google's speech recognition model. I also worked on a Large Language Model to detect the accuracy of grammar in a patient's response. My work is now currently in the Constant Therapy app, being used by patients globally.</p>",
@@ -49,7 +38,7 @@
       "alt": "HELM Learning Logo",
       "name": "HELM Learning",
       "role": "Co-founder, Teacher, Developer",
-      "duration": "Apr 2020 - May 2024",
+      "duration": "Apr 2020 - Present",
       "links": [
         { "type": "link", "url": "https://helm-learning.github.io/" },
         { "type": "github", "url": "https://github.com/vikramanantha/helmlearning" },
@@ -63,11 +52,10 @@
     {
       "media": "images/engineering/3dgs_example.jpg",
       "mediaType": "image",
-      "title": "Safe Mobile Manipulation using 3D Gaussian Splatting",
+      "title": "Go Fetch: Safe Mobile manipulation in a Gaussian Splat",
       "institution": "ROAHM Lab, University of Michigan",
       "date": "March 2025",
       "links": [
-        { "type": "link", "url": "https://www.roahmlab.com/" },
         { "type": "paper", "url": "https://drive.google.com/file/d/1aC-cdw4XmY19WyBp9W5B8dSc1mJTcwET/view?usp=sharing" }
       ],
       "description": "<p>Currently <b>using Vision Language Action models (VLAs) to develop generalist robots</b> that can perform a wide range of tasks, such as grasping, pushing, and pulling objects.</p><p>Last semester, I <b>worked on a novel pipeline for safe mobile manipulation by implementing scene representation through 3D Gaussian Splatting, which efficiently generates detailed, manipulable 3D models from RGB-D images.</b><ul><li>I integrated object detection capabilities combining <a href=\"https://github.com/IDEA-Research/GroundingDINO\">GroundingDINO</a> for zero-shot target identification and <a href=\"https://github.com/facebookresearch/segment-anything\">Meta's Segment Anything Model</a> for precise object segmentation, allowing the system to identify specific clusters of Gaussians associated with target objects.</li><li>I established grasp detection functionality using <a href=\"https://github.com/graspnet/anygrasp_sdk\">AnyGrasp</a> to generate optimal gripper positions for the Fetch robot to safely manipulate objects in novel environments.</li><li>I leveraged <a href=\"https://github.com/UZ-SLAMLab/ORB_SLAM3\">ORBSLAM3</a> to process continuous camera feeds, track features across frames, and generate accurate camera positions that were essential for creating the initial point cloud used to produce Normalized Gaussians for scene representation.</li></ul></p><p>Together, my contributions formed the foundation for a computationally efficient and safe autonomous system capable of understanding scenes, identifying objects, and calculating appropriate grasping positions without prior environment knowledge.</p>"
@@ -79,7 +67,6 @@
       "institution": "Auto ID Lab, MIT",
       "date": "Sept 2023",
       "links": [
-        { "type": "link", "url": "https://autoid.mit.edu/" },
         { "type": "github", "url": "https://github.com/vikramanantha/mit-2fa-summer2023" }
       ],
       "description": "<p>The aim of this project was to <b>create a secure visual confirmation system for autonomous vehicles (AVs) communicating with road-side units (RSUs), like a traffic light.</b> For an RSU to verify the identity of an AV, the AV flashes its headlights in a specific sequence. My project was to detect the recognition of this sequence using Python. I worked solely, as a paid intern under the supervision of Post-doc Dajiang Suo and Professor Sanjay Sarma of MIT.</p><ul><li>This system first detects a vehicle using a YOLOv8 Computer Vision model, and cropping the frame to just the vehicle.</li><li>It then detects whether the vehicle's headlights were on or off per frame, by turning each RGB cropped image into a binary image, showing where the bright regions are.</li><li>I evaluated several approaches that have been previously studied (including a few that use machine learning), but developed a new approach that uses binary images, so as to maximize the detection accuracy and minimize processing latency.</li><li>The system finally determines whether the sequence of headlight flashes follows the sequence originally sent to the AV, accounting for possible errors.</li></ul><p>Biggest challenge: process identity while the vehicle is moving through a street intersection in less than 1 second & to work in a lot of situations: variable lighting, different types of vehicles, different shapes of headlights, etc.</p>"
@@ -87,11 +74,10 @@
     {
       "media": "images/engineering/field_test_image.jpeg",
       "mediaType": "image",
-      "title": "Pedestrian-Vehicle Collision Warning System",
+      "title": "Digital Twin for Pedestrian Safety Warning at a Single Urban Traffic Intersection",
       "institution": "Center for Smart Street Scapes, Columbia University",
       "date": "Feb 2024",
       "links": [
-        { "type": "link", "url": "https://cs3-erc.org/" },
         { "type": "github", "url": "https://github.com/vikramanantha/columbia-pedapp-summer2023" },
         { "type": "paper", "url": "https://doi.org/10.1109/IV55156.2024.10588544" }
       ],
