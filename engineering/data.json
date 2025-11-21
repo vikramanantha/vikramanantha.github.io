@@ -1,6 +1,19 @@
 {
   "internshipsAndProjects": [
     {
+      "name": "Eous AR-Car",
+      "logo": "",
+      "role": "1st Place Winner at Stanford's Immerse the Bay 2025 Hackathon",
+      "duration": "Nov 2025",
+      "links": [
+        {"type": "github", "url": ""},
+        {"type": "devpost", "url": ""},
+        {"type": "video", "url": ""}
+      ],
+      "description":
+      "<p>Developed an RC Car remotely controlled from Augmented Reality (AR) glasses.</p><p>The user would control the car with gestures recognized by the AR glasses, which would send the commands to a Raspberry Pi which controlled the car via an Arduino microcontroller. In addition, the user could see a live feed from the car in the display of the AR glasses. <br>The user could also talk with ChatGPT on the car, which would allow the user to ask general questions or command actions, like playing music on Spotify.</p><p>This project was created on the XREAL Sponsored Track at Stanford's Immerse the Bay Hackathon with Feolu __, Ryan Chen, and Tyler Wong.</p>"
+    },
+    {
       "name": "Stellantis",
       "logo": "https://pbs.twimg.com/profile_images/1350691793394946048/sc3Hpcsr_200x200.png",
       "alt": "Stellantis Logo",

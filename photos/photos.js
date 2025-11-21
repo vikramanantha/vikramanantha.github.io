@@ -85,7 +85,7 @@ function renderBannerView() {
         const firstPhoto = photos[0];
         console.log(`Creating banner for ${category} with image ${firstPhoto.path}`);
         // Create banner
-        const banner = createBanner(category, firstPhoto.path);
+        const banner = createBanner(category, "../images/photos/" + firstPhoto.path);
         bannersContainer.appendChild(banner);
         bannerCount++;
     }
@@ -161,7 +161,7 @@ function createPhotoGridItem(photo) {
     const item = document.createElement('div');
     item.className = 'photo-grid-item skeleton';
     const img = document.createElement('img');
-    img.src = photo.path;
+    img.src = "../images/photos/" + photo.path;
     img.alt = photo.what || 'Photo';
     img.loading = 'lazy';
     img.style.opacity = '0';
@@ -190,7 +190,7 @@ function createPhotoGridItem(photo) {
     const downloadBtn = document.createElement('a');
     downloadBtn.className = 'photo-action-btn download-btn';
     downloadBtn.title = 'Download Image';
-    downloadBtn.href = photo.path;
+    downloadBtn.href = "../images/photos/" + photo.path;
     const safeWhat = (photo.what || 'image').replace(/[^a-z0-9\s]/gi, '_').replace(/\s+/g, '_');
     const extension = photo.path.split('.').pop();
     downloadBtn.download = `${safeWhat}.${extension}`;
@@ -206,7 +206,7 @@ function createPhotoGridItem(photo) {
     item.onclick = () => openLightbox(photo);
     // Handle image loading errors
     img.onerror = () => {
-        console.error(`Failed to load image: ${photo.path}`);
+        console.error(`Failed to load image: ../images/photos/${photo.path}`);
         item.innerHTML = `<p style="color: red; font-size: 0.8em; text-align: center;">Error loading:<br>${photo.path.split('/').pop()}</p>`;
     };
     return item;
@@ -233,7 +233,7 @@ function setupLightbox() {
 function openLightbox(photo) {
     if (!lightboxOverlay || !lightboxImage || !lightboxCaption)
         return;
-    lightboxImage.src = photo.path;
+    lightboxImage.src = "../images/photos/" + photo.path;
     lightboxImage.alt = photo.what || 'Enlarged photo';
     let captionText = photo.what || '';
     if (photo.where)
