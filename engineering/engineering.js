@@ -15,6 +15,12 @@ function loadData() {
         return yield response.json();
     });
 }
+function resolvePath(path) {
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+        return path;
+    }
+    return `../${path}`;
+}
 function createLinkButton(link) {
     const anchor = document.createElement('a');
     anchor.href = link.url;
@@ -36,6 +42,15 @@ function createLinkButton(link) {
             icon = '<i class="fas fa-file-alt"></i>';
             title = 'Read Paper';
             break;
+        case 'youtube':
+        case 'video':
+            icon = '<i class="fab fa-youtube"></i>';
+            title = 'Watch Video';
+            break;
+        case 'devpost':
+            icon = '<i class="fas fa-laptop-code"></i>';
+            title = 'View on Devpost';
+            break;
     }
     anchor.innerHTML = icon;
     anchor.title = title;
@@ -48,7 +63,7 @@ function createInternshipItem(item) {
     const logoContainer = document.createElement('div');
     logoContainer.className = 'eng-logo-container';
     const logo = document.createElement('img');
-    logo.src = item.logo;
+    logo.src = resolvePath(item.logo);
     logo.alt = item.alt;
     logo.className = 'eng-logo';
     logoContainer.appendChild(logo);
@@ -220,7 +235,7 @@ function createEducationItem(item) {
     const logoContainer = document.createElement('div');
     logoContainer.className = 'eng-logo-container';
     const logo = document.createElement('img');
-    logo.src = item.logo;
+    logo.src = resolvePath(item.logo);
     logo.alt = item.alt;
     logo.className = 'eng-logo';
     logoContainer.appendChild(logo);

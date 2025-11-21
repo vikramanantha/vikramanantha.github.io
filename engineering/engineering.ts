@@ -1,7 +1,7 @@
 // Engineering page TypeScript
 
 interface LinkButton {
-    type: 'link' | 'github' | 'paper';
+    type: 'link' | 'github' | 'paper' | 'youtube' | 'devpost' | 'video';
     url: string;
 }
 
@@ -50,6 +50,13 @@ async function loadData(): Promise<EngineeringData> {
     return await response.json();
 }
 
+function resolvePath(path: string): string {
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+        return path;
+    }
+    return `../${path}`;
+}
+
 function createLinkButton(link: LinkButton): HTMLElement {
     const anchor = document.createElement('a');
     anchor.href = link.url;
@@ -72,6 +79,15 @@ function createLinkButton(link: LinkButton): HTMLElement {
             icon = '<i class="fas fa-file-alt"></i>';
             title = 'Read Paper';
             break;
+        case 'youtube':
+        case 'video':
+            icon = '<i class="fab fa-youtube"></i>';
+            title = 'Watch Video';
+            break;
+        case 'devpost':
+            icon = '<i class="fas fa-laptop-code"></i>';
+            title = 'View on Devpost';
+            break;
     }
     
     anchor.innerHTML = icon;
@@ -87,7 +103,7 @@ function createInternshipItem(item: InternshipProject): HTMLElement {
     const logoContainer = document.createElement('div');
     logoContainer.className = 'eng-logo-container';
     const logo = document.createElement('img');
-    logo.src = item.logo;
+    logo.src = resolvePath(item.logo);
     logo.alt = item.alt;
     logo.className = 'eng-logo';
     logoContainer.appendChild(logo);
@@ -302,7 +318,7 @@ function createEducationItem(item: EducationItem): HTMLElement {
     const logoContainer = document.createElement('div');
     logoContainer.className = 'eng-logo-container';
     const logo = document.createElement('img');
-    logo.src = item.logo;
+    logo.src = resolvePath(item.logo);
     logo.alt = item.alt;
     logo.className = 'eng-logo';
     logoContainer.appendChild(logo);
