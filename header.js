@@ -33,7 +33,7 @@ function loadHeader() {
             navPath: 'photos/'
         },
         resume: {
-            path: 'resume/resume.pdf',
+            path: 'important_files/resume.pdf',
             isCurrent: window.location.pathname.includes('resume/'),
             navPath: 'important_files/resume.pdf'
         },
