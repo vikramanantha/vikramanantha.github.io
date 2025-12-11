@@ -328,7 +328,7 @@ a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn)::afte
     transition: width 0.3s ease;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn)::after {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):hover::after {
     width: 100%;
 }
 
