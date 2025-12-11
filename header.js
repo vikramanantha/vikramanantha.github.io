@@ -20,6 +20,7 @@ function loadHeader() {
                         window.location.pathname.includes('photos/') || 
                         window.location.pathname.includes('resume/') ||
                         window.location.pathname.includes('polaroider/') ||
+                        window.location.pathname.includes('storyteller/') ||
                         window.location.pathname.includes('photorank/')),
         },
         engineering: {
@@ -46,23 +47,24 @@ function loadHeader() {
             path: 'photorank/',
             isCurrent: window.location.pathname.includes('photorank/'),
             navPath: 'photorank/'
+        },
+        storyteller: {
+            path: 'storyteller/',
+            isCurrent: window.location.pathname.includes('storyteller/'),
+            navPath: 'storyteller/'
         }
     }
     
     // Set navigation paths based on current location
-    // Calculate navigation paths for each page using a for loop
+    // Use absolute paths (starting with /) to work from any subdirectory
     for (const [key, page] of Object.entries(pages)) {
         if (key === 'home') {
-            page.navPath = page.isCurrent ? page.path : '../index.html';
+            page.navPath = page.isCurrent ? page.path : '/index.html';
         // } else if (key === 'photos') { // SPECIAL CASE: Instagram link
         //     page.navPath = 'https://www.instagram.com/photos.by.vik';
         }
         else {
-            page.navPath = page.isCurrent ? 
-                '../' + page.path : 
-                (pages.home.isCurrent ? 
-                    page.navPath : 
-                    '../' + page.path);
+            page.navPath = '/' + page.path;
         }
     }
     
@@ -77,7 +79,7 @@ function loadHeader() {
     const headerHTML = `
         <header>
             <div class="logo">
-                <img src="${pages.home.isCurrent ? '' : '../'}images/VA-2025.png" alt="Logo">
+                <img src="/images/VA-2025.png" alt="Logo">
             </div>
             <div class="hamburger">
                 <span></span>
@@ -93,12 +95,12 @@ function loadHeader() {
                         <a href="#" class="dropdown-toggle">Small Projects <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="${pages.polaroider.navPath}">
-                                <img src="${pages.home.isCurrent ? '' : '../'}polaroider/icon.png" alt="Polaroider Icon" class="project-icon">
+                                <img src="/polaroider/icon.png" alt="Polaroider Icon" class="project-icon">
                                 Polaroider
                             </a></li>
-                            <li><a href="${pages.photorank.navPath}">
-                                <img src="${pages.home.isCurrent ? '' : '../'}photorank/icon.png" alt="Photo Rank Icon" class="project-icon">
-                                Photo Rank
+                            <li><a href="${pages.storyteller.navPath}">
+                                <img src="/storyteller/icon.png" alt="storyteller Icon" class="project-icon">
+                                Storyteller
                             </a></li>
                         </ul>
                     </li>
@@ -147,6 +149,13 @@ function loadHeader() {
         const photorankLink = document.querySelector('.dropdown-menu a[href*="photorank"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (photorankLink) photorankLink.classList.add('active');
+    }
+
+    if (pages.storyteller.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const storytellerLink = document.querySelector('.dropdown-menu a[href*="storyteller"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (storytellerLink) storytellerLink.classList.add('active');
     }
 
     // Dropdown functionality
