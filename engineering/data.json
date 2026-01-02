@@ -29,10 +29,10 @@
       "logo": "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/irk4bkrls8rlqrqwd7ci",
       "alt": "Capoom Logo",
       "role": "Software Engineering Intern, via Perot Jain Tech Lab at Mcity Program",
-      "duration": "Jan 2025 - Present",
+      "duration": "Jan 2025 - Dec 2025",
       "links": [
       ],
-      "description": "<p><b>Developing method for automatic 3D Gaussian Splat model creation of UofM's Mcity</b> as an inexpensive, lightweight testbed for autonomous vehicle companies to train and test their vehicles</p><p>Established the data collection pipeline using Lucid Cameras with Arena SDK and implemented 3D modeling using Gaussian Splatting techniques through <a href='https://www.capturingreality.com/'>Reality Capture</a> and <a href='https://www.jawset.com/'>Post Shot</a> software to create detailed small-scale models. I explored two hierarchical Gaussian splatting methods - <a href='https://github.com/Linketic/CityGaussian'>CityGaussianV2</a> and <a href='https://github.com/graphdeco-inria/hierarchical-3d-gaussians'>Hierarchical 3D Gaussians</a> - to effectively scale up these models while maintaining detail quality and minimizing computational resources.</p>",
+      "description": "<p><b>Developing method for automatic 3D Gaussian Splat model creation of UofM's Mcity</b> as an inexpensive, lightweight testbed for autonomous vehicle companies to train and test their vehicles</p><p>Established the data collection pipeline using Lucid Cameras with Arena SDK and implemented 3D modeling using Gaussian Splatting techniques through <a href='https://www.capturingreality.com/'>Reality Capture</a> and <a href='https://www.jawset.com/'>Post Shot</a> software to create detailed small-scale models. We also incorporated semantic segmentation into the 3D model generation using <a href='https://github.com/lkeab/gaussian-grouping'>Gaussian Grouping</a> to identify, remove, and add new objects</p>",
       "images": ["images/engineering/realitycapture.png"]
     },
     {
