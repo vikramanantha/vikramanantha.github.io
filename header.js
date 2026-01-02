@@ -21,7 +21,8 @@ function loadHeader() {
                         window.location.pathname.includes('resume/') ||
                         window.location.pathname.includes('polaroider/') ||
                         window.location.pathname.includes('storyteller/') ||
-                        window.location.pathname.includes('photorank/')),
+                        window.location.pathname.includes('photorank/') ||
+                        window.location.pathname.includes('3d_modeler/')),
         },
         engineering: {
             path: 'engineering/',
@@ -52,6 +53,11 @@ function loadHeader() {
             path: 'storyteller/',
             isCurrent: window.location.pathname.includes('storyteller/'),
             navPath: 'storyteller/'
+        },
+        three_d_modeler: {
+            path: '3d_modeler/',
+            isCurrent: window.location.pathname.includes('3d_modeler/'),
+            navPath: '3d_modeler/'
         }
     }
     
@@ -59,7 +65,8 @@ function loadHeader() {
     // Use absolute paths (starting with /) to work from any subdirectory
     for (const [key, page] of Object.entries(pages)) {
         if (key === 'home') {
-            page.navPath = page.isCurrent ? page.path : '/index.html';
+            // Always use absolute path for home to ensure it works from any subdirectory
+            page.navPath = '/index.html';
         // } else if (key === 'photos') { // SPECIAL CASE: Instagram link
         //     page.navPath = 'https://www.instagram.com/photos.by.vik';
         }
@@ -102,6 +109,10 @@ function loadHeader() {
                                 <img src="/storyteller/icon.png" alt="storyteller Icon" class="project-icon">
                                 Storyteller
                             </a></li>
+                            <li><a href="${pages.three_d_modeler.navPath}">
+                                <img src="/3d_modeler/icon.png" alt="3D Modeler Icon" class="project-icon">
+                                3D Modeler
+                            </a></li>
                         </ul>
                     </li>
                     <li><a href="${pages.resume.navPath}" target="_blank">Resume</a></li>
@@ -122,12 +133,22 @@ function loadHeader() {
         // Remove any existing active class first
         link.classList.remove('active');
         
+        // Skip home link - it will be handled separately
+        if (link.getAttribute('href') === pages.home.navPath) {
+            // Only highlight home if we're actually on the home page
+            if (pages.home.isCurrent) {
+                link.classList.add('active');
+            }
+            return;
+        }
+        
         // Get the href attribute
         const linkPath = link.getAttribute('href');
         
         // Check which page is current and add active class accordingly
-        // Loop through all page keys
+        // Loop through all page keys (skip home, already handled)
         for (const key in pages) {
+            if (key === 'home') continue;
             const page = pages[key];
             if (page.isCurrent && linkPath === page.navPath) {
                 link.classList.add('active');
@@ -156,6 +177,13 @@ function loadHeader() {
         const storytellerLink = document.querySelector('.dropdown-menu a[href*="storyteller"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (storytellerLink) storytellerLink.classList.add('active');
+    }
+
+    if (pages.three_d_modeler.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const three_d_modelerLink = document.querySelector('.dropdown-menu a[href*="3d_modeler"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (three_d_modelerLink) three_d_modelerLink.classList.add('active');
     }
 
     // Dropdown functionality
