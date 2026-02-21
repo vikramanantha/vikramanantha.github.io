@@ -20,6 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          submodules: recursive  # Checkout submodules (3d_modeler, storyteller)
           lfs: true  # Important for your .glb 3D model files!
       
       - name: Setup Pages

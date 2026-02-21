@@ -2,7 +2,7 @@ function loadFooter() {
     const footerHTML = `
         <footer>
             <div class="footer-content">
-                <p>Last updated: Nov 2025</p>
+                <p>Last updated: Feb 2026</p>
                 <p>Vikram Anantha</p>
                 <p><a href="https://github.com/vikramanantha/vikramanantha.github.io" target="_blank">View Source Code</a></p>
             </div>
