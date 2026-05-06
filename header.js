@@ -22,7 +22,8 @@ function loadHeader() {
                         window.location.pathname.includes('polaroider/') ||
                         window.location.pathname.includes('storyteller/') ||
                         window.location.pathname.includes('photorank/') ||
-                        window.location.pathname.includes('3d_modeler/')),
+                        window.location.pathname.includes('3d_modeler/') ||
+                        window.location.pathname.includes('signer/')),
         },
         engineering: {
             path: 'engineering/',
@@ -58,6 +59,11 @@ function loadHeader() {
             path: '3d_modeler/',
             isCurrent: window.location.pathname.includes('3d_modeler/'),
             navPath: '3d_modeler/'
+        },
+        signer: {
+            path: 'signer/',
+            isCurrent: window.location.pathname.includes('signer/'),
+            navPath: 'signer/'
         }
     }
     
@@ -112,6 +118,10 @@ function loadHeader() {
                             <li><a href="${pages.three_d_modeler.navPath}">
                                 <img src="/3d_modeler/icon.png" alt="3D Modeler Icon" class="project-icon">
                                 3D Modeler
+                            </a></li>
+                            <li><a href="${pages.signer.navPath}">
+                                <img src="/images/VA small.png" alt="VA Signer Icon" class="project-icon">
+                                VA Signer
                             </a></li>
                         </ul>
                     </li>
@@ -184,6 +194,13 @@ function loadHeader() {
         const three_d_modelerLink = document.querySelector('.dropdown-menu a[href*="3d_modeler"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (three_d_modelerLink) three_d_modelerLink.classList.add('active');
+    }
+
+    if (pages.signer.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const signerLink = document.querySelector('.dropdown-menu a[href*="signer"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (signerLink) signerLink.classList.add('active');
     }
 
     // Dropdown functionality
