@@ -4,3 +4,6 @@
 [submodule "3d_modeler"]
 	path = 3d_modeler
 	url = https://github.com/vikramanantha/3d_modeler.git
+[submodule "signer"]
+	path = signer
+	url = https://github.com/vikramanantha/signer.git
