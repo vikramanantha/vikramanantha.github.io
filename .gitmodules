@@ -7,3 +7,6 @@
 [submodule "signer"]
 	path = signer
 	url = https://github.com/vikramanantha/signer.git
+[submodule "scheduler"]
+	path = scheduler
+	url = https://github.com/vikramanantha/scheduler.git
