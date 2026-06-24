@@ -1,3 +1,10 @@
+const CLOUDINARY_BASE = 'https://res.cloudinary.com/dzqrv6c0o/image/upload';
+
+function getPhotoUrl(path, transforms = 'w_2048,q_auto,f_auto') {
+    const safePath = path.replace(/\s+/g, '_');
+    return `${CLOUDINARY_BASE}/${transforms}/portfolio/photos/${safePath}`;
+}
+
 // State management
 let currentView = 'banners';
 let currentCategory = null;
@@ -100,7 +107,7 @@ function renderBannerView() {
         console.log(`Creating banner for ${category} with image ${firstPhoto.path}`);
 
         // Create banner
-        const banner = createBanner(category, "../images/photos/" + firstPhoto.path);
+        const banner = createBanner(category, getPhotoUrl(firstPhoto.path, 'w_1200,q_auto,f_auto'));
         bannersContainer.appendChild(banner);
         bannerCount++;
     }
@@ -196,7 +203,7 @@ function createPhotoGridItem(photo) {
     item.className = 'photo-grid-item skeleton';
 
     const img = document.createElement('img');
-    img.src = "../images/photos/" + photo.path;
+    img.src = getPhotoUrl(photo.path, 'w_800,q_auto,f_auto');
     img.alt = photo.what || 'Photo';
     img.loading = 'lazy';
     img.style.opacity = '0';
@@ -231,7 +238,7 @@ function createPhotoGridItem(photo) {
     const downloadBtn = document.createElement('a');
     downloadBtn.className = 'photo-action-btn download-btn';
     downloadBtn.title = 'Download Image';
-    downloadBtn.href = "../images/photos/" + photo.path;
+    downloadBtn.href = getPhotoUrl(photo.path, 'fl_attachment');
     
     const safeWhat = (photo.what || 'image').replace(/[^a-z0-9\s]/gi, '_').replace(/\s+/g, '_');
     const extension = photo.path.split('.').pop();
@@ -254,7 +261,7 @@ function createPhotoGridItem(photo) {
 
     // Handle image loading errors
     img.onerror = () => {
-        console.error(`Failed to load image: ../images/photos/${photo.path}`);
+        console.error(`Failed to load image: ${getPhotoUrl(photo.path)}`);
         item.innerHTML = `<p style="color: red; font-size: 0.8em; text-align: center;">Error loading:<br>${photo.path.split('/').pop()}</p>`;
     };
 
@@ -286,7 +293,7 @@ function setupLightbox() {
 function openLightbox(photo) {
     if (!lightboxOverlay || !lightboxImage || !lightboxCaption) return;
 
-    lightboxImage.src = "../images/photos/" + photo.path;
+    lightboxImage.src = getPhotoUrl(photo.path, 'w_3840,q_auto,f_auto');
     lightboxImage.alt = photo.what || 'Enlarged photo';
     
     let captionText = photo.what || '';
