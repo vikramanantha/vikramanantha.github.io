@@ -55,11 +55,11 @@ async function init() {
 // Load photo data from JSON
 async function loadPhotoData() {
     try {
-        const response = await fetch('photo_data.json');
+        const response = await fetch('https://api.jsonbin.io/v3/b/6a42a081da38895dfe112f88');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        photoData = await response.json();
+        photoData = (await response.json()).record;
     } catch (error) {
         console.error('Error loading photo data:', error);
         if (portfolioContainer) {

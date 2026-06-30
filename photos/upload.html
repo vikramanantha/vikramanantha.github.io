@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Admin - Vikram Anantha</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../images/icon.png">
+    <style>
+        .admin-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        main { display: flex; flex-direction: column; align-items: center; }
+        .admin-section { width: 100%; }
+
+        .admin-section h2 {
+            color: var(--color-main);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .config-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .config-row label {
+            font-weight: 500;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .config-row input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 0.75rem;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .config-row input:focus {
+            outline: none;
+            border-color: var(--color-main);
+        }
+
+        .btn {
+            padding: 0.5rem 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: opacity 0.15s;
+        }
+
+        .btn:hover { opacity: 0.85; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-primary { background: var(--color-main); color: white; }
+        .btn-accent  { background: var(--color-accent); color: white; }
+        .btn-green   { background: #2e7d32; color: white; }
+        .btn-ghost   { background: #f0f0f0; color: #333; }
+
+        .preset-hint {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.4rem;
+        }
+
+        .preset-hint a { color: var(--color-accent); }
+
+        /* Drop zone */
+        .drop-zone {
+            border: 2.5px dashed #b0b8c4;
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+        }
+
+        .drop-zone.dragover {
+            border-color: var(--color-main);
+            background: #eef2f7;
+        }
+
+        .drop-zone i { font-size: 2rem; color: #aaa; margin-bottom: 0.5rem; display: block; }
+        .drop-zone p { color: #666; margin: 0; }
+        .drop-zone span { color: var(--color-accent); cursor: pointer; font-weight: 500; }
+
+        #file-input { display: none; }
+
+        /* File queue */
+        .file-queue { display: flex; flex-direction: column; gap: 1rem; }
+
+        .file-card {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 1rem;
+            align-items: start;
+            background: #f8f9fa;
+            border: 1.5px solid #e0e4e8;
+            border-radius: 10px;
+            padding: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .file-card.success { border-color: #2e7d32; background: #f0fff4; }
+        .file-card.error   { border-color: var(--color-accent); background: #fff5f5; }
+        .file-card.uploading { border-color: var(--color-main); }
+
+        .file-thumb {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #ddd;
+        }
+
+        .file-fields { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .file-fields input {
+            padding: 0.4rem 0.6rem;
+            border: 1.5px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+
+        .file-fields input:focus { outline: none; border-color: var(--color-main); }
+
+        .file-name {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+            word-break: break-all;
+        }
+
+        .category-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.2rem;
+        }
+
+        .category-checkboxes label {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.78rem;
+            background: #e8ecf0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+        }
+
+        .category-checkboxes input[type=checkbox]:checked + span {
+            font-weight: 600;
+        }
+
+        .category-checkboxes label:has(input:checked) {
+            background: var(--color-main);
+            color: white;
+        }
+
+        .category-checkboxes input[type=checkbox] { display: none; }
+
+        .file-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.4rem;
+            min-width: 60px;
+        }
+
+        .status-icon { font-size: 1.2rem; }
+        .status-icon.pending   { color: #aaa; }
+        .status-icon.uploading { color: var(--color-main); animation: spin 1s linear infinite; }
+        .status-icon.success   { color: #2e7d32; }
+        .status-icon.error     { color: var(--color-accent); }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .status-label { font-size: 0.75rem; color: #888; text-align: right; }
+
+        .upload-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .upload-summary {
+            font-size: 0.85rem;
+            color: #555;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* JSON section */
+        .json-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; justify-content: center; }
+
+        .json-preview {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre;
+            display: none;
+        }
+
+        .new-entries-list {
+            margin-top: 1rem;
+        }
+
+        .new-entry-badge {
+            display: inline-block;
+            background: #e8f4e9;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+            border-radius: 6px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            color: white;
+            font-size: 0.9rem;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background: #2e7d32; }
+        .toast.error   { background: var(--color-accent); }
+        .toast.info    { background: var(--color-main); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <h1><i class="fas fa-camera-retro" style="color: var(--color-accent)"></i> Photo Admin</h1>
+                <p>Upload photos to Cloudinary &amp; manage photo_data.json</p>
+            </div>
+
+            <!-- Config -->
+            <div class="admin-section">
+                <h2><i class="fas fa-lock"></i> Access</h2>
+                <div class="config-row">
+                    <label for="preset-input">Upload Preset</label>
+                    <input type="password" id="preset-input" placeholder="Enter upload preset">
+                    <button class="btn btn-primary" onclick="savePreset()">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+
+            <!-- Uploader -->
+            <div class="admin-section">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Upload Photos</h2>
+
+                <div class="drop-zone" id="drop-zone">
+                    <i class="fas fa-images"></i>
+                    <p>Drag &amp; drop photos here, or <span onclick="document.getElementById('file-input').click()">browse files</span></p>
+                    <p style="font-size:0.8rem; color:#aaa; margin-top:0.3rem">JPG, PNG — files over 9 MB are auto-resized before upload</p>
+                </div>
+                <input type="file" id="file-input" multiple accept="image/*">
+
+                <div class="file-queue" id="file-queue"></div>
+
+                <div class="upload-actions" id="upload-actions" style="display:none">
+                    <button class="btn btn-accent" id="upload-all-btn" onclick="uploadAll()">
+                        <i class="fas fa-upload"></i> Upload All
+                    </button>
+                    <button class="btn btn-ghost" onclick="clearQueue()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <span class="upload-summary" id="upload-summary"></span>
+                </div>
+            </div>
+
+            <!-- JSON Manager -->
+            <div class="admin-section">
+                <h2><i class="fas fa-file-code"></i> photo_data.json</h2>
+                <div class="json-actions">
+                    <button class="btn btn-primary" onclick="fetchAndDownloadJSON()">
+                        <i class="fas fa-download"></i> Download Current JSON
+                    </button>
+                    <button class="btn btn-ghost" onclick="toggleJSONPreview()">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                    <button class="btn btn-green" id="download-merged-btn" onclick="downloadMergedJSON()" style="display:none">
+                        <i class="fas fa-file-export"></i> Download with New Uploads
+                    </button>
+                </div>
+                <pre class="json-preview" id="json-preview"></pre>
+                <div class="new-entries-list" id="new-entries-list"></div>
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+    <script src="upload.js"></script>
+</body>
+</html>

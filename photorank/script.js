@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadPhotos() {
         try {
-            const response = await fetch('../photos/photo_data.json');
-            const config = await response.json();
+            const response = await fetch('https://api.jsonbin.io/v3/b/6a42a081da38895dfe112f88');
+            const config = (await response.json()).record;
 
             // Store meta-data if it exists
             if (config['meta-data']) {
