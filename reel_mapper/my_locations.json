@@ -1,0 +1,89 @@
+{
+  "categories": [
+      "tasty cafes",
+      "study cafes",
+      "good view points"
+  ],
+  "places": [
+      {
+          "name": "Yutori",
+          "lat": 37.4201157,
+          "lng": -122.1358167,
+          "map_url": "https://maps.google.com/?cid=10708300136315527516",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJ0daGNgC7j4ARXKFaLT2Gm5Q"
+      },
+      {
+          "name": "Covour Coffee",
+          "lat": 37.4332568,
+          "lng": -122.1294948,
+          "map_url": "https://maps.google.com/?cid=7051750372273122637",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJ1b93KAC7j4ARTW0REJrZ3GE"
+      },
+      {
+          "name": "Palo Alto Cafe",
+          "lat": 37.4340284,
+          "lng": -122.1295474,
+          "map_url": "https://maps.google.com/?cid=8337442376711587017",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJVxFMmPi6j4ARycQu_6qLtHM"
+      },
+      {
+          "name": "Ryokucha Cafe",
+          "lat": 37.4131249,
+          "lng": -122.1250582,
+          "map_url": "https://maps.google.com/?cid=3167527338653123638",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJ1cOnFZy7j4ARNgTCDFVR9Ss"
+      },
+      {
+          "name": "Rikyu",
+          "lat": 37.44461099999999,
+          "lng": -122.1651784,
+          "map_url": "https://maps.google.com/?cid=8280122484763910977",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJlUJpJQC7j4ARQeMTqYfn6HI"
+      },
+      {
+          "name": "Yummy Future Coffee, Matcha & Tea",
+          "lat": 37.4442771,
+          "lng": -122.162797,
+          "map_url": "https://maps.google.com/?cid=3377841451441691025",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJAe6EeY27j4ARkZnFTOeA4C4"
+      },
+      {
+          "name": "Ralph's Coffee",
+          "lat": 37.4416828,
+          "lng": -122.172905,
+          "map_url": "https://maps.google.com/?cid=11187143086489452921",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJ-_sbcgC7j4ARecGreV23QJs"
+      },
+      {
+          "name": "Verve Coffee Roasters",
+          "lat": 37.4442151,
+          "lng": -122.1630528,
+          "map_url": "https://maps.google.com/?cid=10056066624525985840",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJIdyPATq7j4ARMGiI0FBTjos"
+      },
+      {
+          "name": "Cloud9 Coffee",
+          "lat": 37.4542924,
+          "lng": -122.1151711,
+          "map_url": "https://maps.google.com/?cid=8992481774026990407",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJ9YkCOjK7j4ARR6MNfoe2y3w"
+      },
+      {
+          "name": "Backyard Brew",
+          "lat": 37.4260472,
+          "lng": -122.1453861,
+          "map_url": "https://maps.google.com/?cid=17611622165129381878",
+          "context": "Cafe to work/study",
+          "place_id": "ChIJtVNO8OW6j4AR9sfufgwNafQ"
+      }
+  ]
+}
