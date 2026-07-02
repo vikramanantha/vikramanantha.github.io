@@ -22,3 +22,6 @@ important_files/*
 
 polaroider/polaroids
 
+# Large image assets (served via other means)
+images/
+
