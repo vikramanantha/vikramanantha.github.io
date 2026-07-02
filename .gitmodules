@@ -4,9 +4,15 @@
 [submodule "reel_mapper"]
 	path = reel_mapper
 	url = https://github.com/vikramanantha/reel_mapper.git
+[submodule "scheduler"]
+	path = scheduler
+	url = https://github.com/vikramanantha/scheduler.git
 [submodule "sidequest_map"]
 	path = sidequest_map
 	url = https://github.com/vikramanantha/sidequest_map.git
+[submodule "signer"]
+	path = signer
+	url = https://github.com/vikramanantha/signer.git
 [submodule "storyteller"]
 	path = storyteller
 	url = https://github.com/vikramanantha/storyteller.git
