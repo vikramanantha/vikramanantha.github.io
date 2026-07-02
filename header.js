@@ -23,7 +23,8 @@ function loadHeader() {
                         window.location.pathname.includes('storyteller/') ||
                         window.location.pathname.includes('photorank/') ||
                         window.location.pathname.includes('3d_modeler/') ||
-                        window.location.pathname.includes('signer/')),
+                        window.location.pathname.includes('signer/') ||
+                        window.location.pathname.includes('reel_mapper/')),
         },
         engineering: {
             path: 'engineering/',
@@ -64,6 +65,11 @@ function loadHeader() {
             path: 'signer/',
             isCurrent: window.location.pathname.includes('signer/'),
             navPath: 'signer/'
+        },
+        reel_mapper: {
+            path: 'reel_mapper/',
+            isCurrent: window.location.pathname.includes('reel_mapper/'),
+            navPath: 'reel_mapper/'
         }
     }
     
@@ -122,6 +128,10 @@ function loadHeader() {
                             <li><a href="${pages.signer.navPath}">
                                 <img src="/images/VA small.png" alt="VA Signer Icon" class="project-icon">
                                 VA Signer
+                            </a></li>
+                            <li><a href="${pages.reel_mapper.navPath}">
+                                <img src="/reel_mapper/icon.png" alt="Reel Mapper Icon" class="project-icon">
+                                Reel Mapper
                             </a></li>
                         </ul>
                     </li>
@@ -201,6 +211,13 @@ function loadHeader() {
         const signerLink = document.querySelector('.dropdown-menu a[href*="signer"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (signerLink) signerLink.classList.add('active');
+    }
+
+    if (pages.reel_mapper.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const reelMapperLink = document.querySelector('.dropdown-menu a[href*="reel_mapper"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (reelMapperLink) reelMapperLink.classList.add('active');
     }
 
     // Dropdown functionality
