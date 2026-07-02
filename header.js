@@ -16,15 +16,16 @@ function loadHeader() {
     const pages = {
         home: {
             path: 'index.html',
-            isCurrent: !(window.location.pathname.includes('engineering/') || 
-                        window.location.pathname.includes('photos/') || 
+            isCurrent: !(window.location.pathname.includes('engineering/') ||
+                        window.location.pathname.includes('photos/') ||
                         window.location.pathname.includes('resume/') ||
                         window.location.pathname.includes('polaroider/') ||
                         window.location.pathname.includes('storyteller/') ||
                         window.location.pathname.includes('photorank/') ||
                         window.location.pathname.includes('3d_modeler/') ||
                         window.location.pathname.includes('signer/') ||
-                        window.location.pathname.includes('reel_mapper/')),
+                        window.location.pathname.includes('reel_mapper/') ||
+                        window.location.pathname.includes('/sidequest_map/')),
         },
         engineering: {
             path: 'engineering/',
@@ -70,6 +71,11 @@ function loadHeader() {
             path: 'reel_mapper/',
             isCurrent: window.location.pathname.includes('reel_mapper/'),
             navPath: 'reel_mapper/'
+        },
+        sidequest_map: {
+            path: 'sidequest_map/',
+            isCurrent: window.location.pathname.includes('/sidequest_map/'),
+            navPath: 'sidequest_map/'
         }
     }
     
@@ -135,6 +141,7 @@ function loadHeader() {
                             </a></li>
                         </ul>
                     </li>
+                    <li><a href="${pages.sidequest_map.navPath}">Artifacts</a></li>
                     <li><a href="${pages.resume.navPath}" target="_blank">Resume</a></li>
                 </ul>
             </nav>
@@ -218,6 +225,13 @@ function loadHeader() {
         const reelMapperLink = document.querySelector('.dropdown-menu a[href*="reel_mapper"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (reelMapperLink) reelMapperLink.classList.add('active');
+    }
+
+    if (pages.sidequest_map.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const sidequestMapLink = document.querySelector('.dropdown-menu a[href*="/sidequest_map/"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (sidequestMapLink) sidequestMapLink.classList.add('active');
     }
 
     // Dropdown functionality
