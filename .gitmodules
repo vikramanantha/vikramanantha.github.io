@@ -1,3 +1,12 @@
+[submodule "3d_modeler"]
+	path = 3d_modeler
+	url = https://github.com/vikramanantha/3d_modeler.git
+[submodule "reel_mapper"]
+	path = reel_mapper
+	url = https://github.com/vikramanantha/reel_mapper.git
 [submodule "sidequest_map"]
 	path = sidequest_map
 	url = https://github.com/vikramanantha/sidequest_map.git
+[submodule "storyteller"]
+	path = storyteller
+	url = https://github.com/vikramanantha/storyteller.git
