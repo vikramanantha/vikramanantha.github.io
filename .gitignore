@@ -25,3 +25,7 @@ polaroider/polaroids
 # Large image assets (served via other means)
 images/
 
+# Local-only git repos with no remote (not submodules)
+scheduler/
+signer/
+
