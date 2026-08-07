@@ -16,3 +16,6 @@
 [submodule "storyteller"]
 	path = storyteller
 	url = https://github.com/vikramanantha/storyteller.git
+[submodule "resumeer"]
+	path = resumeer
+	url = https://github.com/vikramanantha/resumeer.git

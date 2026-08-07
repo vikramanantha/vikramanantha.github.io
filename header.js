@@ -25,6 +25,7 @@ function loadHeader() {
                         window.location.pathname.includes('3d_modeler/') ||
                         window.location.pathname.includes('signer/') ||
                         window.location.pathname.includes('reel_mapper/') ||
+                        window.location.pathname.includes('resumeer/') ||
                         window.location.pathname.includes('/sidequest_map/')),
         },
         engineering: {
@@ -71,6 +72,11 @@ function loadHeader() {
             path: 'reel_mapper/',
             isCurrent: window.location.pathname.includes('reel_mapper/'),
             navPath: 'reel_mapper/'
+        },
+        resumeer: {
+            path: 'resumeer/',
+            isCurrent: window.location.pathname.includes('resumeer/'),
+            navPath: 'resumeer/'
         },
         sidequest_map: {
             path: 'sidequest_map/',
@@ -138,6 +144,10 @@ function loadHeader() {
                             <li><a href="${pages.reel_mapper.navPath}">
                                 <img src="/reel_mapper/icon.png" alt="Reel Mapper Icon" class="project-icon">
                                 Reel Mapper
+                            </a></li>
+                            <li><a href="${pages.resumeer.navPath}">
+                                <img src="/resumeer/icon.png" alt="Resumeer Icon" class="project-icon">
+                                Resumeer
                             </a></li>
                         </ul>
                     </li>
@@ -225,6 +235,13 @@ function loadHeader() {
         const reelMapperLink = document.querySelector('.dropdown-menu a[href*="reel_mapper"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (reelMapperLink) reelMapperLink.classList.add('active');
+    }
+
+    if (pages.resumeer.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const resumeerLink = document.querySelector('.dropdown-menu a[href*="resumeer"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (resumeerLink) resumeerLink.classList.add('active');
     }
 
     if (pages.sidequest_map.isCurrent) {
