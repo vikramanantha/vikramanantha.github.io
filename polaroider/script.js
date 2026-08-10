@@ -21,19 +21,173 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedImage = null;
     let currentCropped = null;
+    let rotationDeg = 0;
+    const metadataStatus = document.getElementById('metadata-status');
+    const rotateLeftBtn = document.getElementById('rotate-left-btn');
+    const rotateRightBtn = document.getElementById('rotate-right-btn');
 
-    imagePicker.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                originalImage.src = event.target.result;
-                selectedImage = new Image();
-                selectedImage.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
+    // The status line reports two independent async jobs (HEIC conversion
+    // and EXIF metadata lookup), so their messages are tracked separately
+    // and combined rather than one overwriting the other mid-flight.
+    let heicStatusText = '';
+    let metaStatusText = '';
+    function renderCombinedStatus() {
+        if (!metadataStatus) return;
+        metadataStatus.textContent = [heicStatusText, metaStatusText].filter(Boolean).join(' ');
+    }
+
+    // Browsers (other than Safari) can't decode HEIC/HEIF in <img> or canvas,
+    // so iPhone photos need converting to JPEG client-side before use.
+    async function isHeicFile(file) {
+        if (typeof HeicTo !== 'undefined') {
+            try {
+                return await HeicTo.isHeic(file);
+            } catch (err) {
+                // fall through to extension check
+            }
         }
+        return /\.hei[cf]$/i.test(file.name);
+    }
+
+    function convertHeicToJpeg(file) {
+        return HeicTo({ blob: file, type: 'image/jpeg', quality: 0.92 });
+    }
+
+    imagePicker.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        rotationDeg = 0;
+        autofillFromPhotoMetadata(file);
+
+        let displayFile = file;
+        if (await isHeicFile(file)) {
+            heicStatusText = 'Converting HEIC photo…';
+            renderCombinedStatus();
+            try {
+                displayFile = await convertHeicToJpeg(file);
+            } catch (err) {
+                heicStatusText = 'Could not convert this HEIC photo — try exporting it as JPEG first.';
+                if (metadataStatus) metadataStatus.classList.add('error');
+                renderCombinedStatus();
+                return;
+            }
+            heicStatusText = '';
+            renderCombinedStatus();
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            selectedImage = new Image();
+            selectedImage.onload = () => {
+                updateOriginalPreview();
+            };
+            selectedImage.src = event.target.result;
+        };
+        reader.readAsDataURL(displayFile);
     });
+
+    // Rotates an image/canvas by a multiple of 90deg onto an offscreen
+    // canvas, swapping width/height for 90/270deg turns. Returns a canvas,
+    // which (like an Image) can be used directly as a drawImage source.
+    function rotateImage(img, degrees) {
+        const rad = degrees * Math.PI / 180;
+        const swap = degrees % 180 !== 0;
+        const w = img.width;
+        const h = img.height;
+        const rotatedCanvas = document.createElement('canvas');
+        rotatedCanvas.width = swap ? h : w;
+        rotatedCanvas.height = swap ? w : h;
+        const rCtx = rotatedCanvas.getContext('2d');
+        rCtx.translate(rotatedCanvas.width / 2, rotatedCanvas.height / 2);
+        rCtx.rotate(rad);
+        rCtx.drawImage(img, -w / 2, -h / 2);
+        return rotatedCanvas;
+    }
+
+    function getRotatedSource() {
+        if (!selectedImage) return null;
+        return rotationDeg === 0 ? selectedImage : rotateImage(selectedImage, rotationDeg);
+    }
+
+    function updateOriginalPreview() {
+        if (!selectedImage) return;
+        originalImage.src = rotationDeg === 0 ? selectedImage.src : getRotatedSource().toDataURL();
+    }
+
+    function rotateBy(delta) {
+        if (!selectedImage) return;
+        rotationDeg = ((rotationDeg + delta) % 360 + 360) % 360;
+        updateOriginalPreview();
+        if (currentCropped) runGenerate();
+    }
+
+    if (rotateLeftBtn) rotateLeftBtn.addEventListener('click', () => rotateBy(-90));
+    if (rotateRightBtn) rotateRightBtn.addEventListener('click', () => rotateBy(90));
+
+    function formatExifDate(date) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`;
+    }
+
+    // Reverse-geocodes GPS coordinates into a short place label via the
+    // Nominatim (OpenStreetMap) public API, since EXIF only stores lat/lon.
+    async function reverseGeocode(latitude, longitude) {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&zoom=17&addressdetails=1`;
+        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!response.ok) throw new Error(`Nominatim request failed: ${response.status}`);
+        const data = await response.json();
+        const addr = data.address || {};
+        const specific = addr.attraction || addr.leisure || addr.amenity || addr.building
+            || addr.tourism || addr.shop || addr.road;
+        const place = addr.city || addr.town || addr.village || addr.suburb || addr.county;
+        if (specific && place) return `${specific}, ${place}`;
+        if (specific) return specific;
+        if (place) return place;
+        return data.display_name ? data.display_name.split(',')[0] : null;
+    }
+
+    async function autofillFromPhotoMetadata(file) {
+        if (typeof exifr === 'undefined') return;
+        metaStatusText = 'Reading photo metadata…';
+        if (metadataStatus) metadataStatus.classList.remove('error');
+        renderCombinedStatus();
+        try {
+            const exif = await exifr.parse(file, { gps: true, tiff: true, exif: true });
+            const foundParts = [];
+
+            if (exif) {
+                const dateTaken = exif.DateTimeOriginal || exif.CreateDate;
+                if (dateTaken instanceof Date && !isNaN(dateTaken) && !whenInput.value) {
+                    whenInput.value = formatExifDate(dateTaken);
+                    foundParts.push('date');
+                }
+
+                if (typeof exif.latitude === 'number' && typeof exif.longitude === 'number' && !whereInput.value) {
+                    try {
+                        const place = await reverseGeocode(exif.latitude, exif.longitude);
+                        if (place) {
+                            whereInput.value = place;
+                            foundParts.push('location');
+                        }
+                    } catch (geoErr) {
+                        // Reverse geocoding is best-effort; fall back to raw coordinates.
+                        whereInput.value = `${exif.latitude.toFixed(4)}, ${exif.longitude.toFixed(4)}`;
+                        foundParts.push('location (coordinates only)');
+                    }
+                }
+            }
+
+            metaStatusText = foundParts.length
+                ? `Auto-filled from photo: ${foundParts.join(', ')}.`
+                : 'No date/location metadata found in this photo.';
+            renderCombinedStatus();
+            maybeRerender();
+        } catch (err) {
+            metaStatusText = 'Could not read photo metadata.';
+            if (metadataStatus) metadataStatus.classList.add('error');
+            renderCombinedStatus();
+        }
+    }
 
     function cropToAspect(img, aspect_ratio = [3, 4]) {
         const w = img.width;
@@ -58,16 +212,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return croppedImage;
     }
 
+    function runGenerate() {
+        const cropped = cropToAspect(getRotatedSource(), [3, 4]);
+        cropped.onload = () => {
+            currentCropped = cropped;
+            createPolaroid(currentCropped, whatInput.value, whenInput.value, whereInput.value);
+        }
+    }
+
     generateBtn.addEventListener('click', () => {
         if (!selectedImage) {
             alert('Please select an image first.');
             return;
         }
-        const cropped = cropToAspect(selectedImage, [3, 4]);
-        cropped.onload = () => {
-            currentCropped = cropped;
-            createPolaroid(currentCropped, whatInput.value, whenInput.value, whereInput.value);
-        }
+        runGenerate();
     });
 
     function getControls() {
@@ -170,20 +328,12 @@ document.addEventListener('DOMContentLoaded', () => {
         createPolaroid(currentCropped, whatInput.value, whenInput.value, whereInput.value);
     }
 
-    // Attach listeners for live updates
+    // Slider value readouts update live, but the canvas itself only
+    // re-renders when the Generate Polaroid button is pressed.
     [fontSizeSlider, lineSpacingSlider, topOffsetSlider, whatWidthSlider]
         .filter(Boolean)
         .forEach((el) => {
-            el.addEventListener('input', () => {
-                updateValueLabels();
-                maybeRerender();
-            });
-        });
-
-    [whatInput, whenInput, whereInput]
-        .filter(Boolean)
-        .forEach((el) => {
-            el.addEventListener('input', maybeRerender);
+            el.addEventListener('input', updateValueLabels);
         });
 
     updateValueLabels();
@@ -287,7 +437,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const files = Array.from(e.target.files || []);
             batchItems = [];
             for (const file of files) {
-                const url = URL.createObjectURL(file);
+                let displayFile = file;
+                if (await isHeicFile(file)) {
+                    try {
+                        displayFile = await convertHeicToJpeg(file);
+                    } catch (err) {
+                        continue;
+                    }
+                }
+                const url = URL.createObjectURL(displayFile);
                 const img = await loadImageFromURL(url).catch(() => null);
                 if (!img) continue;
                 batchItems.push({ id: nextItemId++, file, url, img, quantity: 1 });
