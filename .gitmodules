@@ -19,3 +19,6 @@
 [submodule "resumeer"]
 	path = resumeer
 	url = https://github.com/vikramanantha/resumeer.git
+[submodule "carouseler"]
+	path = carouseler
+	url = https://github.com/vikramanantha/carouseler.git

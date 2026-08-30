@@ -26,6 +26,7 @@ function loadHeader() {
                         window.location.pathname.includes('signer/') ||
                         window.location.pathname.includes('reel_mapper/') ||
                         window.location.pathname.includes('resumeer/') ||
+                        window.location.pathname.includes('carouseler/') ||
                         window.location.pathname.includes('/sidequest_map/')),
         },
         engineering: {
@@ -77,6 +78,11 @@ function loadHeader() {
             path: 'resumeer/',
             isCurrent: window.location.pathname.includes('resumeer/'),
             navPath: 'resumeer/'
+        },
+        carouseler: {
+            path: 'carouseler/',
+            isCurrent: window.location.pathname.includes('carouseler/'),
+            navPath: 'carouseler/'
         },
         sidequest_map: {
             path: 'sidequest_map/',
@@ -138,7 +144,7 @@ function loadHeader() {
                                 3D Modeler
                             </a></li>
                             <li><a href="${pages.signer.navPath}">
-                                <img src="/images/VA small.png" alt="VA Signer Icon" class="project-icon">
+                                <img src="/images/VA-2026.png" alt="VA Signer Icon" class="project-icon">
                                 VA Signer
                             </a></li>
                             <li><a href="${pages.reel_mapper.navPath}">
@@ -148,6 +154,10 @@ function loadHeader() {
                             <li><a href="${pages.resumeer.navPath}">
                                 <img src="/resumeer/icon.png" alt="Resumeer Icon" class="project-icon">
                                 Resumeer
+                            </a></li>
+                            <li><a href="${pages.carouseler.navPath}">
+                                <img src="/carouseler/icon.png" alt="Carouseler Icon" class="project-icon">
+                                Carouseler
                             </a></li>
                         </ul>
                     </li>
