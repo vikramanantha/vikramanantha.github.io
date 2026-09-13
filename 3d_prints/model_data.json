@@ -1,0 +1,35 @@
+[
+    {
+        "path": "models/project_homecoming.stl",
+        "name": "Project Homecoming v2",
+        "purpose": "Monitor Stand",
+        "description": "This monitor stand was meant to increase the height of my monitor on my desk so that it would appear above my computer. The rift in the middle was meant to decrease the amount of filament used (Robotics staff yelled at me for the first version costing too much) and was meant to resemble the <a href='https://gravityfalls.fandom.com/wiki/Weirdmageddon_(event)'>Bill Cipher's Weirdmageddon rift from Gravity Falls</a>. It turns out that it is a <em>great</em> way to store the charging + HDMI cables so that it doesn't fall behind my desk.",
+        "print_date": "Oct 2025",
+        "name_origin": "My parents visited me during Homecoming weekend and brought my monitor, giving the name \"Project Homecoming\"",
+        "improvements": "My first print got rejected because the Maker Space said \"I think you could find a monitor stand online that would fit your needs and would be cheaper than us printing you one.\" This told me that I need to reduce the filament and change the name so they don't know what I'm trying to print" 
+    },
+    {
+        "path": "models/project_mackinac.stl",
+        "name": "Project Mackinac v2",
+        "purpose": "Camera Phone Stand",
+        "description": "When I am on a trip, I want to put my phone on a stand and keep in a corner to take candid videos / group photos. I also need something that can fit in my backpack and attach to my phone easily. I designed this to fit in my backpack or pocket (very thin, tall so that it can fit in the cupholder) and also have a Magsafe ring hole so my phone (and others) can attach easily.",
+        "print_date":"Oct 2025",
+        "name_origin": "My friends and I went to Mackinac Island and needed candid videos. This helped a lot with that, hence the name \"Project Mackinac\""
+    },
+    {
+        "path": "models/project_candle_light.stl",
+        "name": "Project Candle Light",
+        "purpose": "Initials Stamper",
+        "description": "I got inspired by some of the fancy wax seal stamps for envelopes because they seem very royal and old money. I tried to make my own wax seal stamp with the plastic with my own initials. Notes for next time: I need to change the material from not plastic, and also make it bigger",
+        "print_date": "Dec 2025",
+        "name_origin": "In order to melt the wax on the envelope, I need a flame. I don't have wax seal wax, so I used the wax from a candle, hence the name \"Project Candlelight\""
+    },
+    {
+        "path": "models/project_woodworker.stl",
+        "purpose": "Battery pack charger",
+        "name": "Project Woodworker",
+        "description": "I wanted to be able to cleanly put my powerbanks into a slot that will start charging the batteries. This was aimed to reduce the friction in charging my powerbanks so hopefully they would be charged more often. There are slots for the USB-C cable, and to see the battery indicator.",
+        "print_date": "Mar 2026",
+        "name_origin": "There are a lot of YouTubers that supercharge their desk setups with stuff like this, like <a href='https://www.youtube.com/@ScottYuJan'>Scott Yu-Jan</a> and <a href='https://www.youtube.com/@makewithmiles'>Make with Miles</a>, the latter woodworks a lot, hence the name \"Project Woodworker\""
+    }
+]

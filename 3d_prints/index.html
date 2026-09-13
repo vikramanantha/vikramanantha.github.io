@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Prints - Vikram Anantha</title>
+    <meta name="description" content="3D Prints - A gallery of 3D models designed and printed by Vikram Anantha. Click into any model to spin it around.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vikramanantha.github.io/3d_prints/">
+    <meta property="og:title" content="3D Prints - Vikram Anantha">
+    <meta property="og:description" content="A gallery of 3D models designed and printed by Vikram Anantha. Click into any model to spin it around.">
+    <meta property="og:image" content="https://vikramanantha.github.io/3d_prints/icon.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="3D Prints Icon">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://vikramanantha.github.io/3d_prints/">
+    <meta property="twitter:title" content="3D Prints - Vikram Anantha">
+    <meta property="twitter:description" content="A gallery of 3D models designed and printed by Vikram Anantha. Click into any model to spin it around.">
+    <meta property="twitter:image" content="https://vikramanantha.github.io/3d_prints/icon.png">
+    <meta property="twitter:image:alt" content="3D Prints Icon">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../images/icon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <div class="title-with-icon">
+                    <img src="icon.png" alt="3D Prints Icon" class="title-icon">
+                    <h1>3D Prints</h1>
+                </div>
+                <p>Things I've designed and printed. <br>Funky names so that the Robotics Maker Space won't know why I'm printing it and tell me to buy it off Amazon instead.</p>
+            </div>
+
+            <div id="prints-container" class="prints-container">
+                <!-- Banners / model viewer are rendered here by prints.js -->
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            loadHeader();
+            loadFooter();
+        });
+    </script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="prints.js"></script>
+</body>
+</html>

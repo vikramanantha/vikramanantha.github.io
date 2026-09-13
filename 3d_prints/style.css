@@ -1,0 +1,193 @@
+/* 3D Prints — builds on the photo portfolio banner/grid styles in ../style.css */
+
+.prints-container {
+    width: 100%;
+}
+
+.prints-error {
+    color: red;
+    text-align: center;
+}
+
+/* Banners have no photo, so use a brand gradient as the "image" (inherited by ::before for the hover zoom) */
+.print-banner {
+    display: block;
+    text-decoration: none;
+    background-image: linear-gradient(135deg, var(--color-main) 0%, #1d4e89 55%, var(--color-accent) 130%);
+}
+
+.print-banner .photo-banner-overlay {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Two banners per row instead of the photo portfolio's full-width stack */
+#prints-container .photo-banners-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#prints-container .print-banner {
+    height: 150px;
+}
+
+#prints-container .print-banner .photo-banner-text {
+    font-size: 1.8rem;
+}
+
+/* Detail view: viewer on the left, info on the right */
+.print-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: 20px;
+    padding: 0 20px 20px;
+}
+
+.print-viewer {
+    position: relative;
+    height: 600px;
+    border-radius: 25px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 40%, #ffffff 0%, #dfe2e7 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.print-viewer canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.print-viewer canvas:active {
+    cursor: grabbing;
+}
+
+.print-viewer-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--color-main);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.print-viewer-status.error {
+    color: var(--color-accent);
+}
+
+.print-viewer-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(10, 35, 66, 0.75);
+    color: white;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.print-reset-button {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-main);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.print-reset-button:hover {
+    background-color: var(--color-accent);
+}
+
+.print-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-self: start;
+}
+
+.print-info-field h3 {
+    color: var(--color-main);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+}
+
+.print-info-field p {
+    white-space: pre-line;
+}
+
+/* Links in descriptions: blue instead of the global white, with the site's red underline-grow on hover.
+   The global ::after version collapses to 0 width when a link wraps lines, so use a background underline instead. */
+#prints-container .print-info-field a {
+    color: #1a5fb4;
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0 3px;
+    transition: color 0.2s ease, background-size 0.3s ease;
+}
+
+#prints-container .print-info-field a::after {
+    content: none;
+}
+
+#prints-container .print-info-field a:hover {
+    color: #0A2342;
+    background-size: 100% 3px;
+}
+
+/* id selector needed to beat the global a:not(...) underline rule */
+#prints-container .print-download {
+    justify-content: center;
+    text-decoration: none;
+}
+
+#prints-container .print-download:hover {
+    transform: none;
+}
+
+@media (max-width: 900px) {
+    .print-detail {
+        grid-template-columns: 1fr;
+        padding: 0 0 20px;
+    }
+
+    .print-viewer {
+        height: 60vh;
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+    #prints-container .photo-banners-container {
+        grid-template-columns: 1fr;
+    }
+
+    #prints-container .print-banner {
+        height: 120px;
+    }
+
+    #prints-container .print-banner .photo-banner-text {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .print-viewer-hint {
+        font-size: 0.7rem;
+    }
+}

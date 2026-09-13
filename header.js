@@ -27,6 +27,7 @@ function loadHeader() {
                         window.location.pathname.includes('reel_mapper/') ||
                         window.location.pathname.includes('resumeer/') ||
                         window.location.pathname.includes('carouseler/') ||
+                        window.location.pathname.includes('3d_prints/') ||
                         window.location.pathname.includes('/sidequest_map/')),
         },
         engineering: {
@@ -83,6 +84,11 @@ function loadHeader() {
             path: 'carouseler/',
             isCurrent: window.location.pathname.includes('carouseler/'),
             navPath: 'carouseler/'
+        },
+        three_d_prints: {
+            path: '3d_prints/',
+            isCurrent: window.location.pathname.includes('3d_prints/'),
+            navPath: '3d_prints/'
         },
         sidequest_map: {
             path: 'sidequest_map/',
@@ -158,6 +164,10 @@ function loadHeader() {
                             <li><a href="${pages.carouseler.navPath}">
                                 <img src="/carouseler/icon.png" alt="Carouseler Icon" class="project-icon">
                                 Carouseler
+                            </a></li>
+                            <li><a href="${pages.three_d_prints.navPath}">
+                                <img src="/3d_prints/icon.png" alt="3D Prints Icon" class="project-icon">
+                                3D Prints
                             </a></li>
                         </ul>
                     </li>
@@ -252,6 +262,13 @@ function loadHeader() {
         const resumeerLink = document.querySelector('.dropdown-menu a[href*="resumeer"]');
         if (dropdownToggle) dropdownToggle.classList.add('active');
         if (resumeerLink) resumeerLink.classList.add('active');
+    }
+
+    if (pages.three_d_prints.isCurrent) {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const threeDPrintsLink = document.querySelector('.dropdown-menu a[href*="3d_prints"]');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+        if (threeDPrintsLink) threeDPrintsLink.classList.add('active');
     }
 
     if (pages.sidequest_map.isCurrent) {
