@@ -17,6 +17,14 @@
         "name_origin": "My friends and I went to Mackinac Island and needed candid videos. This helped a lot with that, hence the name \"Project Mackinac\""
     },
     {
+        "path": "models/project_mantissa.stl",
+        "name": "Project Mantissa",
+        "purpose": "Magsafe Charger Stand",
+        "description": "On my desk I want my iPad to have its own stand so I can add a 3rd monitor screen to my desk setup. To attach the iPad to a stand, I just magsafe'd my iPad. It's really easy to magsafe any device- you just have to buy magsafe rings off of Amazon for like $5 and stick it onto a device.",
+        "print_date":"Sept 2025",
+        "name_origin": "The goal is to make the device that I'm putting on the Magsafe Stand look like it's floating, like a floating point number. One of the main parts of a floating point number we learned in EECS370 is the mantissa, hence the name \"Project Mantissa\""
+    },
+    {
         "path": "models/project_candle_light.stl",
         "name": "Project Candle Light",
         "purpose": "Initials Stamper",
