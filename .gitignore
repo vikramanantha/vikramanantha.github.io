@@ -22,7 +22,7 @@ important_files/*
 
 polaroider/polaroids
 
-# Large image assets (served via other means)
-images/
+# Large 3D assets (multi-GB drone footage and models)
+images/3d/
 
 interview_prep/
