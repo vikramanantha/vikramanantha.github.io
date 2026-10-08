@@ -22,3 +22,9 @@
 [submodule "carouseler"]
 	path = carouseler
 	url = https://github.com/vikramanantha/carouseler.git
+[submodule "sunsetter"]
+	path = sunsetter
+	url = https://github.com/vikramanantha/sunsetter.git
+[submodule "harmonize"]
+	path = harmonize
+	url = https://github.com/vikramanantha/harmonize.git

@@ -328,13 +328,13 @@ a:not(nav a):not(.social-links a):not(.engineering-container h3 a):not(.social-l
     color:white;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn) {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):not(.proj-banner):not(.proj-try-btn) {
     text-decoration: underline;
     position: relative;
     transition: color 0.2s ease;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn)::after {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):not(.proj-banner):not(.proj-try-btn)::after {
     content: '';
     position: absolute;
     width: 0;
@@ -345,7 +345,7 @@ a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn)::afte
     transition: width 0.3s ease;
 }
 
-a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):hover::after {
+a:not(nav a):not(.social-links a):not(.social-link):not(.photo-action-btn):not(.proj-banner):not(.proj-try-btn):hover::after {
     width: 100%;
 }
 
@@ -1436,6 +1436,7 @@ a.photo-action-btn:hover {
 .polaroider-container {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
@@ -1453,7 +1454,8 @@ a.photo-action-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 500px;
+    flex: 1 1 380px;
+    max-width: 480px;
 }
 
 .polaroider-container .controls h2 {
@@ -1522,15 +1524,32 @@ a.photo-action-btn:hover {
     background-color: var(--color-accent);
 }
 
+.polaroider-container .rotate-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.polaroider-container .rotate-controls button {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
 .polaroider-container .display {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    flex: 2 1 500px;
+    min-width: 0;
 }
 
-.polaroider-container .image-preview, 
+.polaroider-container .image-preview,
 .polaroider-container .polaroid-preview {
-    width: 400px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 400px;
 }
 
 .polaroider-container #original-image, 
@@ -1643,13 +1662,34 @@ a.photo-action-btn:hover {
     .lexobserver-image-item {
         height: 150px;
     }
+
+    .polaroider-container {
+        flex-direction: column;
+    }
+
+    .polaroider-container .controls {
+        max-width: 100%;
+        flex-basis: auto;
+    }
+
+    .polaroider-container .display {
+        flex-direction: column;
+        max-width: 100%;
+        flex-basis: auto;
+    }
+
+    .polaroider-container .image-preview,
+    .polaroider-container .polaroid-preview {
+        max-width: 100%;
+        flex-basis: auto;
+    }
 }
 
 @media (max-width: 480px) {
     .instagram-container iframe {
         height: 350px;
     }
-    
+
     .lexobserver-image-item {
         height: 120px;
     }
@@ -2484,6 +2524,167 @@ a.photo-action-btn:hover {
     box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3);
 }
 
+/* Projects Page: narrower column, section banners, small-project cards */
+.projects-container {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+#projects-section-view {
+    width: 100%;
+}
+
+#projects-section-view .grid-header {
+    padding: 0 0 20px 0;
+}
+
+.proj-banners {
+    width: 100%;
+    padding: 0;
+}
+
+/* Placeholder until banner images are chosen: Sunsetter green */
+.proj-banner {
+    display: block;
+    background-color: #306C52;
+    text-decoration: none;
+}
+
+.proj-banner:not(.has-image) .photo-banner-overlay {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.proj-icon-thumb {
+    background-color: var(--color-main);
+    color: white;
+    font-size: 2rem;
+}
+
+.proj-try-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 32px;
+    padding: 0 0.9rem;
+    border-radius: 6px;
+    background-color: var(--color-main);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.proj-try-btn i {
+    transition: transform 0.3s ease;
+}
+
+.projects-container .eng-internship-item:hover .proj-try-btn {
+    background-color: var(--color-accent);
+}
+
+.projects-container .eng-internship-item:hover .proj-try-btn i {
+    transform: translateX(3px);
+}
+
+/* Cards open a pop-out instead of expanding inline */
+.projects-container .eng-internship-item,
+.projects-container .eng-research-item {
+    cursor: pointer;
+}
+
+.projects-container .eng-internship-item:hover .eng-expand-btn,
+.projects-container .eng-research-item:hover .eng-expand-btn {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.proj-card-lifted {
+    opacity: 0;
+    transition: none;
+}
+
+html.proj-modal-open {
+    overflow: hidden;
+}
+
+/* Pop-out Modal */
+.proj-modal-root {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+}
+
+.proj-modal-root[hidden] {
+    display: none;
+}
+
+.proj-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(10, 35, 66, 0.25);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    backdrop-filter: blur(14px) saturate(120%);
+}
+
+.proj-modal {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: min(960px, calc(100vw - 32px));
+    height: fit-content;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 1.75rem;
+    border-radius: 16px;
+    background-color: var(--color-background);
+    border: 2px solid var(--color-main);
+    color: black;
+    box-shadow: 0 30px 80px rgba(10, 35, 66, 0.35);
+    transform-origin: 0 0;
+    will-change: transform, clip-path;
+}
+
+/* Copy of the card that crossfades with the panel during the morph */
+.proj-ghost {
+    position: fixed;
+    margin: 0;
+    z-index: 1;
+    pointer-events: none;
+    transform-origin: 0 0;
+    will-change: transform, opacity;
+}
+
+.proj-modal-top {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.proj-modal-header {
+    cursor: default;
+}
+
+.proj-modal .eng-description.proj-modal-body {
+    max-height: none;
+    overflow: visible;
+    margin-top: 1rem;
+}
+
+.proj-modal-hero {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    margin-bottom: 1.25rem;
+}
+
 /* Responsive Styles for New Engineering Sections */
 @media (max-width: 968px) {
     .eng-item-header {
@@ -2521,7 +2722,8 @@ a.photo-action-btn:hover {
 @media (max-width: 640px) {
     .eng-internship-item,
     .eng-research-item,
-    .eng-education-item {
+    .eng-education-item,
+    .proj-modal-top {
         flex-direction: column;
         gap: 1rem;
     }
@@ -2547,6 +2749,15 @@ a.photo-action-btn:hover {
     
     .eng-controls {
         flex-wrap: wrap;
+    }
+    
+    .proj-modal {
+        padding: 1.25rem;
+    }
+
+    /* Thumbnail is already full-width here */
+    .proj-modal-hero {
+        display: none;
     }
     
     .education-content {
@@ -3432,6 +3643,18 @@ a.photo-action-btn:hover {
     color: #dc3545;
 }
 
+.metadata-status {
+    min-height: 20px;
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.metadata-status.error {
+    color: #dc3545;
+}
+
 .scheduler-layout {
     display: flex;
     gap: 20px;
@@ -3657,4 +3880,9 @@ a.photo-action-btn:hover {
     .timeline-section {
         grid-template-columns: 1fr;
     }
+}
+
+/* Projects page toggles views with the hidden attribute */
+.projects-container [hidden] {
+    display: none !important;
 }

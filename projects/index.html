@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikram Anantha - Projects</title>
+    <meta name="description" content="Vikram Anantha's Projects - Internship, research, and personal projects, research, and internships in autonomous vehicles, computer vision, and robotics.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vikramanantha.github.io/projects/">
+    <meta property="og:title" content="Vikram Anantha - Projects">
+    <meta property="og:description" content="Internship, research, and personal projects in autonomous vehicles, computer vision, and robotics.">
+    <meta property="og:image" content="https://vikramanantha.github.io/images/engineering/3dgs_example.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="3D Gaussian Splatting Example from Projects">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vikramanantha.github.io/projects/">
+    <meta property="twitter:title" content="Vikram Anantha - Projects">
+    <meta property="twitter:description" content="Internship, research, and personal projects in autonomous vehicles, computer vision, and robotics.">
+    <meta property="twitter:image" content="https://vikramanantha.github.io/images/engineering/3dgs_example.jpg">
+    <meta property="twitter:image:alt" content="3D Gaussian Splatting Example from Projects">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../images/icon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <main>
+            <div class="title-card">
+                <h1>Projects</h1>
+            </div>
+            
+            <div class="engineering-container projects-container">
+                
+                <!-- Section banners; each links to /projects#<section> -->
+                <div id="projects-banners" class="photo-banners-container proj-banners"></div>
+
+                <div id="projects-section-view" hidden>
+                    <div class="grid-header">
+                        <button id="projects-back" class="back-button"><i class="fas fa-arrow-left"></i> Back to Projects</button>
+                        <h1 id="projects-section-title" class="grid-title"></h1>
+                    </div>
+
+                    <section id="section-internships" class="eng-section content-box" hidden>
+                        <div id="internships-content" class="eng-section-content">
+                            <!-- Internship items will be dynamically inserted here -->
+                        </div>
+                    </section>
+
+                    <section id="section-research" class="eng-section content-box" hidden>
+                        <div id="research-content" class="eng-section-content">
+                            <!-- Research items will be dynamically inserted here -->
+                        </div>
+                    </section>
+
+                    <section id="section-personal" class="eng-section content-box" hidden>
+                        <div id="personal-content" class="eng-section-content">
+                            <!-- Personal project items will be dynamically inserted here -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script src="../header.js"></script>
+    <script src="../footer.js"></script>
+    <script>
+        // Load header and footer when the page loads
+        window.onload = function() {
+            loadHeader();
+            loadFooter();
+        };
+    </script>
+    <script type="module" src="projects.js"></script>
+</body>
+</html>

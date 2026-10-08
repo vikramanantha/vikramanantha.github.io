@@ -13,27 +13,24 @@ function loadHeader() {
     //     resume: 'resume/resume.pdf'
     // }
 
+    // Small projects and the sidequest map live under the Projects page now
+    const projectSubpages = [
+        'projects/', 'polaroider/', 'storyteller/', 'photorank/', '3d_modeler/', 'signer/',
+        'reel_mapper/', 'resumeer/', 'carouseler/', '3d_prints/', '/sidequest_map/'
+    ];
+    const onProjectsPage = projectSubpages.some(path => window.location.pathname.includes(path));
+
     const pages = {
         home: {
             path: 'index.html',
-            isCurrent: !(window.location.pathname.includes('engineering/') ||
+            isCurrent: !(onProjectsPage ||
                         window.location.pathname.includes('photos/') ||
-                        window.location.pathname.includes('resume/') ||
-                        window.location.pathname.includes('polaroider/') ||
-                        window.location.pathname.includes('storyteller/') ||
-                        window.location.pathname.includes('photorank/') ||
-                        window.location.pathname.includes('3d_modeler/') ||
-                        window.location.pathname.includes('signer/') ||
-                        window.location.pathname.includes('reel_mapper/') ||
-                        window.location.pathname.includes('resumeer/') ||
-                        window.location.pathname.includes('carouseler/') ||
-                        window.location.pathname.includes('3d_prints/') ||
-                        window.location.pathname.includes('/sidequest_map/')),
+                        window.location.pathname.includes('resume/')),
         },
-        engineering: {
-            path: 'engineering/',
-            isCurrent: window.location.pathname.includes('engineering/'),
-            navPath: 'engineering/'
+        projects: {
+            path: 'projects/',
+            isCurrent: onProjectsPage,
+            navPath: 'projects/'
         },
         photos: {
             path: 'photos/',
@@ -44,56 +41,6 @@ function loadHeader() {
             path: 'important_files/resume.pdf',
             isCurrent: window.location.pathname.includes('resume/'),
             navPath: 'important_files/resume.pdf'
-        },
-        polaroider: {
-            path: 'polaroider/',
-            isCurrent: window.location.pathname.includes('polaroider/'),
-            navPath: 'polaroider/'
-        },
-        photorank: {
-            path: 'photorank/',
-            isCurrent: window.location.pathname.includes('photorank/'),
-            navPath: 'photorank/'
-        },
-        storyteller: {
-            path: 'storyteller/',
-            isCurrent: window.location.pathname.includes('storyteller/'),
-            navPath: 'storyteller/'
-        },
-        three_d_modeler: {
-            path: '3d_modeler/',
-            isCurrent: window.location.pathname.includes('3d_modeler/'),
-            navPath: '3d_modeler/'
-        },
-        signer: {
-            path: 'signer/',
-            isCurrent: window.location.pathname.includes('signer/'),
-            navPath: 'signer/'
-        },
-        reel_mapper: {
-            path: 'reel_mapper/',
-            isCurrent: window.location.pathname.includes('reel_mapper/'),
-            navPath: 'reel_mapper/'
-        },
-        resumeer: {
-            path: 'resumeer/',
-            isCurrent: window.location.pathname.includes('resumeer/'),
-            navPath: 'resumeer/'
-        },
-        carouseler: {
-            path: 'carouseler/',
-            isCurrent: window.location.pathname.includes('carouseler/'),
-            navPath: 'carouseler/'
-        },
-        three_d_prints: {
-            path: '3d_prints/',
-            isCurrent: window.location.pathname.includes('3d_prints/'),
-            navPath: '3d_prints/'
-        },
-        sidequest_map: {
-            path: 'sidequest_map/',
-            isCurrent: window.location.pathname.includes('/sidequest_map/'),
-            navPath: 'sidequest_map/'
         }
     }
     
@@ -132,46 +79,8 @@ function loadHeader() {
             <nav>
                 <ul>
                     <li><a href="${pages.home.navPath}">Home</a></li>
-                    <li><a href="${pages.engineering.navPath}">Engineering</a></li>
+                    <li><a href="${pages.projects.navPath}">Projects</a></li>
                     <li><a href="${pages.photos.navPath}">Photos</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Small Projects <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="${pages.polaroider.navPath}">
-                                <img src="/polaroider/icon.png" alt="Polaroider Icon" class="project-icon">
-                                Polaroider
-                            </a></li>
-                            <li><a href="${pages.storyteller.navPath}">
-                                <img src="/storyteller/icon.png" alt="storyteller Icon" class="project-icon">
-                                Storyteller
-                            </a></li>
-                            <li><a href="${pages.three_d_modeler.navPath}">
-                                <img src="/3d_modeler/icon.png" alt="3D Modeler Icon" class="project-icon">
-                                3D Modeler
-                            </a></li>
-                            <li><a href="${pages.signer.navPath}">
-                                <img src="/images/VA-2026.png" alt="VA Signer Icon" class="project-icon">
-                                VA Signer
-                            </a></li>
-                            <li><a href="${pages.reel_mapper.navPath}">
-                                <img src="/reel_mapper/icon.png" alt="Reel Mapper Icon" class="project-icon">
-                                Reel Mapper
-                            </a></li>
-                            <li><a href="${pages.resumeer.navPath}">
-                                <img src="/resumeer/icon.png" alt="Resumeer Icon" class="project-icon">
-                                Resumeer
-                            </a></li>
-                            <li><a href="${pages.carouseler.navPath}">
-                                <img src="/carouseler/icon.png" alt="Carouseler Icon" class="project-icon">
-                                Carouseler
-                            </a></li>
-                            <li><a href="${pages.three_d_prints.navPath}">
-                                <img src="/3d_prints/icon.png" alt="3D Prints Icon" class="project-icon">
-                                3D Prints
-                            </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="${pages.sidequest_map.navPath}">Artifacts</a></li>
                     <li><a href="${pages.resume.navPath}" target="_blank">Resume</a></li>
                 </ul>
             </nav>
@@ -213,90 +122,6 @@ function loadHeader() {
             }
         }
     });
-
-    // Special handling for Small Projects dropdown
-    if (pages.polaroider.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const polaroiderLink = document.querySelector('.dropdown-menu a[href*="polaroider"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (polaroiderLink) polaroiderLink.classList.add('active');
-    }
-    
-    if (pages.photorank.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const photorankLink = document.querySelector('.dropdown-menu a[href*="photorank"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (photorankLink) photorankLink.classList.add('active');
-    }
-
-    if (pages.storyteller.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const storytellerLink = document.querySelector('.dropdown-menu a[href*="storyteller"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (storytellerLink) storytellerLink.classList.add('active');
-    }
-
-    if (pages.three_d_modeler.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const three_d_modelerLink = document.querySelector('.dropdown-menu a[href*="3d_modeler"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (three_d_modelerLink) three_d_modelerLink.classList.add('active');
-    }
-
-    if (pages.signer.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const signerLink = document.querySelector('.dropdown-menu a[href*="signer"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (signerLink) signerLink.classList.add('active');
-    }
-
-    if (pages.reel_mapper.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const reelMapperLink = document.querySelector('.dropdown-menu a[href*="reel_mapper"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (reelMapperLink) reelMapperLink.classList.add('active');
-    }
-
-    if (pages.resumeer.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const resumeerLink = document.querySelector('.dropdown-menu a[href*="resumeer"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (resumeerLink) resumeerLink.classList.add('active');
-    }
-
-    if (pages.three_d_prints.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const threeDPrintsLink = document.querySelector('.dropdown-menu a[href*="3d_prints"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (threeDPrintsLink) threeDPrintsLink.classList.add('active');
-    }
-
-    if (pages.sidequest_map.isCurrent) {
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        const sidequestMapLink = document.querySelector('.dropdown-menu a[href*="/sidequest_map/"]');
-        if (dropdownToggle) dropdownToggle.classList.add('active');
-        if (sidequestMapLink) sidequestMapLink.classList.add('active');
-    }
-
-    // Dropdown functionality
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-
-    if (dropdown && dropdownToggle && dropdownMenu) {
-        dropdown.addEventListener('mouseenter', () => {
-            dropdownMenu.classList.add('show');
-        });
-
-        dropdown.addEventListener('mouseleave', () => {
-            dropdownMenu.classList.remove('show');
-        });
-
-        dropdownToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdownMenu.classList.toggle('show');
-        });
-    }
 
     // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');

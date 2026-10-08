@@ -42,8 +42,10 @@ function addFiles(files) {
     const images = files.filter(f => f.type.startsWith('image/'));
     images.forEach(file => {
         const id = `file-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-        fileQueue.push({ file, id, meta: { what: '', where: '', when: '', categories: [] }, status: 'pending' });
-        renderCard(fileQueue[fileQueue.length - 1]);
+        const item = { file, id, meta: { what: '', where: '', when: '', categories: [] }, status: 'pending' };
+        fileQueue.push(item);
+        renderCard(item);
+        autofillMetadata(item);
     });
     fileInput.value = '';
     updateUploadActions();
@@ -75,6 +77,8 @@ function renderCard(item) {
     const whatInput = makeInput('What (description)', val => { item.meta.what = val; });
     const whereInput = makeInput('Where (location)', val => { item.meta.where = val; });
     const whenInput = makeInput('When (e.g. Jun 2025)', val => { item.meta.when = val; });
+    item.whereInput = whereInput;
+    item.whenInput = whenInput;
 
     const catLabel = document.createElement('div');
     catLabel.style.cssText = 'font-size:0.78rem;color:#666;margin-top:0.25rem;';
@@ -144,6 +148,55 @@ function makeInput(placeholder, onChange) {
     input.placeholder = placeholder;
     input.addEventListener('input', () => onChange(input.value.trim()));
     return input;
+}
+
+// ── EXIF metadata autofill ───────────────────────────────────────────────────
+// Reads capture date/GPS straight from the photo's EXIF client-side (via the
+// exifr library) and reverse-geocodes GPS through OpenStreetMap's free
+// Nominatim API to fill in the When/Where fields. Only fills fields the user
+// hasn't already typed into, and fails silently for photos with no metadata.
+
+function formatExifMonthYear(date) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+async function reverseGeocodeCity(latitude, longitude) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`;
+    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!response.ok) throw new Error(`Nominatim request failed: ${response.status}`);
+    const data = await response.json();
+    const addr = data.address || {};
+    return addr.city || addr.town || addr.village || addr.suburb || addr.county || null;
+}
+
+async function autofillMetadata(item) {
+    if (typeof exifr === 'undefined') return;
+    try {
+        const exif = await exifr.parse(item.file, { gps: true, tiff: true, exif: true });
+        if (!exif) return;
+
+        const dateTaken = exif.DateTimeOriginal || exif.CreateDate;
+        if (dateTaken instanceof Date && !isNaN(dateTaken) && !item.meta.when) {
+            const formatted = formatExifMonthYear(dateTaken);
+            item.meta.when = formatted;
+            if (item.whenInput) item.whenInput.value = formatted;
+        }
+
+        if (typeof exif.latitude === 'number' && typeof exif.longitude === 'number' && !item.meta.where) {
+            try {
+                const city = await reverseGeocodeCity(exif.latitude, exif.longitude);
+                if (city) {
+                    item.meta.where = city;
+                    if (item.whereInput) item.whereInput.value = city;
+                }
+            } catch (geoErr) {
+                // Reverse geocoding is best-effort; leave the field blank on failure.
+            }
+        }
+    } catch (err) {
+        // No EXIF data, unsupported format, etc. — leave fields for manual entry.
+    }
 }
 
 function removeCard(id) {
@@ -313,6 +366,8 @@ function renderNewEntriesBadges() {
 function refreshMergedButton() {
     const hasNew = Object.values(newEntries).some(a => a.length > 0);
     document.getElementById('download-merged-btn').style.display = hasNew ? 'inline-flex' : 'none';
+    const copyBtn = document.getElementById('copy-merged-btn');
+    if (copyBtn) copyBtn.style.display = hasNew ? 'inline-flex' : 'none';
 }
 
 // ── JSON manager ──────────────────────────────────────────────────────────────
@@ -346,10 +401,7 @@ async function toggleJSONPreview() {
     }
 }
 
-async function downloadMergedJSON() {
-    await ensurePhotoData();
-    if (!photoData) return;
-
+function buildMergedJSON() {
     // Deep clone
     const merged = JSON.parse(JSON.stringify(photoData));
 
@@ -361,8 +413,52 @@ async function downloadMergedJSON() {
         });
     }
 
+    return merged;
+}
+
+async function downloadMergedJSON() {
+    await ensurePhotoData();
+    if (!photoData) return;
+
+    const merged = buildMergedJSON();
     triggerDownload(JSON.stringify(merged, null, 2), 'photo_data.json');
     showToast('Downloaded merged photo_data.json', 'success');
+}
+
+async function copyMergedJSON() {
+    await ensurePhotoData();
+    if (!photoData) return;
+
+    const merged = buildMergedJSON();
+    const json = JSON.stringify(merged, null, 2);
+    const copyStatus = document.getElementById('copy-status');
+
+    try {
+        await copyToClipboard(json);
+        if (copyStatus) {
+            copyStatus.innerHTML = 'Copied! Now go to <a href="https://jsonbin.io" target="_blank" rel="noopener">jsonbin.io</a> and update the JSON bin with the new data.';
+        }
+        showToast('Copied merged photo_data.json', 'success');
+    } catch (err) {
+        showToast('Could not copy to clipboard', 'error');
+    }
+}
+
+async function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+    // Fallback for non-secure contexts / older browsers without the Clipboard API.
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    if (!ok) throw new Error('execCommand copy failed');
 }
 
 function triggerDownload(content, filename) {
