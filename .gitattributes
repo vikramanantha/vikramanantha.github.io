@@ -2,3 +2,8 @@
 *.glb filter=lfs diff=lfs merge=lfs -text
 *.JPG filter=lfs diff=lfs merge=lfs -text
 *.MP4 filter=lfs diff=lfs merge=lfs -text
+
+# Site images are served directly by Pages, which can't render LFS pointers.
+# (*.JPG above also catches *.jpg on case-insensitive filesystems.)
+images/** -filter -diff -merge
+images/3d/** filter=lfs diff=lfs merge=lfs -text
