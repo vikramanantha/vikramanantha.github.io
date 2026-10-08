@@ -5,6 +5,10 @@ function getPhotoUrl(path, transforms = 'w_2048,q_auto,f_auto') {
     return `${CLOUDINARY_BASE}/${transforms}/portfolio/photos/${safePath}`;
 }
 
+const PHOTO_DATA_URL = 'https://api.jsonbin.io/v3/b/6a42a081da38895dfe112f88';
+const PHOTO_DATA_CACHE_KEY = 'photoData:v1';
+const PLACEHOLDER_BANNER_COUNT = 5;
+
 // State management
 let currentView = 'banners';
 let currentCategory = null;
@@ -45,27 +49,92 @@ async function init() {
         return;
     }
 
-    await loadPhotoData();
-    console.log('Photo data loaded:', Object.keys(photoData));
-
     setupLightbox();
-    renderBannerView();
+
+    // Show banners right away: last visit's data if we have it, otherwise
+    // placeholder banners, so the page doesn't sit empty while JSONBin responds
+    const cached = readCachedPhotoData();
+    if (cached) {
+        photoData = cached;
+        renderBannerView();
+    } else {
+        renderPlaceholderBanners();
+    }
+
+    const fresh = await loadPhotoData();
+    if (!fresh) {
+        if (!cached) {
+            portfolioContainer.innerHTML = '<p style="color: red; text-align: center;">Could not load the photo portfolio. Please try again later.</p>';
+        }
+        return;
+    }
+    const changed = !cached || JSON.stringify(cached) !== JSON.stringify(fresh);
+    photoData = fresh;
+    writeCachedPhotoData(fresh);
+    console.log('Photo data loaded:', Object.keys(photoData));
+    if (changed && currentView === 'banners') {
+        renderBannerView();
+    }
 }
 
-// Load photo data from JSON
+// Load photo data from JSONBin; returns null on failure
 async function loadPhotoData() {
     try {
-        const response = await fetch('https://api.jsonbin.io/v3/b/6a42a081da38895dfe112f88');
+        const response = await fetch(PHOTO_DATA_URL);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        photoData = (await response.json()).record;
+        return (await response.json()).record;
     } catch (error) {
         console.error('Error loading photo data:', error);
-        if (portfolioContainer) {
-            portfolioContainer.innerHTML = '<p style="color: red; text-align: center;">Could not load photo portfolio data. Please check photo_data.json.</p>';
-        }
+        return null;
     }
+}
+
+function readCachedPhotoData() {
+    try {
+        const raw = localStorage.getItem(PHOTO_DATA_CACHE_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function writeCachedPhotoData(data) {
+    try {
+        localStorage.setItem(PHOTO_DATA_CACHE_KEY, JSON.stringify(data));
+    } catch (error) {
+        // Storage can be full or blocked; the page works without it
+    }
+}
+
+// Banner-shaped placeholders shown before we know the category names
+function renderPlaceholderBanners() {
+    portfolioContainer.innerHTML = '';
+    const bannersContainer = document.createElement('div');
+    bannersContainer.className = 'photo-banners-container';
+    bannersContainer.setAttribute('aria-busy', 'true');
+
+    for (let i = 0; i < PLACEHOLDER_BANNER_COUNT; i++) {
+        const banner = document.createElement('div');
+        banner.className = 'photo-banner is-placeholder is-loading';
+        banner.setAttribute('aria-hidden', 'true');
+
+        const shimmer = document.createElement('div');
+        shimmer.className = 'photo-banner-shimmer';
+
+        const overlay = document.createElement('div');
+        overlay.className = 'photo-banner-overlay';
+
+        const textSkeleton = document.createElement('div');
+        textSkeleton.className = 'photo-banner-text-skeleton';
+
+        banner.appendChild(shimmer);
+        banner.appendChild(overlay);
+        banner.appendChild(textSkeleton);
+        bannersContainer.appendChild(banner);
+    }
+    portfolioContainer.appendChild(bannersContainer);
 }
 
 // Create banner view (main landing page)
@@ -120,13 +189,17 @@ function renderBannerView() {
 // Create individual banner element
 function createBanner(category, imagePath) {
     const banner = document.createElement('div');
-    banner.className = 'photo-banner skeleton';
+    banner.className = 'photo-banner is-loading';
 
-    // Set background image after it loads
+    // Shimmer sits over the photo until it has loaded, then fades out
+    const shimmer = document.createElement('div');
+    shimmer.className = 'photo-banner-shimmer';
+    banner.appendChild(shimmer);
+
     preloadImage(imagePath)
         .then(() => {
             banner.style.backgroundImage = `url('${imagePath}')`;
-            banner.classList.remove('skeleton');
+            banner.classList.remove('is-loading');
         })
         .catch(() => {
             console.error('Banner image failed to load:', imagePath);
