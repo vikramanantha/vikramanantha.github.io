@@ -19,6 +19,7 @@ package.json
 
 important_files/*
 !important_files/resume_v2.pdf
+!important_files/transcript.pdf
 
 polaroider/polaroids
 
