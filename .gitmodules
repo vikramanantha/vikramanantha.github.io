@@ -28,3 +28,6 @@
 [submodule "harmonize"]
 	path = harmonize
 	url = https://github.com/vikramanantha/harmonize.git
+[submodule "notcher"]
+	path = notcher
+	url = https://github.com/vikramanantha/notcher.git

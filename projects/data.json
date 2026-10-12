@@ -113,6 +113,21 @@
   ],
   "personalProjects": [
     {
+      "name": "Notcher",
+      "logo": "images/engineering/notcher_logo.png",
+      "alt": "Notcher Logo",
+      "role": "Turns the MacBook notch into a media and volume widget",
+      "duration": "Oct 2026",
+      "links": [
+        {
+          "type": "github",
+          "url": "https://github.com/vikramanantha/notcher"
+        }
+      ],
+      "description": "<p>A macOS app that lives in the MacBook notch. What's playing shows on the left of the notch and the audio output on the right. Hover over it and it expands into playback controls, a volume slider, and an output device picker.</p><ul><li>Built with <b>Swift, SwiftUI, and AppKit</b> as a borderless panel over the menu bar that lets clicks pass through until you hover.</li><li>Reads now-playing info from any app through Apple's private <b>MediaRemote</b> framework, using mediaremote-adapter to work around the restrictions added in macOS 15.4.</li><li>Controls volume, mute, and the output device through <b>CoreAudio</b>, kept live with property listeners.</li><li>Album art morphs out of the notch into the expanded view with spring animations.</li></ul>",
+      "images": []
+    },
+    {
       "name": "Harmonize",
       "logo": "images/engineering/harmonize_logo.png",
       "alt": "Harmonize Logo",
